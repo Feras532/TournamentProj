@@ -13,6 +13,7 @@ public class mainApp extends Application {
             Parent root = (Parent) fxmlLoader.load();
             Scene scene = new Scene(root);
             primaryStage.setTitle("Tourno");
+            System.out.println("jamb");
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (Exception e) {
