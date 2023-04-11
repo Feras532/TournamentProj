@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="516.0" prefWidth="825.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="516.0" prefWidth="825.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="admin.controller_DashBoard_admin">
    <children>
       <VBox prefHeight="516.0" prefWidth="191.0" style="-fx-background-color: #78909c;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -31,7 +31,7 @@
                <VBox.margin>
                   <Insets />
                </VBox.margin></Button>
-            <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="194.0" style="-fx-background-color: #5b6e78;" text="Logout" textFill="WHITE" />
+            <Button fx:id="btn_logout" mnemonicParsing="false" onAction="#logout" prefHeight="42.0" prefWidth="194.0" style="-fx-background-color: #5b6e78;" text="Logout" textFill="WHITE" />
          </children>
       </VBox>
       <Text layoutX="212.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My tournaments" wrappingWidth="191.0">

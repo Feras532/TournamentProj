@@ -9,11 +9,11 @@ public class mainApp extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/LoginPage.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Login/LoginPage.fxml"));
             Parent root = (Parent) fxmlLoader.load();
             Scene scene = new Scene(root);
             primaryStage.setTitle("Tourno");
-            
+
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (Exception e) {
