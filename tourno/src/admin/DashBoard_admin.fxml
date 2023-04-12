@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="610.0" prefWidth="933.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="admin.controller_DashBoard_admin">
+<BorderPane fx:id="borderpane" prefHeight="610.0" prefWidth="933.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="admin.controller_DashBoard_admin">
    <left>
       <VBox prefHeight="513.0" prefWidth="191.0" style="-fx-background-color: #78909c;" BorderPane.alignment="CENTER">
          <children>
@@ -32,7 +32,7 @@
             <Button graphicTextGap="5.0" mnemonicParsing="false" onAction="#viewTournament" prefHeight="53.0" prefWidth="191.0" style="-fx-background-color: #6b818c;" text="View Tournaments" textFill="WHITE" />
             <Button graphicTextGap="5.0" mnemonicParsing="false" onAction="#createTournament" prefHeight="54.0" prefWidth="214.0" style="-fx-background-color: #6b818c;" text="Create Tournament" textFill="WHITE" />
             <Button graphicTextGap="5.0" mnemonicParsing="false" onAction="#manageTournament" prefHeight="54.0" prefWidth="219.0" style="-fx-background-color: #6b818c;" text="Manage Tournaments" textFill="WHITE" />
-            <Button graphicTextGap="5.0" mnemonicParsing="false" onAction="#addGame" prefHeight="54.0" prefWidth="219.0" style="-fx-background-color: #6b818c;" text="Add new game" textFill="WHITE" />
+            <Button graphicTextGap="5.0" mnemonicParsing="false" onAction="#scene_addGame" prefHeight="54.0" prefWidth="219.0" style="-fx-background-color: #6b818c;" text="Add new game" textFill="WHITE" />
             <AnchorPane prefHeight="136.0" prefWidth="191.0">
                <VBox.margin>
                   <Insets bottom="60.0" />
