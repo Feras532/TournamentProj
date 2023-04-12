@@ -2,67 +2,88 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="516.0" prefWidth="825.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="admin.controller_DashBoard_admin">
-   <children>
-      <VBox prefHeight="516.0" prefWidth="191.0" style="-fx-background-color: #78909c;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+<BorderPane prefHeight="610.0" prefWidth="933.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="admin.controller_DashBoard_admin">
+   <left>
+      <VBox prefHeight="513.0" prefWidth="191.0" style="-fx-background-color: #78909c;" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane prefHeight="121.0" prefWidth="191.0">
+            <AnchorPane prefHeight="125.0" prefWidth="191.0">
                <children>
-                  <Text layoutX="14.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello admin, " wrappingWidth="70.01953125" />
-                  <Text layoutX="14.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="getName()" />
-               </children></AnchorPane>
-            <Button mnemonicParsing="false" prefHeight="53.0" prefWidth="211.0" style="-fx-background-color: #6b818c;" text="View Tournaments" textFill="WHITE" />
-            <Button mnemonicParsing="false" prefHeight="54.0" prefWidth="214.0" style="-fx-background-color: #6b818c;" text="Create Tournament" textFill="WHITE" />
-            <Button mnemonicParsing="false" prefHeight="54.0" prefWidth="219.0" style="-fx-background-color: #6b818c;" text="Manage Tournaments" textFill="WHITE" />
-            <Button mnemonicParsing="false" prefHeight="54.0" prefWidth="219.0" style="-fx-background-color: #6b818c;" text="Add new game" textFill="WHITE" />
-            <AnchorPane prefHeight="124.0" prefWidth="191.0">
+                  <Text fill="WHITE" layoutX="22.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ahmed's" wrappingWidth="146.01953125">
+                     <font>
+                        <Font name="Eras Bold ITC" size="27.0" />
+                     </font></Text>
+                  <Text fill="WHITE" layoutX="22.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Software" wrappingWidth="146.01953125">
+                     <font>
+                        <Font name="Eras Bold ITC" size="19.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <Button graphicTextGap="5.0" mnemonicParsing="false" onAction="#viewTournament" prefHeight="53.0" prefWidth="191.0" style="-fx-background-color: #6b818c;" text="View Tournaments" textFill="WHITE" />
+            <Button graphicTextGap="5.0" mnemonicParsing="false" onAction="#createTournament" prefHeight="54.0" prefWidth="214.0" style="-fx-background-color: #6b818c;" text="Create Tournament" textFill="WHITE" />
+            <Button graphicTextGap="5.0" mnemonicParsing="false" onAction="#manageTournament" prefHeight="54.0" prefWidth="219.0" style="-fx-background-color: #6b818c;" text="Manage Tournaments" textFill="WHITE" />
+            <Button graphicTextGap="5.0" mnemonicParsing="false" onAction="#addGame" prefHeight="54.0" prefWidth="219.0" style="-fx-background-color: #6b818c;" text="Add new game" textFill="WHITE" />
+            <AnchorPane prefHeight="136.0" prefWidth="191.0">
                <VBox.margin>
                   <Insets bottom="60.0" />
-               </VBox.margin></AnchorPane>
-            <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="194.0" style="-fx-background-color: #6b818c;" text="profile info" textFill="WHITE">
+               </VBox.margin>
+            </AnchorPane>
+            <Button graphicTextGap="5.0" mnemonicParsing="false" onAction="#profile" prefHeight="42.0" prefWidth="194.0" style="-fx-background-color: #6b818c;" text="profile info" textFill="WHITE">
                <VBox.margin>
                   <Insets />
-               </VBox.margin></Button>
-            <Button fx:id="btn_logout" mnemonicParsing="false" onAction="#logout" prefHeight="42.0" prefWidth="194.0" style="-fx-background-color: #5b6e78;" text="Logout" textFill="WHITE" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="btn_logout" graphicTextGap="5.0" mnemonicParsing="false" onAction="#logout" prefHeight="42.0" prefWidth="194.0" style="-fx-background-color: #5b6e78;" text="Logout" textFill="WHITE" />
          </children>
       </VBox>
-      <Text layoutX="212.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My tournaments" wrappingWidth="191.0">
-         <font>
-            <Font name="Verdana" size="23.0" />
-         </font>
-      </Text>
-      <Line endX="100.0" layoutX="307.0" layoutY="73.0" startX="-100.0" stroke="#6b818c" />
-      <HBox layoutX="212.0" layoutY="106.0" prefHeight="39.0" prefWidth="401.0" AnchorPane.leftAnchor="212.0" AnchorPane.rightAnchor="212.0">
+   </left>
+   <center>
+      <AnchorPane prefHeight="538.0" prefWidth="634.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="128.0" style="-fx-background-color: #f2f2f2;" text="Ongoing">
+            <Text layoutX="29.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My tournaments" wrappingWidth="191.0">
                <font>
-                  <Font size="15.0" />
+                  <Font name="Verdana" size="23.0" />
                </font>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="128.0" style="-fx-background-color: #f2f2f2;" text="Past">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="128.0" style="-fx-background-color: #f2f2f2;" text="Future">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Button>
+            </Text>
+            <Line endX="100.0" layoutX="129.0" layoutY="109.0" startX="-100.0" stroke="#6b818c" />
+            <HBox layoutX="29.0" layoutY="129.0" prefHeight="39.0" prefWidth="386.0" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="327.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#ongoing" prefHeight="39.0" prefWidth="128.0" style="-fx-background-color: #f2f2f2;" text="Ongoing">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#past" prefHeight="39.0" prefWidth="128.0" style="-fx-background-color: #f2f2f2;" text="Past">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#future" prefHeight="39.0" prefWidth="128.0" style="-fx-background-color: #f2f2f2;" text="Future">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <TableView layoutX="29.0" layoutY="183.0" prefHeight="362.0" prefWidth="631.0">
+               <columns>
+                  <TableColumn prefWidth="149.59997940063477" text="Game" />
+                  <TableColumn prefWidth="221.5999298095703" text="Tournament type" />
+                  <TableColumn prefWidth="132.0" text="Size" />
+                  <TableColumn prefWidth="127.199951171875" text="Status" />
+               </columns>
+            </TableView>
          </children>
-      </HBox>
-      <ScrollPane layoutX="212.0" layoutY="168.0" prefHeight="326.0" prefWidth="573.0" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="212.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="168.0">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-        </content>
-      </ScrollPane>
-   </children>
-</AnchorPane>
+      </AnchorPane>
+   </center>
+</BorderPane>

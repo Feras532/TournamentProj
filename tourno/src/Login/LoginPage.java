@@ -12,7 +12,6 @@ import javafx.scene.Node;
 public class LoginPage {
     private Stage stage;
     private Scene scene;
-    private Parent root;
 
     @FXML
     private ResourceBundle resources;

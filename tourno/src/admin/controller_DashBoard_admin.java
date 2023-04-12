@@ -49,6 +49,52 @@ public class controller_DashBoard_admin {
 
     }
 
+
+    //*********************************************************************//
+    @FXML
+    void viewTournament(ActionEvent event) {
+
+    }
+    // in view tournament we have 3 buttons: ongoing, past, future.----------------
+    @FXML
+    void ongoing(ActionEvent event) {
+
+    }
+
+    @FXML
+    void past(ActionEvent event) {
+
+    }
+
+    @FXML
+    void future(ActionEvent event) {
+
+    }
+
+    //*********************************************************************//
+
+
+
+    @FXML
+    void addGame(ActionEvent event) {
+
+    }
+
+    @FXML
+    void createTournament(ActionEvent event) {
+
+    }
+
+    @FXML
+    void manageTournament(ActionEvent event) {
+
+    }
+
+    @FXML
+    void profile(ActionEvent event) {
+
+    }
+
     @FXML
     void initialize() {
         assert btn_logout != null
