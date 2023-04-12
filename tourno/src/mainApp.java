@@ -13,7 +13,6 @@ public class mainApp extends Application {
             Parent root = (Parent) fxmlLoader.load();
             Scene scene = new Scene(root);
             primaryStage.setTitle("Tourno");
-
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (Exception e) {
@@ -22,7 +21,7 @@ public class mainApp extends Application {
     }
 
     public static void main(String[] args) {
-        
+        System.out.println("Start the app");
         launch(args);
     }
 }
