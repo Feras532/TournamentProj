@@ -103,8 +103,9 @@ public class controller_DashBoard_admin {
     }
 
     @FXML
-    void profile(ActionEvent event) {
-
+    void profile(ActionEvent event) throws IOException {
+        AnchorPane view = FXMLLoader.load(getClass().getResource("profile.fxml"));
+        borderpane.setCenter(view);
     }
 
     @FXML
