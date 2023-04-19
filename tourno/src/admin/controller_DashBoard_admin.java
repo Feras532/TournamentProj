@@ -1,4 +1,6 @@
 package admin;
+
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -100,24 +102,26 @@ public class controller_DashBoard_admin {
 
         // Brother I am just testing one tournament in the table, so later we will
         // figure it how to deal with binary.
-        Game LeagueOfLegends = new Game("LeagueOfLegends", null, 0, 0);
-        Game Fifa = new Game("Fifa 15", null, 0, 0);
-        Team[] teams = new Team[2];
-        teams[0] = new Team(null, null, null, 0, 0, 0, 0, 0, 0, 0);
-        teams[1] = new Team(null, null, null, 0, 0, 0, 0, 0, 0, 0);
+        ObservableList<Tournament> observableList = FXCollections.observableArrayList();
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("savedTournaments.dat"))) {
+            ArrayList<Tournament> list = (ArrayList<Tournament>) ois.readObject();
+            observableList.addAll(list);
+            name.setCellValueFactory(new PropertyValueFactory<Tournament, String>("name"));
+            game.setCellValueFactory(new PropertyValueFactory<Tournament, String>("game"));
+            status.setCellValueFactory(new PropertyValueFactory<Tournament, String>("status"));
+            type.setCellValueFactory(new PropertyValueFactory<Tournament, String>("type"));
+            registeredToMax.setCellValueFactory(new PropertyValueFactory<Tournament, String>("registeredToMax"));
+            tableView.setItems(observableList);
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        // ObservableList<Tournament> list = FXCollections.observableArrayList(
+        // new Elimination("Elimination test", LeagueOfLegends, 0, null, null, null,
+        // null, 32, true, true, teams),
+        // new RoundRobin("Round robin test", Fifa, 0, null, null, null, null, 16,
+        // false, false, teams)
 
-        ObservableList<Tournament> list = FXCollections.observableArrayList(
-                new Elimination("Elimination test", LeagueOfLegends, 0, null, null, null, null, 32, true, true, teams),
-                new RoundRobin("Round robin test", Fifa, 0, null, null, null, null, 16, false, false, teams)
-
-        );
-
-        name.setCellValueFactory(new PropertyValueFactory<Tournament, String>("name"));
-        game.setCellValueFactory(new PropertyValueFactory<Tournament, String>("game"));
-        status.setCellValueFactory(new PropertyValueFactory<Tournament, String>("status"));
-        type.setCellValueFactory(new PropertyValueFactory<Tournament, String>("type"));
-        registeredToMax.setCellValueFactory(new PropertyValueFactory<Tournament, String>("registeredToMax"));
-        tableView.setItems(list);
+        // );
 
     }
 
@@ -133,9 +137,6 @@ public class controller_DashBoard_admin {
 
     // ☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️
 
-
-
-    
     // 👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇
 
     @FXML
@@ -147,6 +148,7 @@ public class controller_DashBoard_admin {
         stage.show();
 
     }
+
     @FXML
     void returnfromGame(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("DashBoard_admin.fxml"));
@@ -163,7 +165,6 @@ public class controller_DashBoard_admin {
 
     }
     // ☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️
-
 
     // 👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇
 
@@ -201,8 +202,6 @@ public class controller_DashBoard_admin {
 
     @FXML
     private TextField gameTextField;
-
-    
 
     @FXML
     private void handleIndividualCheck() {
@@ -272,16 +271,12 @@ public class controller_DashBoard_admin {
 
     }
 
-
-
-    ///Create Tournament
-
+    /// Create Tournament
 
     @FXML
     void initialize() {
         assert btn_logout != null
                 : "fx:id=\"btn_logout\" was not injected: check your FXML file 'DashBoard_admin.fxml'.";
-              
 
     }
 

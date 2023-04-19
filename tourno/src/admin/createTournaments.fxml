@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane centerShape="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="682.0" prefWidth="657.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="admin.controller_DashBoard_CreateTournament">
+<AnchorPane centerShape="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="696.0" prefWidth="657.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="admin.controller_DashBoard_CreateTournament">
    <children>
       <Text layoutX="14.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create a Tournament">
          <font>
@@ -24,7 +24,7 @@
          </font>
       </Text>
       <TextField fx:id="TournamentTextField" layoutX="218.0" layoutY="105.0" prefHeight="26.0" prefWidth="166.0" />
-      <Button fx:id="createTournBtn" layoutX="166.0" layoutY="606.0" mnemonicParsing="false" onAction="#createTournamentBtn" prefHeight="26.0" prefWidth="270.0" text="Create Tournament" />
+      <Button fx:id="createTournBtn" layoutX="165.0" layoutY="539.0" mnemonicParsing="false" onAction="#createTournamentBtn" prefHeight="26.0" prefWidth="270.0" text="Create Tournament" />
       <Line endX="153.0" endY="-7.62939453125E-6" layoutX="113.0" layoutY="79.0" startX="-106.20001220703125" startY="-7.62939453125E-6" />
       <Text layoutX="42.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter game:" wrappingWidth="149.5999999999999">
          <font>

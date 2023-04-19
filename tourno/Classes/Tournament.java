@@ -1,4 +1,5 @@
 package Classes;
+
 public abstract class Tournament implements java.io.Serializable {
     String name;
     Game game;
@@ -7,7 +8,7 @@ public abstract class Tournament implements java.io.Serializable {
     String startdate;
     String endDate;
     Boolean numOfTeamsIsFixed;
-     int numOfTeams;
+    int numOfTeams;
 
     public int getNumOfTeams() {
         return numOfTeams;
@@ -59,8 +60,10 @@ public abstract class Tournament implements java.io.Serializable {
 
     public int getNumRegisteredTeams() {
         int size = 0;
-        for (int i = 0; i < registeredTeams.length; i++) {
-            size++;
+        if (registeredTeams != null) {
+            for (int i = 0; i < registeredTeams.length; i++) {
+                size++;
+            }
         }
         return size;
     }
@@ -96,6 +99,11 @@ public abstract class Tournament implements java.io.Serializable {
     private String registeredToMax;
 
     public String getRegisteredToMax() {
+
+        if ((getNumOfTeams() == 0) && (getNumOfTeamsIsFixed() == false))
+            return getNumRegisteredTeams() + " / Unlimited";
+        if (this.registeredTeams == null)
+            return "0/" + getNumOfTeams();
         return getNumRegisteredTeams() + " /" + getNumOfTeams();
 
     }
