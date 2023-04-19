@@ -24,11 +24,6 @@
             <TableColumn prefWidth="80.5" text="size" />
         </columns>
       </TableView>
-      <Button layoutX="42.0" layoutY="379.0" mnemonicParsing="false" onAction="#addNewGameScene" text="+">
-         <font>
-            <Font name="System Bold" size="26.0" />
-         </font>
-      </Button>
       <Text layoutX="42.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available games">
          <font>
             <Font name="Verdana Bold" size="18.0" />
@@ -40,5 +35,10 @@
          </font>
       </Text>
       <ButtonBar layoutX="329.0" layoutY="348.0" prefHeight="40.0" prefWidth="200.0" />
+      <Button layoutX="42.0" layoutY="379.0" mnemonicParsing="false" onAction="#scene_addingGame" prefHeight="51.0" prefWidth="52.0" text="+">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
