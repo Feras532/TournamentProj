@@ -1,4 +1,6 @@
 import java.io.IOException;
+
+import Classes.Elimination;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

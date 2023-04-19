@@ -7,7 +7,12 @@ public abstract class Tournament implements java.io.Serializable {
     String startdate;
     String endDate;
     Boolean numOfTeamsIsFixed;
-    int numOfTeams;
+     int numOfTeams;
+
+    public int getNumOfTeams() {
+        return numOfTeams;
+    }
+
     Boolean isOpenRegisteration;
     Boolean isActive;
     Team[] registeredTeams;
@@ -52,34 +57,47 @@ public abstract class Tournament implements java.io.Serializable {
         return registeredTeams;
     }
 
-    public int getNumRegisteredTeams(){
+    public int getNumRegisteredTeams() {
         int size = 0;
-        for(int i  = 0 ; i< registeredTeams.length ; i++){
+        for (int i = 0; i < registeredTeams.length; i++) {
             size++;
         }
         return size;
     }
-    public Tournament(String name,Game game,int numOfDays,Round[] rounds,String startdate,String endDate,Boolean numOfTeamsIsFixed,int numOfTeams,Boolean isOpenRegisteration,Boolean isActive,Team[] registeredTeams){
-        this.name=name;
-        this.game=game;
-        this.numOfDays=numOfDays;
-        this.rounds=rounds;
-        this.startdate=startdate;
-        this.endDate=endDate;
-        this.numOfTeamsIsFixed=numOfTeamsIsFixed;
-        this.numOfTeams=numOfTeams;
-        this.isOpenRegisteration=isOpenRegisteration;
-        this.isActive=isActive;
-        this.registeredTeams=registeredTeams;
+
+    public Tournament(String name, Game game, int numOfDays, Round[] rounds, String startdate, String endDate,
+            Boolean numOfTeamsIsFixed, int numOfTeams, Boolean isOpenRegisteration, Boolean isActive,
+            Team[] registeredTeams) {
+        this.name = name;
+        this.game = game;
+        this.numOfDays = numOfDays;
+        this.rounds = rounds;
+        this.startdate = startdate;
+        this.numOfTeams = numOfTeams;
+        this.endDate = endDate;
+        this.numOfTeamsIsFixed = numOfTeamsIsFixed;
+        this.isOpenRegisteration = isOpenRegisteration;
+        this.isActive = isActive;
+        this.registeredTeams = registeredTeams;
 
     }
 
-        // BROTHER DO NOT TOUCH THIS OR I WILL EAT YOU !!
-        private String status;
-        public  String getStatus() {
-            if(isOpenRegisteration) return "Open for registeration";
-            else return "Closed";
-        }
+    // BROTHER DO NOT TOUCH THIS OR I WILL EAT YOU !!
+    private String status;
 
+    public String getStatus() {
+        if (isOpenRegisteration)
+            return "Open for registeration";
+        else
+            return "Closed";
+    }
+
+    // BROTHER DO NOT TOUCH THIS OR I WILL EAT YOU !!
+    private String registeredToMax;
+
+    public String getRegisteredToMax() {
+        return getNumRegisteredTeams() + " /" + getNumOfTeams();
+
+    }
 
 }

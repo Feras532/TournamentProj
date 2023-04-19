@@ -43,7 +43,15 @@ public class SystemData {
 
 
 
+        // to be completed: ... .
+
+        // this.allParicipants = allParicipants
+        // this.allTournaments = allTournaments
+
     }
+    
+    // this method is created for adding new which will just open the .dat file and append an object of type game
+    // and then saved it in the file.
     public void addNewGame(Game game){
         allgames.add(game);
         System.out.println("Game is added to the arraylist.");
