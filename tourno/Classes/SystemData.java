@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class SystemData {
     ArrayList<Paricipant> allParicipants;
     ArrayList<Game> allgames = new ArrayList<>();
-    ArrayList<Tournament> alltTournaments;
+    ArrayList<Tournament> allTournaments=new ArrayList<>();
 
     public SystemData() {
         try {
@@ -27,6 +27,22 @@ public class SystemData {
             c.printStackTrace();
         }
 
+        try {
+            FileInputStream fileIn = new FileInputStream("savedTournaments.dat");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            ArrayList<Tournament> tournaments = (ArrayList<Tournament>) in.readObject();
+            in.close();
+            fileIn.close();
+            this.allTournaments = tournaments;
+        } catch (IOException i) {
+            i.printStackTrace();
+        } catch (ClassNotFoundException c) {
+            System.out.println("Tournament class not found");
+            c.printStackTrace();
+        }
+
+
+
     }
     public void addNewGame(Game game){
         allgames.add(game);
@@ -38,6 +54,21 @@ public class SystemData {
             out.close();
             fileOut.close();
             System.out.println("Data saved in games.dat");
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
+    }
+
+    public void addNewTournament(Tournament tournament){
+        allTournaments.add(tournament);
+        System.out.println("a tournament is added to the arraylist.");
+        try {
+            FileOutputStream fileOut = new FileOutputStream("savedTournaments.dat");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(allTournaments);
+            out.close();
+            fileOut.close();
+            System.out.println("Data saved in savedTournaments.dat");
         } catch (IOException i) {
             i.printStackTrace();
         }

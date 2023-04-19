@@ -1,5 +1,5 @@
 package Classes;
-public abstract class Tournament {
+public abstract class Tournament implements java.io.Serializable {
     String name;
     Game game;
     int numOfDays;

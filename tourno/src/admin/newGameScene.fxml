@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane centerShape="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="518.0" prefWidth="672.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="admin.controller_DashBoard_admin">
+<AnchorPane centerShape="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="518.0" prefWidth="627.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="admin.controller_DashBoard_admin">
    <children>
       <Text layoutX="14.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create a game">
          <font>
@@ -25,19 +25,19 @@
             <Font name="Arial" size="13.0" />
          </font>
       </Text>
-      <Text layoutX="26.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="minimum number of teams">
+      <Text layoutX="7.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="minimum number of members in a team" wrappingWidth="242.540771484375">
          <font>
             <Font name="Arial" size="13.0" />
          </font>
       </Text>
-      <Text layoutX="25.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maximum number of teams">
+      <Text layoutX="7.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="minimum number of members in a team">
          <font>
             <Font name="Arial" size="13.0" />
          </font>
       </Text>
       <TextField fx:id="gameTextField" layoutX="218.0" layoutY="105.0" />
-      <TextField fx:id="minTextField" layoutX="232.0" layoutY="272.0" />
-      <TextField fx:id="maxTextField" layoutX="232.0" layoutY="332.0" />
+      <TextField fx:id="minTextField" layoutX="254.0" layoutY="272.0" />
+      <TextField fx:id="maxTextField" layoutX="254.0" layoutY="331.0" />
       <CheckBox fx:id="individualCheck" layoutX="319.0" layoutY="197.0" mnemonicParsing="false" onAction="#handleIndividualCheck" text="Individual" />
       <CheckBox fx:id="teamCheck" layoutX="210.0" layoutY="197.0" mnemonicParsing="false" onAction="#handleTeamCheck" text="Team-Based" />
       <Button fx:id="createBtn" layoutX="209.0" layoutY="397.0" mnemonicParsing="false" onAction="#createGame" prefHeight="26.0" prefWidth="166.0" text="Create Game" />

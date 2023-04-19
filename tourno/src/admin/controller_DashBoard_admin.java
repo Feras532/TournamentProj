@@ -1,8 +1,11 @@
 package admin;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import Classes.Game;
@@ -99,8 +102,9 @@ public class controller_DashBoard_admin{
     }
 
     @FXML
-    void createTournament(ActionEvent event) {
-
+    void createTournament(ActionEvent event) throws IOException {
+        AnchorPane view = FXMLLoader.load(getClass().getResource("createTournaments.fxml"));
+        borderpane.setCenter(view);
     }
 
     @FXML
@@ -147,7 +151,7 @@ public class controller_DashBoard_admin{
     private TextField gameTextField;
 
     
-
+   
     @FXML
     private void handleIndividualCheck(){
         if(individualCheck.isSelected())
@@ -224,8 +228,7 @@ public class controller_DashBoard_admin{
 
 
 
-    ///Create Tournament
-
+ 
 
     @FXML
      void initialize() {
@@ -234,7 +237,6 @@ public class controller_DashBoard_admin{
         assert btn_logout != null
                 : "fx:id=\"btn_logout\" was not injected: check your FXML file 'DashBoard_admin.fxml'.";
               
-
     }
 
 
