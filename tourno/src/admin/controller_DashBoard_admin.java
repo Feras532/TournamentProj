@@ -255,7 +255,7 @@ public class controller_DashBoard_admin {
                 checkAlert.showAndWait();
             }
            
-            if(isTeamGame == null){
+            else if(isTeamGame == null){
                 Alert checkAlert = new Alert(AlertType.WARNING);
                 checkAlert.setTitle("Error");
                 checkAlert.setHeaderText("Please check Team type individual or team-based");
@@ -267,7 +267,7 @@ public class controller_DashBoard_admin {
                 checkAlert.setHeaderText("the minimum number of teams is more than the maximum number of teams");
                 checkAlert.showAndWait();
             }
-            if(checkDuplication(gameName) == false){
+           else if(checkDuplication(gameName) == false){
                 Alert checkAlert = new Alert(AlertType.WARNING);
                 checkAlert.setTitle("Error");
                  checkAlert.setHeaderText("Game Name is already intialized");
