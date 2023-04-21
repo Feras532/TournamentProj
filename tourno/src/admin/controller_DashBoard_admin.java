@@ -303,7 +303,7 @@ public class controller_DashBoard_admin {
 
     }
 
-    public Boolean checkDuplication(String game) throws FileNotFoundException, IOException, ClassNotFoundException{
+    public Boolean checkDuplication(String game) throws IOException, ClassNotFoundException{
         Boolean duplicate = true;
         try (FileInputStream fis = new FileInputStream("savedGames.dat");
         ObjectInputStream ois = new ObjectInputStream(fis)) {
@@ -317,9 +317,16 @@ public class controller_DashBoard_admin {
         duplicate = true;
     }
     }
-}
-        return duplicate;
 
+        
+        }
+        catch(FileNotFoundException e){
+            FileOutputStream fileOut = new FileOutputStream("savedGames.dat");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.close();
+            fileOut.close();
+        }
+        return duplicate;
     }
 
     ///Create Tournament

@@ -1,8 +1,10 @@
 package admin;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import Classes.Elimination;
 import Classes.Game;
@@ -185,7 +187,7 @@ public class controller_DashBoard_CreateTournament {
         return null;
 }
 
-public Boolean checkDuplication(String tournament) throws FileNotFoundException, IOException, ClassNotFoundException{
+public Boolean checkDuplication(String tournament) throws IOException, ClassNotFoundException{
     Boolean duplicate = true;
     try (FileInputStream fis = new FileInputStream("savedTournaments.dat");
     ObjectInputStream ois = new ObjectInputStream(fis)) {
@@ -193,16 +195,23 @@ public Boolean checkDuplication(String tournament) throws FileNotFoundException,
    for(Tournament s: list){
     if(s.getName().equals(tournament)){ //if the name of the game = the object game name return boolean
         duplicate= false;
-            break;
+        break;
 }
-        else{
-        duplicate = true;
-    }
-    }
+    else{
+    duplicate = true;
 }
-        return duplicate;
+}
 
+    
     }
+    catch(FileNotFoundException e){
+        FileOutputStream fileOut = new FileOutputStream("savedTournaments.dat");
+        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+        out.close();
+        fileOut.close();
+    }
+    return duplicate;
+}
 
     @FXML
     void handleElimination(ActionEvent event) {
