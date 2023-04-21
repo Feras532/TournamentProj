@@ -274,7 +274,7 @@ public class controller_DashBoard_admin {
                  checkAlert.showAndWait();
              }
         
-            else {
+            else if(isTeamGame != null & !(minNum>maxNum)){
                 Game game = new Game(gameName, isTeamGame, minNum, maxNum);
                 new SystemData().addNewGame(game);
                 Alert checkAlert = new Alert(AlertType.WARNING);
