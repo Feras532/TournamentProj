@@ -106,6 +106,12 @@ public class controller_DashBoard_CreateTournament {
             checkAlert.setHeaderText("Tournament name is not intialized");
             checkAlert.showAndWait();
         }
+        if(checkDuplication(tournamentName) == false) {
+            Alert checkAlert = new Alert(AlertType.WARNING);
+            checkAlert.setTitle("Error");
+             checkAlert.setHeaderText("Tournament Name is already intialized");
+             checkAlert.showAndWait();
+         }
         else if((startDate.isEmpty())){
             Alert checkAlert = new Alert(AlertType.WARNING);
             checkAlert.setTitle("Error");
@@ -118,6 +124,7 @@ public class controller_DashBoard_CreateTournament {
             checkAlert.setHeaderText("endDate is not intialized");
             checkAlert.showAndWait();
         }
+         
         else{    
             
             if(eliminationBox.isSelected() && !startDate.isEmpty() && !endDate.isEmpty() && !tournamentName.isEmpty()&& gamecomb != null ){
@@ -177,6 +184,25 @@ public class controller_DashBoard_CreateTournament {
     }
         return null;
 }
+
+public Boolean checkDuplication(String tournament) throws FileNotFoundException, IOException, ClassNotFoundException{
+    Boolean duplicate = true;
+    try (FileInputStream fis = new FileInputStream("savedTournaments.dat");
+    ObjectInputStream ois = new ObjectInputStream(fis)) {
+   ArrayList<Tournament> list = (ArrayList<Tournament>) ois.readObject();
+   for(Tournament s: list){
+    if(s.getName().equals(tournament)){ //if the name of the game = the object game name return boolean
+        duplicate= false;
+            break;
+}
+        else{
+        duplicate = true;
+    }
+    }
+}
+        return duplicate;
+
+    }
 
     @FXML
     void handleElimination(ActionEvent event) {

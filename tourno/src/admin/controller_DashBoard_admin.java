@@ -1,6 +1,6 @@
 package admin;
-
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -115,15 +115,12 @@ public class controller_DashBoard_admin {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
         // ObservableList<Tournament> list = FXCollections.observableArrayList(
         // new Elimination("Elimination test", LeagueOfLegends, 0, null, null, null,
         // null, 32, true, true, teams),
         // new RoundRobin("Round robin test", Fifa, 0, null, null, null, null, 16,
         // false, false, teams)
-
-        // );
-
-    }
 
     @FXML
     void past(ActionEvent event) {
@@ -137,6 +134,9 @@ public class controller_DashBoard_admin {
 
     // ☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️
 
+
+
+    
     // 👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇
 
     @FXML
@@ -148,7 +148,6 @@ public class controller_DashBoard_admin {
         stage.show();
 
     }
-
     @FXML
     void returnfromGame(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("DashBoard_admin.fxml"));
@@ -165,6 +164,7 @@ public class controller_DashBoard_admin {
 
     }
     // ☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️
+
 
     // 👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇
 
@@ -203,49 +203,78 @@ public class controller_DashBoard_admin {
     @FXML
     private TextField gameTextField;
 
+    
+
     @FXML
     private void handleIndividualCheck() {
-        if (individualCheck.isSelected())
+        if (individualCheck.isSelected()){
             teamCheck.setSelected(false);
+            minTextField.setVisible(false);
+            maxTextField.setVisible(false);
+        }
     }
 
     @FXML
     private void handleTeamCheck() {
-        if (teamCheck.isSelected())
+        if (teamCheck.isSelected()){
             individualCheck.setSelected(false);
+            minTextField.setVisible(true);
+            maxTextField.setVisible(true);
+        }
+        else{
+            minTextField.setVisible(false);
+            maxTextField.setVisible(false);
+        }
+
     }
 
     @FXML
-    public void createGame(ActionEvent event) throws IOException {
+    public void createGame(ActionEvent event) throws FileNotFoundException, ClassNotFoundException, IOException    {
 
-        try {
+        try{
             String gameName = gameTextField.getText();
-            int minNum = Integer.parseInt(minTextField.getText());
-            int maxNum = Integer.parseInt(maxTextField.getText());
+            int minNum = 0;
+            int maxNum = 0;
             Boolean isTeamGame = null;
-
-            if (teamCheck.isSelected())
-                isTeamGame = true;
-            if (individualCheck.isSelected())
-                isTeamGame = false;
-
-            if ((gameName.isEmpty())) {
+    
+            if(teamCheck.isSelected()){
+            isTeamGame = true;
+            minNum = Integer.parseInt(minTextField.getText());
+            maxNum = Integer.parseInt(maxTextField.getText());    
+        }
+            if(individualCheck.isSelected()){
+            isTeamGame = false;
+            minNum =1;
+            maxNum =1;
+                    }
+           
+            if((gameName.isEmpty())){
                 Alert checkAlert = new Alert(AlertType.WARNING);
                 checkAlert.setTitle("Error");
                 checkAlert.setHeaderText("Game Name is not intialized");
                 checkAlert.showAndWait();
             }
-            if (isTeamGame == null) {
+           
+            if(isTeamGame == null){
                 Alert checkAlert = new Alert(AlertType.WARNING);
                 checkAlert.setTitle("Error");
                 checkAlert.setHeaderText("Please check Team type individual or team-based");
                 checkAlert.showAndWait();
-            } else if (minNum > maxNum) {
+            }
+            else if(minNum>maxNum){
                 Alert checkAlert = new Alert(AlertType.WARNING);
                 checkAlert.setTitle("Error");
                 checkAlert.setHeaderText("the minimum number of teams is more than the maximum number of teams");
                 checkAlert.showAndWait();
-            } else {
+            }
+            if(checkDuplication(gameName) == false){
+                Alert checkAlert = new Alert(AlertType.WARNING);
+                checkAlert.setTitle("Error");
+                 checkAlert.setHeaderText("Game Name is already intialized");
+                 checkAlert.showAndWait();
+             }
+        
+            else {
                 Game game = new Game(gameName, isTeamGame, minNum, maxNum);
                 new SystemData().addNewGame(game);
                 Alert checkAlert = new Alert(AlertType.WARNING);
@@ -268,15 +297,39 @@ public class controller_DashBoard_admin {
             gameAlert.showAndWait();
 
         }
+        catch(FileNotFoundException e){
+
+        }
 
     }
 
-    /// Create Tournament
+    public Boolean checkDuplication(String game) throws FileNotFoundException, IOException, ClassNotFoundException{
+        Boolean duplicate = true;
+        try (FileInputStream fis = new FileInputStream("savedGames.dat");
+        ObjectInputStream ois = new ObjectInputStream(fis)) {
+       ArrayList<Game> list = (ArrayList<Game>) ois.readObject();
+       for(Game s: list){
+        if(s.getName().equals(game)){ //if the name of the game = the object game name return boolean
+        duplicate= false;
+            break;
+}
+        else{
+        duplicate = true;
+    }
+    }
+}
+        return duplicate;
+
+    }
+
+    ///Create Tournament
+
 
     @FXML
     void initialize() {
         assert btn_logout != null
                 : "fx:id=\"btn_logout\" was not injected: check your FXML file 'DashBoard_admin.fxml'.";
+              
 
     }
 
