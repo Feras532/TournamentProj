@@ -126,6 +126,12 @@ public class controller_DashBoard_CreateTournament {
             checkAlert.setHeaderText("endDate is not intialized");
             checkAlert.showAndWait();
         }
+        else if(numOfTeams == 0 & isFixed == true){
+            Alert checkAlert = new Alert(AlertType.WARNING);
+            checkAlert.setTitle("Error");
+            checkAlert.setHeaderText("number of teams should be more than 0");
+            checkAlert.showAndWait();
+        }
          
         else{    
             
@@ -247,9 +253,12 @@ public Boolean checkDuplication(String tournament) throws IOException, ClassNotF
        enterGameCombo.getItems().addAll(s);
        
    } catch (IOException | ClassNotFoundException e) {
-       e.printStackTrace();
+    Alert alert = new Alert(AlertType.INFORMATION);
+    alert.setTitle("Could not found");
+    alert.setHeaderText("No games available, Please try creating a new Game");
+     alert.showAndWait();}
    } 
        
               
     }
-}
+

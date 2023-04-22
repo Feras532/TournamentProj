@@ -40,5 +40,24 @@ public class Game implements java.io.Serializable{
     this.maxTeamSize=maxTeamSize;
   }
 
-  
+  private String typeOfgame;
+
+  public String getTypeOfgame() {
+      if (isTeamGame)
+          return "Team-Base";
+      else
+          return "Individual";
+  }
+
+ 
+  private String sizeOfGame;
+
+  public String getSizeOfGame() {
+
+     
+      return getMinTeamSize() + " /" + getMaxTeamSize();
+
+  }
+
+
 }
