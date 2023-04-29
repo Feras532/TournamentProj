@@ -1,6 +1,7 @@
 package Classes;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -81,4 +82,57 @@ public class SystemData {
             i.printStackTrace();
         }
     }
-}
+
+    public void deleteTournament(Tournament tournament) throws FileNotFoundException, IOException, ClassNotFoundException{
+        int j = 0;
+        try (FileInputStream fis = new FileInputStream("savedTournaments.dat");
+        ObjectInputStream ois = new ObjectInputStream(fis)) {
+       ArrayList<Tournament> list = (ArrayList<Tournament>) ois.readObject();
+       for(Tournament s: list){
+        if(s.getName().equals(tournament.getName()))
+        break;
+        else
+        j++;
+       }
+     }
+       allTournaments.remove(j);
+       try {
+        FileOutputStream fileOut = new FileOutputStream("savedTournaments.dat");
+        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+        out.writeObject(allTournaments);
+        out.close();
+        fileOut.close();
+    } catch (IOException i) {
+        i.printStackTrace();}
+    }
+
+
+
+       public void editTournament(Tournament tournament,Tournament tournament2) throws FileNotFoundException, IOException, ClassNotFoundException{
+        int j = 0;
+        try (FileInputStream fis = new FileInputStream("savedTournaments.dat");
+        ObjectInputStream ois = new ObjectInputStream(fis)) {
+       ArrayList<Tournament> list = (ArrayList<Tournament>) ois.readObject();
+       for(Tournament s: list){
+        if(s.getName().equals(tournament.getName())){
+        break;
+    }
+        else
+        j++;
+       }
+    }
+       allTournaments.remove(j);
+       allTournaments.add(j,tournament2);
+       try {
+        FileOutputStream fileOut = new FileOutputStream("savedTournaments.dat");
+        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+        out.writeObject(allTournaments);
+        out.close();
+        fileOut.close();
+    } catch (IOException i) {
+        i.printStackTrace();
+    }
+       }
+    }
+
+ 

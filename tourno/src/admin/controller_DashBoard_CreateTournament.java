@@ -136,7 +136,7 @@ public class controller_DashBoard_CreateTournament {
         else{    
             
             if(eliminationBox.isSelected() && !startDate.isEmpty() && !endDate.isEmpty() && !tournamentName.isEmpty()&& gamecomb != null ){
-                Elimination tournament = new Elimination(tournamentName, game, duration, null, startDate, endDate, isFixed,numOfTeams, false,true, null);
+                Elimination tournament = new Elimination(tournamentName, game, duration, new ArrayList<>(), startDate, endDate, isFixed,numOfTeams, false,true, new ArrayList<>());
                 new SystemData().addNewTournament(tournament);
                 Alert checkAlert = new Alert(AlertType.WARNING);
                 checkAlert.setTitle("Success");
@@ -144,7 +144,7 @@ public class controller_DashBoard_CreateTournament {
                 checkAlert.showAndWait(); 
             }
             else if(roundRobinBox.isSelected() && !startDate.isEmpty() && !endDate.isEmpty() && !tournamentName.isEmpty()&& gamecomb != null){
-            RoundRobin tournament = new RoundRobin(tournamentName, game, duration, null, startDate, endDate, isFixed, numOfTeams, false,true, null);
+            RoundRobin tournament = new RoundRobin(tournamentName, game, duration, new ArrayList<>(), startDate, endDate, isFixed, numOfTeams, false,true, new ArrayList<>());
             new SystemData().addNewTournament(tournament);
                 Alert checkAlert = new Alert(AlertType.WARNING);
                 checkAlert.setTitle("Success");

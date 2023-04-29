@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -14,7 +18,7 @@
 
 <BorderPane fx:id="borderpane" prefHeight="616.0" prefWidth="1083.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="admin.controller_DashBoard_admin">
    <left>
-      <VBox prefHeight="513.0" prefWidth="191.0" style="-fx-background-color: #78909c;" BorderPane.alignment="CENTER">
+      <VBox prefHeight="616.0" prefWidth="222.0" style="-fx-background-color: #78909c;" BorderPane.alignment="CENTER">
          <children>
             <AnchorPane prefHeight="125.0" prefWidth="191.0">
                <children>
@@ -29,21 +33,123 @@
                   </Text>
                </children>
             </AnchorPane>
-            <Button graphicTextGap="5.0" mnemonicParsing="false" onAction="#viewTournament" prefHeight="53.0" prefWidth="191.0" style="-fx-background-color: #6b818c;" text="View Tournaments" textFill="WHITE" />
-            <Button graphicTextGap="5.0" mnemonicParsing="false" onAction="#createTournament" prefHeight="54.0" prefWidth="214.0" style="-fx-background-color: #6b818c;" text="Create Tournament" textFill="WHITE" />
-            <Button graphicTextGap="5.0" mnemonicParsing="false" onAction="#manageTournament" prefHeight="54.0" prefWidth="219.0" style="-fx-background-color: #6b818c;" text="Manage Tournaments" textFill="WHITE" />
-            <Button graphicTextGap="5.0" mnemonicParsing="false" onAction="#scene_addGame" prefHeight="54.0" prefWidth="219.0" style="-fx-background-color: #6b818c;" text="Add new game" textFill="WHITE" />
-            <AnchorPane prefHeight="136.0" prefWidth="191.0">
+            <Button fx:id="btn_viewTournament" graphicTextGap="5.0" mnemonicParsing="false" onAction="#viewTournament" prefHeight="53.0" prefWidth="227.0" style="-fx-background-color: #5b6e78;" textFill="WHITE">
+               <graphic>
+                  <Label graphicTextGap="15.0" prefHeight="45.0" prefWidth="199.0" text="View Tournament" textAlignment="RIGHT" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="39.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/view.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+               </graphic></Button>
+            <Button fx:id="btn_createTournament" graphicTextGap="5.0" mnemonicParsing="false" onAction="#createTournament" prefHeight="54.0" prefWidth="226.0" style="-fx-background-color: #5b6e78;" textFill="WHITE">
+               <graphic>
+                  <Label graphicTextGap="22.0" prefHeight="45.0" prefWidth="190.0" text="Create  Tournament" textAlignment="RIGHT" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="33.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/create.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+               </graphic></Button>
+            <Button fx:id="btn_manage" graphicTextGap="5.0" mnemonicParsing="false" onAction="#manageTournament" prefHeight="54.0" prefWidth="229.0" style="-fx-background-color: #5b6e78;" textFill="WHITE">
+               <graphic>
+                  <Label graphicTextGap="20.0" prefHeight="45.0" prefWidth="192.0" text="Manage Tournament" textAlignment="RIGHT" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="37.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/manageTournament-PhotoRoom.png-PhotoRoom.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+               </graphic></Button>
+            <Button fx:id="btn_AddNewGame" graphicTextGap="5.0" mnemonicParsing="false" onAction="#scene_addGame" prefHeight="44.0" prefWidth="222.0" style="-fx-background-color: #5b6e78;" textFill="WHITE">
+               <graphic>
+                  <Label graphicTextGap="15.0" prefHeight="45.0" prefWidth="206.0" text="Games" textAlignment="RIGHT" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/game.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+               </graphic></Button>
+            <AnchorPane prefHeight="139.0" prefWidth="222.0">
                <VBox.margin>
                   <Insets bottom="60.0" />
                </VBox.margin>
             </AnchorPane>
-            <Button graphicTextGap="5.0" mnemonicParsing="false" onAction="#profile" prefHeight="42.0" prefWidth="194.0" style="-fx-background-color: #6b818c;" text="profile info" textFill="WHITE">
+            <Button fx:id="btn_profile" graphicTextGap="5.0" mnemonicParsing="false" onAction="#profile" prefHeight="42.0" prefWidth="230.0" style="-fx-background-color: #5b6e78;" textFill="WHITE">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
+               <graphic>
+                  <Label graphicTextGap="15.0" prefHeight="45.0" prefWidth="190.0" text="Profile" textAlignment="RIGHT" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="36.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/profile.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+               </graphic>
             </Button>
-            <Button fx:id="btn_logout" graphicTextGap="5.0" mnemonicParsing="false" onAction="#logout" prefHeight="42.0" prefWidth="194.0" style="-fx-background-color: #5b6e78;" text="Logout" textFill="WHITE" />
+            <Button fx:id="btn_logout" graphicTextGap="5.0" mnemonicParsing="false" onAction="#logout" prefHeight="42.0" prefWidth="241.0" style="-fx-background-color: #5b6e78;" textFill="WHITE">
+               <graphic>
+                  <Label graphicTextGap="10.0" prefHeight="39.0" prefWidth="184.0" text="Log out" textAlignment="RIGHT" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="39.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/logout.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+               </graphic></Button>
          </children>
       </VBox>
    </left>
@@ -75,7 +181,7 @@
                   </Button>
                </children>
             </HBox>
-            <TableView fx:id="tableView" layoutX="29.0" layoutY="187.0" prefHeight="362.0" prefWidth="749.0">
+            <TableView fx:id="tableView" layoutX="29.0" layoutY="187.0" onMouseClicked="#selectElimination" prefHeight="362.0" prefWidth="749.0">
                <columns>
                   <TableColumn fx:id="name" prefWidth="149.59997940063477" text="name" />
                   <TableColumn fx:id="game" prefWidth="149.59997940063477" text="game" />
@@ -84,6 +190,7 @@
                   <TableColumn fx:id="status" prefWidth="149.59997940063477" text="status" />
                </columns>
             </TableView>
+            <HBox layoutX="692.0" layoutY="59.0" prefHeight="52.0" prefWidth="200.0" />
          </children>
       </AnchorPane>
    </center>

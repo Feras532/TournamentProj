@@ -17,11 +17,11 @@
          </font>
       </Text>
       <Line endX="323.5" layoutX="142.0" layoutY="86.0" startX="-100.0" />
-      <TableView fx:id="gameTable" layoutX="42.0" layoutY="93.0" prefHeight="200.0" prefWidth="320.0">
+      <TableView fx:id="gameTable" layoutX="42.0" layoutY="93.0" prefHeight="200.0" prefWidth="487.0">
         <columns>
-          <TableColumn fx:id="nameOfGame" prefWidth="139.5" text="Name" />
-          <TableColumn fx:id="typeOfgame" prefWidth="104.0" text="Team/individual" />
-            <TableColumn fx:id="sizeOfGame" prefWidth="80.5" text="size" />
+          <TableColumn fx:id="nameOfGame" prefWidth="278.39996337890625" text="Name" />
+          <TableColumn fx:id="typeOfgame" prefWidth="98.4000244140625" text="Team/individual" />
+            <TableColumn fx:id="sizeOfGame" prefWidth="107.20013427734375" text="size" />
         </columns>
       </TableView>
       <Text layoutX="42.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available games">

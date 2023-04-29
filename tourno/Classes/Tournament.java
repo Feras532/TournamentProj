@@ -1,22 +1,27 @@
 package Classes;
 
+import java.util.ArrayList;
+
 public abstract class Tournament implements java.io.Serializable {
-    String name;
-    Game game;
-    int numOfDays;
-    Round[] rounds;
-    String startdate;
-    String endDate;
-    Boolean numOfTeamsIsFixed;
-    int numOfTeams;
+    private String name;
+    private Game game;
+    private int numOfDays;
+    private String startdate;
+    private String endDate;
+    private Boolean numOfTeamsIsFixed;
+    private int numOfTeams;
+    private Boolean isOpenRegisteration;
+    private Boolean isActive;
+    protected ArrayList<Team> registeredTeams;
+    public void setRegisteredTeams(ArrayList<Team> registeredTeams) {
+        this.registeredTeams = registeredTeams;
+    }
+
+    protected ArrayList<Round> rounds;
 
     public int getNumOfTeams() {
         return numOfTeams;
     }
-
-    Boolean isOpenRegisteration;
-    Boolean isActive;
-    Team[] registeredTeams;
 
     public String getName() {
         return name;
@@ -30,7 +35,7 @@ public abstract class Tournament implements java.io.Serializable {
         return numOfDays;
     }
 
-    public Round[] getRounds() {
+    public ArrayList<Round> getRounds() {
         return rounds;
     }
 
@@ -54,23 +59,48 @@ public abstract class Tournament implements java.io.Serializable {
         return isActive;
     }
 
-    public Team[] getRegisteredTeams() {
+    public ArrayList<Team> getRegisteredTeams() {
         return registeredTeams;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setStartDate(String startdate) {
+        this.startdate = startdate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public void setNumOfDays(int numOfDays) {
+        this.numOfDays = numOfDays;
+    }
+
+    public void setIsActive(Boolean isActive){
+        this.isActive =isActive;
+    }
+
+    public void setIsOpenRegisteration(Boolean isOpenRegisteration){
+        this.isOpenRegisteration =isOpenRegisteration;
+    }
+
 
     public int getNumRegisteredTeams() {
         int size = 0;
         if (registeredTeams != null) {
-            for (int i = 0; i < registeredTeams.length; i++) {
+            for (int i = 0; i < registeredTeams.size(); i++) {
                 size++;
             }
         }
         return size;
     }
 
-    public Tournament(String name, Game game, int numOfDays, Round[] rounds, String startdate, String endDate,
+    public Tournament(String name, Game game, int numOfDays, ArrayList<Round> rounds, String startdate, String endDate,
             Boolean numOfTeamsIsFixed, int numOfTeams, Boolean isOpenRegisteration, Boolean isActive,
-            Team[] registeredTeams) {
+            ArrayList<Team> registeredTeams) {
         this.name = name;
         this.game = game;
         this.numOfDays = numOfDays;
@@ -83,6 +113,10 @@ public abstract class Tournament implements java.io.Serializable {
         this.isActive = isActive;
         this.registeredTeams = registeredTeams;
 
+    }
+    public Tournament(){
+        rounds = new ArrayList<>();
+        registeredTeams = new ArrayList<>();
     }
 
     // BROTHER DO NOT TOUCH THIS OR I WILL EAT YOU !!

@@ -5,19 +5,40 @@ public class Match {
     int[] score;
     int status; //number of teams
 
-    public Team getTeam1() {
-        return team1;
+    public Match(Team team1,Team team2,int[] score, int status){
+        this.team1=team1;
+        this.team2=team2;
+        this.score=score;
+        this.status=status;
     }
 
-    public void setTeam1(Team team1) {
+    public Match(Team team1, Team team2) {
         this.team1 = team1;
+        this.team2 = team2;
+    }
+
+    public Match(){
+        this.team1 = new Team();
+        this.team2 = new Team();
+    }
+
+    public Team getTeam1() {
+        return team1;
     }
 
     public Team getTeam2() {
         return team2;
     }
 
+    public void setTeam1(Team team1) {
+        this.team1 = team1;
+    }
+
     public void setTeam2(Team team2) {
+        this.team2 = team2;
+    }
+    public void setTeams(Team team1,Team team2) {
+        this.team1 = team1;
         this.team2 = team2;
     }
 
@@ -37,10 +58,8 @@ public class Match {
         this.status = status;
     }
 
-    public Match(Team team1,Team team2,int[] score, int status){
-        this.team1=team1;
-        this.team2=team2;
-        this.score=score;
-        this.status=status;
-    }
+    @Override
+        public String toString() {
+            return team1 + " vs " + team2;
+        }
 }
