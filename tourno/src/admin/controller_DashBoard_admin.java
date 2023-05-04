@@ -118,6 +118,7 @@ public class controller_DashBoard_admin {
                 }
 
             }
+            
             in.close();
             fileIn.close();
             Parent root = FXMLLoader.load(getClass().getResource("elimination/elimination.fxml"));

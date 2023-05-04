@@ -37,7 +37,7 @@
                <graphic>
                   <Label graphicTextGap="15.0" prefHeight="45.0" prefWidth="199.0" text="View Tournament" textAlignment="RIGHT" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="System Italic" size="14.0" />
                      </font>
                      <graphic>
                         <ImageView fitHeight="39.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
@@ -53,9 +53,9 @@
                </graphic></Button>
             <Button fx:id="btn_createTournament" graphicTextGap="5.0" mnemonicParsing="false" onAction="#createTournament" prefHeight="54.0" prefWidth="226.0" style="-fx-background-color: #5b6e78;" textFill="WHITE">
                <graphic>
-                  <Label graphicTextGap="22.0" prefHeight="45.0" prefWidth="190.0" text="Create  Tournament" textAlignment="RIGHT" textFill="WHITE">
+                  <Label graphicTextGap="22.0" prefHeight="45.0" prefWidth="190.0" text="Create Tournament" textAlignment="RIGHT" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="System Italic" size="14.0" />
                      </font>
                      <graphic>
                         <ImageView fitHeight="33.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
@@ -73,7 +73,7 @@
                <graphic>
                   <Label graphicTextGap="20.0" prefHeight="45.0" prefWidth="192.0" text="Manage Tournament" textAlignment="RIGHT" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="System Italic" size="14.0" />
                      </font>
                      <graphic>
                         <ImageView fitHeight="37.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
@@ -91,7 +91,7 @@
                <graphic>
                   <Label graphicTextGap="15.0" prefHeight="45.0" prefWidth="206.0" text="Games" textAlignment="RIGHT" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="System Italic" size="14.0" />
                      </font>
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
@@ -117,7 +117,7 @@
                <graphic>
                   <Label graphicTextGap="15.0" prefHeight="45.0" prefWidth="190.0" text="Profile" textAlignment="RIGHT" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="16.0" />
+                        <Font name="System Italic" size="14.0" />
                      </font>
                      <graphic>
                         <ImageView fitHeight="36.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
@@ -136,7 +136,7 @@
                <graphic>
                   <Label graphicTextGap="10.0" prefHeight="39.0" prefWidth="184.0" text="Log out" textAlignment="RIGHT" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="15.0" />
+                        <Font name="System Italic" size="14.0" />
                      </font>
                      <graphic>
                         <ImageView fitHeight="39.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class SystemData {
     ArrayList<Paricipant> allParicipants;
     ArrayList<Game> allgames = new ArrayList<>();
-    ArrayList<Tournament> allTournaments=new ArrayList<>();
+    ArrayList<Tournament> allTournaments = new ArrayList<>();
 
     public SystemData() {
         try {
@@ -42,18 +42,17 @@ public class SystemData {
             c.printStackTrace();
         }
 
-
-
         // to be completed: ... .
 
         // this.allParicipants = allParicipants
         // this.allTournaments = allTournaments
 
     }
-    
-    // this method is created for adding new which will just open the .dat file and append an object of type game
+
+    // this method is created for adding new which will just open the .dat file and
+    // append an object of type game
     // and then saved it in the file.
-    public void addNewGame(Game game){
+    public void addNewGame(Game game) {
         allgames.add(game);
         System.out.println("Game is added to the arraylist.");
         try {
@@ -68,7 +67,7 @@ public class SystemData {
         }
     }
 
-    public void addNewTournament(Tournament tournament){
+    public void addNewTournament(Tournament tournament) {
         allTournaments.add(tournament);
         System.out.println("a tournament is added to the arraylist.");
         try {
@@ -83,56 +82,115 @@ public class SystemData {
         }
     }
 
-    public void deleteTournament(Tournament tournament) throws FileNotFoundException, IOException, ClassNotFoundException{
+    public void deleteTournament(Tournament tournament)
+            throws FileNotFoundException, IOException, ClassNotFoundException {
         int j = 0;
         try (FileInputStream fis = new FileInputStream("savedTournaments.dat");
-        ObjectInputStream ois = new ObjectInputStream(fis)) {
-       ArrayList<Tournament> list = (ArrayList<Tournament>) ois.readObject();
-       for(Tournament s: list){
-        if(s.getName().equals(tournament.getName()))
-        break;
-        else
-        j++;
-       }
-     }
-       allTournaments.remove(j);
-       try {
-        FileOutputStream fileOut = new FileOutputStream("savedTournaments.dat");
-        ObjectOutputStream out = new ObjectOutputStream(fileOut);
-        out.writeObject(allTournaments);
-        out.close();
-        fileOut.close();
-    } catch (IOException i) {
-        i.printStackTrace();}
+                ObjectInputStream ois = new ObjectInputStream(fis)) {
+            ArrayList<Tournament> list = (ArrayList<Tournament>) ois.readObject();
+            for (Tournament s : list) {
+                if (s.getName().equals(tournament.getName()))
+                    break;
+                else
+                    j++;
+            }
+        }
+        allTournaments.remove(j);
+        try {
+            FileOutputStream fileOut = new FileOutputStream("savedTournaments.dat");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(allTournaments);
+            out.close();
+            fileOut.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
     }
 
-
-
-       public void editTournament(Tournament tournament,Tournament tournament2) throws FileNotFoundException, IOException, ClassNotFoundException{
+    public void editTournament(Tournament tournament, Tournament tournament2)
+            throws FileNotFoundException, IOException, ClassNotFoundException {
         int j = 0;
         try (FileInputStream fis = new FileInputStream("savedTournaments.dat");
-        ObjectInputStream ois = new ObjectInputStream(fis)) {
-       ArrayList<Tournament> list = (ArrayList<Tournament>) ois.readObject();
-       for(Tournament s: list){
-        if(s.getName().equals(tournament.getName())){
-        break;
-    }
-        else
-        j++;
-       }
-    }
-       allTournaments.remove(j);
-       allTournaments.add(j,tournament2);
-       try {
-        FileOutputStream fileOut = new FileOutputStream("savedTournaments.dat");
-        ObjectOutputStream out = new ObjectOutputStream(fileOut);
-        out.writeObject(allTournaments);
-        out.close();
-        fileOut.close();
-    } catch (IOException i) {
-        i.printStackTrace();
-    }
-       }
+                ObjectInputStream ois = new ObjectInputStream(fis)) {
+            ArrayList<Tournament> list = (ArrayList<Tournament>) ois.readObject();
+            for (Tournament s : list) {
+                if (s.getName().equals(tournament.getName())) {
+                    break;
+                } else
+                    j++;
+            }
+        }
+        allTournaments.remove(j);
+        allTournaments.add(j, tournament2);
+        try {
+            FileOutputStream fileOut = new FileOutputStream("savedTournaments.dat");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(allTournaments);
+            out.close();
+            fileOut.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
     }
 
- 
+    
+
+    // check them
+    public static Tournament getTournament(String fileName, Tournament searchTournament) {
+        ArrayList<Tournament> tournaments = new ArrayList<>();
+        try {
+            FileInputStream fis = new FileInputStream(fileName);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            tournaments = (ArrayList<Tournament>) ois.readObject();
+            ois.close();
+            fis.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        for (Tournament tournament : tournaments) {
+            if (tournament.equals(searchTournament)) {
+                System.out.println("found tournament");
+
+                return tournament;
+            }
+        }
+        return null;
+    }
+
+
+    // used in elimination you can check its functionality.
+    public static void updateTournament(String fileName, String name, Tournament newTournament) {
+        ArrayList<Tournament> tournaments = new ArrayList<>();
+        try {
+            FileInputStream fis = new FileInputStream(fileName);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            tournaments = (ArrayList<Tournament>) ois.readObject();
+            ois.close();
+            fis.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        int index = -1;
+        for (int i = 0; i < tournaments.size(); i++) {
+            if (tournaments.get(i).getName().equals(name)) {
+                index = i;
+                break;
+            }
+        }
+        if (index != -1) {
+            tournaments.set(index, newTournament);
+        } else {
+            System.out.println();
+        }
+        try {
+            FileOutputStream fos = new FileOutputStream(fileName);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(tournaments);
+            oos.close();
+            fos.close();
+            System.out.println();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}

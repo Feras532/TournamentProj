@@ -131,7 +131,6 @@ public abstract class Tournament implements java.io.Serializable {
 
     // BROTHER DO NOT TOUCH THIS OR I WILL EAT YOU !!
     private String registeredToMax;
-
     public String getRegisteredToMax() {
 
         if ((getNumOfTeams() == 0) && (getNumOfTeamsIsFixed() == false))

@@ -1,24 +1,24 @@
 package admin.elimination;
 
+import javafx.event.EventHandler;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import Classes.Elimination;
 import Classes.Match;
 import Classes.Round;
+import Classes.SystemData;
 import Classes.Team;
 import Classes.Tournament;
 import admin.controller_DashBoard_admin;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -27,7 +27,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.Node;
-
 import javafx.scene.*;
 
 public class controllerElimination {
@@ -63,24 +62,39 @@ public class controllerElimination {
         stage.show();
     }
 
-    @FXML
-    void initialize() throws IOException {
-        Elimination tournament = (Elimination) controller_DashBoard_admin.selectedTournament;
+    static Elimination tournament = (Elimination) controller_DashBoard_admin.selectedTournament;
 
-        // =============================================
+
+    //// ========== test number of teams here.
+    @FXML
+    void testGenerateMatches(ActionEvent event) {
         // to be deleted:
         ArrayList<Team> teams = new ArrayList<>();
-        for (int i = 0; i < 22; i++)
+        for (int i = 0; i < 16; i++)
             teams.add(new Team(i));
         tournament.setRegisteredTeams(teams);
         tournament.generateMatches();
-        tournament.printMe();
-        //////////////////
-        mainSceneStyler();
+        save();
 
+    }
+
+    @FXML
+    void testDisplayMatches(ActionEvent event) throws IOException {
         Group root = new Group();
         fillWithMatches(root, tournament);
         scrollPane.setContent(root); // display the content in the scroll pane
+        tournament.printMe();
+        System.out.println("---------------------------------------------");
+
+    }
+
+    @FXML
+    void initialize() throws IOException {
+
+        // =============================================
+
+        //////////////////
+        mainSceneStyler();
 
     }
 
@@ -89,8 +103,8 @@ public class controllerElimination {
 
         //// styling the getters
         Date.setText("from: " + tournament.getStartdate() + " To: " + tournament.getEndDate());
-        GameName.setText("Game: "+tournament.getGame());
-        TournamentName.setText("Name: "+ tournament.getName());
+        GameName.setText("Game: " + tournament.getGame());
+        TournamentName.setText("Name: " + tournament.getName());
         numRegistered.setText("" + tournament.getNumRegisteredTeams());
         numRegistered.setFont(Font.font("Verdana", 22));
         Limit.setText("" + tournament.getNumOfTeams());
@@ -122,6 +136,38 @@ public class controllerElimination {
 
                 oneBracketRoot.setLayoutX(xPos);
                 oneBracketRoot.setLayoutY(yPos);
+                // Add an event handler to the pane
+
+                // ==================================================================== this to
+                // click on bracket and move scene.
+                oneBracketRoot.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        try {
+                            // Load the new FXML file
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("matchDetails.fxml"));
+                            Parent root = loader.load();
+                            // Get the controller
+                            controllerMatch controller2 = loader.getController();
+                            // Call the setData method
+                            controller2.setData(match);
+                            // Get the current stage
+                            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                            // Create a new scene with the loaded content
+                            Scene scene = new Scene(root);
+                            // Set the scene of the current stage to the new scene
+                            stage.setScene(scene);
+                            controller2.recordHelper(match);
+
+                            save();
+
+                        } catch (IOException e) {
+                            // Handle the exception
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                // =====================================================================
                 Line l = new Line(xPos + WIDTH, yPos + HEIGHT / 2,
                         xPos + X_SPACING_OF_ROUNDS + WIDTH / 2, yPos + HEIGHT / 2);
                 if (i % 2 == 0 && roundNum != rounds.size()) {
@@ -144,11 +190,31 @@ public class controllerElimination {
             if (roundNum == rounds.size()) {
                 Rectangle r = new Rectangle(xPos + WIDTH / 2, firstMatchYpos, WIDTH, HEIGHT);
                 r.setFill(Color.GREENYELLOW);
-                root.getChildren().addAll(r);
+                ArrayList<Round> allRounds = tournament.getRounds();
+                Round lastRound = allRounds.get(allRounds.size() - 1);
+                Match lastMatch = lastRound.getMatches().get(0);
+                if (lastMatch.getScore() != null) {
+                    String winner;
+                    if (lastMatch.getScore()[0] > lastMatch.getScore()[1])
+                        winner = lastRound.getMatches().get(0).getTeam1().getNameString();
+                    else
+                        winner = lastRound.getMatches().get(0).getTeam2().getNameString();
+                    Text text = new Text(winner);
+                    text.setX(r.getX() + r.getWidth() / 2 - text.getLayoutBounds().getWidth() / 2);
+                    text.setY(r.getY() + r.getHeight() / 2 + text.getLayoutBounds().getHeight() / 4);
+                    root.getChildren().addAll(r, text);
+                }
+
             }
             // Updating coordinates for next round
             yPos = firstMatchYpos * 2 - Y_SPACING_OF_FIRST_ROUND / 2;
             firstMatchYpos = yPos;
         }
+
+    }
+
+    void save() {
+        new SystemData().updateTournament("savedTournaments.dat", tournament.getName(), tournament);
+
     }
 }

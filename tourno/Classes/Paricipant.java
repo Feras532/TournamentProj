@@ -1,5 +1,5 @@
 package Classes;
-public class Paricipant {
+public class Paricipant implements java.io.Serializable{
     Team[] teams;
     
 

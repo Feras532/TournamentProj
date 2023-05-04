@@ -2,7 +2,7 @@ package Classes;
 
 import java.util.ArrayList;
 
-public class Team {
+public class Team implements java.io.Serializable{
     private Tournament tournament;
     private ArrayList<Paricipant> players;
     private String nameString;
@@ -28,7 +28,7 @@ public class Team {
     }
 
     public Team(int n){
-        this.nameString = "Team " + n;
+        this.nameString = "Team" + n;
     }
     public Team(){
         this.nameString = "TBA";

@@ -1,5 +1,5 @@
 package Classes;
-public class Match {
+public class Match implements java.io.Serializable{
     Team team1;
     Team team2;
     int[] score;

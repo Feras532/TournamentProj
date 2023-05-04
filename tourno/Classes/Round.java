@@ -2,7 +2,7 @@ package Classes;
 
 import java.util.ArrayList;
 
-public class Round {
+public class Round implements java.io.Serializable{
     private ArrayList<Match> matches;
     private Boolean isCompleted;
 

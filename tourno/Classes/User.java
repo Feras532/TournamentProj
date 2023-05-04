@@ -1,5 +1,5 @@
 package Classes;
-public abstract class User {
+public abstract class User implements java.io.Serializable {
     int userID;
     String firstName;
     String lastName;
