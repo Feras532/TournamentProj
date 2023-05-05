@@ -68,14 +68,7 @@ public class controllerElimination {
     //// ========== test number of teams here.
     @FXML
     void testGenerateMatches(ActionEvent event) {
-        // to be deleted:
-        ArrayList<Team> teams = new ArrayList<>();
-        for (int i = 0; i < 16; i++)
-            teams.add(new Team(i));
-        tournament.setRegisteredTeams(teams);
-        tournament.generateMatches();
-        save();
-
+        
     }
 
     @FXML
@@ -83,16 +76,15 @@ public class controllerElimination {
         Group root = new Group();
         fillWithMatches(root, tournament);
         scrollPane.setContent(root); // display the content in the scroll pane
-        tournament.printMe();
-        System.out.println("---------------------------------------------");
 
     }
 
     @FXML
     void initialize() throws IOException {
-
         // =============================================
-
+        Group root = new Group();
+        fillWithMatches(root, tournament);
+        scrollPane.setContent(root); // display the content in the scroll pane
         //////////////////
         mainSceneStyler();
 

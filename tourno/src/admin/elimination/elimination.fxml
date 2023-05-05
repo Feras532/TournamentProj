@@ -56,7 +56,5 @@
       </AnchorPane>
       <Button layoutY="154.0" mnemonicParsing="false" onAction="#backHome" prefHeight="26.0" prefWidth="135.0" text="Home" />
       <ScrollPane fx:id="scrollPane" layoutX="69.0" layoutY="241.0" prefHeight="564.0" prefWidth="1026.0" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="69.0" AnchorPane.rightAnchor="137.5999999999999" AnchorPane.topAnchor="241.0" />
-      <Button layoutX="514.0" layoutY="167.0" mnemonicParsing="false" onAction="#testGenerateMatches" text="test button: generate matches" />
-      <Button layoutX="514.0" layoutY="205.0" mnemonicParsing="false" onAction="#testDisplayMatches" text="test button: display matches" />
    </children>
 </AnchorPane>

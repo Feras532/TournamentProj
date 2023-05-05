@@ -1,4 +1,5 @@
 package admin;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -101,7 +102,6 @@ public class controller_DashBoard_admin {
     // tableView.getSelectionModel().getSelectedItem();
     public static Tournament selectedTournament;
 
-
     @FXML // this method to move scene after selecting a row from the table view.
     void selectElimination(MouseEvent event) throws IOException, ClassNotFoundException {
 
@@ -112,22 +112,30 @@ public class controller_DashBoard_admin {
             ArrayList<Tournament> tournaments = (ArrayList<Tournament>) in.readObject();
             for (Tournament s : tournaments) {
                 if (s.getName().equals(selected.getName())) {
-                    selectedTournament = (Elimination)s; // save the seleceted tournament from the tableView in "selectedTournament"
-                                            // so I can work on this variable in controllerElimination.java
+                    selectedTournament = (Elimination) s; // save the seleceted tournament from the tableView in
+                                                          // "selectedTournament"
+                    // so I can work on this variable in controllerElimination.java
                     break;
                 }
 
             }
-            
+
             in.close();
             fileIn.close();
-            Parent root = FXMLLoader.load(getClass().getResource("elimination/elimination.fxml"));
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        }
-        else{
+            if (selectedTournament.getIsActive()) {
+                Parent root = FXMLLoader.load(getClass().getResource("elimination/elimination.fxml"));
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } else if (selectedTournament.getIsActive() == false && selectedTournament.getIsOpenRegisteration()) {
+                Parent root = FXMLLoader.load(getClass().getResource("future.fxml"));
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            }
+        } else {
             System.out.println("put roundrobin method here");
         }
 
@@ -141,7 +149,7 @@ public class controller_DashBoard_admin {
             ArrayList<Tournament> list = (ArrayList<Tournament>) ois.readObject();
 
             for (Tournament s : list) { // display the active tournaments only
-                if (s.getIsActive() == true && !s.getIsOpenRegisteration())
+                if (s.getIsActive() == true && s.getIsOpenRegisteration() == false)
                     observableList.add(s);
             }
             // observableList.addAll(list);
@@ -162,7 +170,7 @@ public class controller_DashBoard_admin {
 
     @FXML
     void past(ActionEvent event) {
-        
+
         ObservableList<Tournament> observableList = FXCollections.observableArrayList();
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("savedTournaments.dat"))) {
             ArrayList<Tournament> list = (ArrayList<Tournament>) ois.readObject();
@@ -249,7 +257,6 @@ public class controller_DashBoard_admin {
 
     }
 
-
     // 👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇
 
     @FXML
@@ -270,19 +277,17 @@ public class controller_DashBoard_admin {
         borderpane.setCenter(view);
     }
 
-
     @FXML
     void initialize() {
-      fake_CSS_styler(btn_logout);
-      fake_CSS_styler(btn_AddNewGame);
-      fake_CSS_styler(btn_createTournament);
-      fake_CSS_styler(btn_manage);
-      fake_CSS_styler(btn_profile);
-      fake_CSS_styler(btn_viewTournament);
+        fake_CSS_styler(btn_logout);
+        fake_CSS_styler(btn_AddNewGame);
+        fake_CSS_styler(btn_createTournament);
+        fake_CSS_styler(btn_manage);
+        fake_CSS_styler(btn_profile);
+        fake_CSS_styler(btn_viewTournament);
 
-        
     }
-    
+
     @FXML
     private Button btn_AddNewGame;
     @FXML
@@ -294,14 +299,14 @@ public class controller_DashBoard_admin {
     @FXML
     private Button btn_viewTournament;
 
-    public void fake_CSS_styler(Button btn){
+    public void fake_CSS_styler(Button btn) {
         btn.setOnMouseEntered(event -> {
             btn.setStyle("-fx-background-color: #86a6b5;");
         });
         btn.setOnMouseExited(event -> {
             btn.setStyle("-fx-background-color:  #5b6e78");
         });
-        
+
     }
 
 }
