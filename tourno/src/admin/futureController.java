@@ -87,7 +87,7 @@ public class futureController {
         // =========================== sample teams registeration number
         // to be deleted:
         ArrayList<Team> teams = new ArrayList<>();
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 17; i++)
             teams.add(new Team(i));
         tournament.setRegisteredTeams(teams);
         save(tournament);

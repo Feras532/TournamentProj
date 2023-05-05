@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
@@ -35,12 +36,12 @@
             </AnchorPane>
             <Button fx:id="btn_viewTournament" graphicTextGap="5.0" mnemonicParsing="false" onAction="#viewTournament" prefHeight="53.0" prefWidth="227.0" style="-fx-background-color: #5b6e78;" textFill="WHITE">
                <graphic>
-                  <Label graphicTextGap="15.0" prefHeight="45.0" prefWidth="199.0" text="View Tournament" textAlignment="RIGHT" textFill="WHITE">
+                  <Label graphicTextGap="22.0" prefHeight="44.0" prefWidth="192.0" text="Tournaments" textAlignment="RIGHT" textFill="WHITE">
                      <font>
                         <Font name="System Italic" size="14.0" />
                      </font>
                      <graphic>
-                        <ImageView fitHeight="39.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="34.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../image/view.png" />
                            </image>
@@ -53,7 +54,7 @@
                </graphic></Button>
             <Button fx:id="btn_createTournament" graphicTextGap="5.0" mnemonicParsing="false" onAction="#createTournament" prefHeight="54.0" prefWidth="226.0" style="-fx-background-color: #5b6e78;" textFill="WHITE">
                <graphic>
-                  <Label graphicTextGap="22.0" prefHeight="45.0" prefWidth="190.0" text="Create Tournament" textAlignment="RIGHT" textFill="WHITE">
+                  <Label graphicTextGap="25.0" prefHeight="45.0" prefWidth="190.0" text="Create Tournament" textAlignment="RIGHT" textFill="WHITE">
                      <font>
                         <Font name="System Italic" size="14.0" />
                      </font>
@@ -89,12 +90,12 @@
                </graphic></Button>
             <Button fx:id="btn_AddNewGame" graphicTextGap="5.0" mnemonicParsing="false" onAction="#scene_addGame" prefHeight="44.0" prefWidth="222.0" style="-fx-background-color: #5b6e78;" textFill="WHITE">
                <graphic>
-                  <Label graphicTextGap="15.0" prefHeight="45.0" prefWidth="206.0" text="Games" textAlignment="RIGHT" textFill="WHITE">
+                  <Label graphicTextGap="18.0" prefHeight="36.0" prefWidth="195.0" text="Games" textAlignment="RIGHT" textFill="WHITE">
                      <font>
                         <Font name="System Italic" size="14.0" />
                      </font>
                      <graphic>
-                        <ImageView fitHeight="35.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="36.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../image/game.png" />
                            </image>
@@ -164,24 +165,26 @@
             <Line endX="100.0" layoutX="129.0" layoutY="109.0" startX="-100.0" stroke="#6b818c" />
             <HBox layoutX="29.0" layoutY="129.0" prefHeight="39.0" prefWidth="386.0" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="327.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#ongoing" prefHeight="39.0" prefWidth="128.0" style="-fx-background-color: #f2f2f2;" text="Ongoing">
+                  <Button mnemonicParsing="false" onAction="#past" prefHeight="39.0" prefWidth="128.0" style="-fx-background-color: #D3D3D3; -fx-background-radius: 15;" text="Past">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#past" prefHeight="39.0" prefWidth="128.0" style="-fx-background-color: #f2f2f2;" text="Past">
+                  <Pane prefHeight="39.0" prefWidth="25.0" />
+                  <Button mnemonicParsing="false" onAction="#ongoing" prefHeight="39.0" prefWidth="128.0" style="-fx-background-color: #D3D3D3; -fx-background-radius: 15;" text="Ongoing">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#future" prefHeight="39.0" prefWidth="128.0" style="-fx-background-color: #f2f2f2;" text="Future">
+                  <Pane prefHeight="39.0" prefWidth="25.0" />
+                  <Button mnemonicParsing="false" onAction="#future" prefHeight="39.0" prefWidth="128.0" style="-fx-background-color: #D3D3D3; -fx-background-radius: 15;" text="Future">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Button>
                </children>
             </HBox>
-            <TableView fx:id="tableView" layoutX="29.0" layoutY="187.0" onMouseClicked="#selectElimination" prefHeight="362.0" prefWidth="749.0">
+            <TableView fx:id="tableView" layoutX="29.0" layoutY="187.0" onMouseClicked="#selectTournament_fromSchedule" prefHeight="362.0" prefWidth="749.0">
                <columns>
                   <TableColumn fx:id="name" prefWidth="149.59997940063477" text="name" />
                   <TableColumn fx:id="game" prefWidth="149.59997940063477" text="game" />

@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 
 import Classes.Elimination;
 import Classes.Game;
+import Classes.RoundRobin;
 import Classes.SystemData;
 import Classes.Tournament;
 import javafx.collections.FXCollections;
@@ -103,10 +104,10 @@ public class controller_DashBoard_admin {
     public static Tournament selectedTournament;
 
     @FXML // this method to move scene after selecting a row from the table view.
-    void selectElimination(MouseEvent event) throws IOException, ClassNotFoundException {
+    void selectTournament_fromSchedule(MouseEvent event) throws IOException, ClassNotFoundException {
 
-        Elimination selected = (Elimination) tableView.getSelectionModel().getSelectedItem();
-        if (selected.getType().equals("Elimination")) {
+        Tournament selected = tableView.getSelectionModel().getSelectedItem();
+        if (selected instanceof Elimination) {
             FileInputStream fileIn = new FileInputStream("savedTournaments.dat");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             ArrayList<Tournament> tournaments = (ArrayList<Tournament>) in.readObject();
@@ -117,9 +118,7 @@ public class controller_DashBoard_admin {
                     // so I can work on this variable in controllerElimination.java
                     break;
                 }
-
             }
-
             in.close();
             fileIn.close();
             if (selectedTournament.getIsActive()) {
@@ -135,8 +134,10 @@ public class controller_DashBoard_admin {
                 stage.setScene(scene);
                 stage.show();
             }
-        } else {
+        } 
+        else if(selected instanceof RoundRobin){
             System.out.println("put roundrobin method here");
+            ////////////////////
         }
 
     }
@@ -286,6 +287,7 @@ public class controller_DashBoard_admin {
         fake_CSS_styler(btn_profile);
         fake_CSS_styler(btn_viewTournament);
 
+        
     }
 
     @FXML
