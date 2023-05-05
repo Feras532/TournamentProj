@@ -19,7 +19,7 @@
 
 <BorderPane fx:id="borderpane" prefHeight="616.0" prefWidth="1083.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="admin.controller_DashBoard_admin">
    <left>
-      <VBox prefHeight="616.0" prefWidth="222.0" style="-fx-background-color: #78909c;" BorderPane.alignment="CENTER">
+      <VBox prefHeight="616.0" prefWidth="186.0" style="-fx-background-color: #78909c;" BorderPane.alignment="CENTER">
          <children>
             <AnchorPane prefHeight="125.0" prefWidth="191.0">
                <children>
@@ -88,7 +88,7 @@
                      </graphic>
                   </Label>
                </graphic></Button>
-            <Button fx:id="btn_AddNewGame" graphicTextGap="5.0" mnemonicParsing="false" onAction="#scene_addGame" prefHeight="44.0" prefWidth="222.0" style="-fx-background-color: #5b6e78;" textFill="WHITE">
+            <Button fx:id="btn_AddNewGame" graphicTextGap="5.0" mnemonicParsing="false" onAction="#scene_addGame" prefHeight="44.0" prefWidth="228.0" style="-fx-background-color: #5b6e78;" textFill="WHITE">
                <graphic>
                   <Label graphicTextGap="18.0" prefHeight="36.0" prefWidth="195.0" text="Games" textAlignment="RIGHT" textFill="WHITE">
                      <font>
@@ -110,47 +110,48 @@
                <VBox.margin>
                   <Insets bottom="60.0" />
                </VBox.margin>
+               <children>
+                  <Line endX="98.39999389648438" endY="-5.999969482421875" layoutX="121.0" layoutY="13.0" startX="-108.1999282836914" startY="-5.999987602233887" stroke="#e1e1e1" style="-fx-fill: #DCDCDC;" />
+                  <Button fx:id="btn_profile" graphicTextGap="5.0" layoutX="-9.0" layoutY="14.0" mnemonicParsing="false" onAction="#profile" prefHeight="44.0" prefWidth="236.0" style="-fx-background-color: #5b6e78;" textFill="WHITE">
+                     <graphic>
+                        <Label graphicTextGap="15.0" prefHeight="45.0" prefWidth="190.0" text="Profile" textAlignment="RIGHT" textFill="WHITE">
+                           <font>
+                              <Font name="System Italic" size="14.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="36.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/profile.png" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btn_logout" graphicTextGap="5.0" layoutX="-15.0" layoutY="58.0" mnemonicParsing="false" onAction="#logout" prefHeight="42.0" prefWidth="241.0" style="-fx-background-color: #5b6e78;" textFill="WHITE">
+                     <graphic>
+                        <Label graphicTextGap="10.0" prefHeight="39.0" prefWidth="184.0" text="Log out" textAlignment="RIGHT" textFill="WHITE">
+                           <font>
+                              <Font name="System Italic" size="14.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="39.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/logout.png" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                     </graphic>
+                  </Button>
+               </children>
             </AnchorPane>
-            <Button fx:id="btn_profile" graphicTextGap="5.0" mnemonicParsing="false" onAction="#profile" prefHeight="42.0" prefWidth="230.0" style="-fx-background-color: #5b6e78;" textFill="WHITE">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-               <graphic>
-                  <Label graphicTextGap="15.0" prefHeight="45.0" prefWidth="190.0" text="Profile" textAlignment="RIGHT" textFill="WHITE">
-                     <font>
-                        <Font name="System Italic" size="14.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="36.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/profile.png" />
-                           </image>
-                           <cursor>
-                              <Cursor fx:constant="DEFAULT" />
-                           </cursor>
-                        </ImageView>
-                     </graphic>
-                  </Label>
-               </graphic>
-            </Button>
-            <Button fx:id="btn_logout" graphicTextGap="5.0" mnemonicParsing="false" onAction="#logout" prefHeight="42.0" prefWidth="241.0" style="-fx-background-color: #5b6e78;" textFill="WHITE">
-               <graphic>
-                  <Label graphicTextGap="10.0" prefHeight="39.0" prefWidth="184.0" text="Log out" textAlignment="RIGHT" textFill="WHITE">
-                     <font>
-                        <Font name="System Italic" size="14.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="39.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/logout.png" />
-                           </image>
-                           <cursor>
-                              <Cursor fx:constant="DEFAULT" />
-                           </cursor>
-                        </ImageView>
-                     </graphic>
-                  </Label>
-               </graphic></Button>
          </children>
       </VBox>
    </left>

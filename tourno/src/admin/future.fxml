@@ -10,7 +10,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="635.0" prefWidth="437.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="admin.futureController">
    <center>
-      <Pane prefHeight="681.0" prefWidth="478.0" style="-fx-background-color: #A1A4A9;" BorderPane.alignment="CENTER">
+      <Pane prefHeight="681.0" prefWidth="478.0" style="-fx-background-color: #C0C0C0;" BorderPane.alignment="CENTER">
          <children>
             <Pane layoutX="108.0" layoutY="14.0" prefHeight="65.0" prefWidth="231.0" style="-fx-background-color: #777777; -fx-background-radius: 20;">
                <children>

@@ -1,20 +1,15 @@
 package admin;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 import Classes.Elimination;
-import Classes.Game;
 import Classes.RoundRobin;
-import Classes.SystemData;
 import Classes.Tournament;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,10 +21,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -99,8 +92,7 @@ public class controller_DashBoard_admin {
         stage.show();
     }
 
-    // public Elimination selected = (Elimination)
-    // tableView.getSelectionModel().getSelectedItem();
+
     public static Tournament selectedTournament;
 
     @FXML // this method to move scene after selecting a row from the table view.
