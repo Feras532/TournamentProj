@@ -23,6 +23,7 @@ public class mainApp extends Application {
     }
 
     public static void main(String[] args) {
+        System.out.println("السلام عليكم مستر شويخات");
         System.out.println("Start the app");
         System.out.println("Test");
         launch(args);
