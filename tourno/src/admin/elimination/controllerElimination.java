@@ -62,25 +62,15 @@ public class controllerElimination {
         stage.show();
     }
 
-    static Elimination tournament = (Elimination) controller_DashBoard_admin.selectedTournament;
+    //  static Elimination tournament = (Elimination) controller_DashBoard_admin.selectedTournament;
 
-
-    //// ========== test number of teams here.
-    @FXML
-    void testGenerateMatches(ActionEvent event) {
-        
-    }
-
-    @FXML
-    void testDisplayMatches(ActionEvent event) throws IOException {
-        Group root = new Group();
-        fillWithMatches(root, tournament);
-        scrollPane.setContent(root); // display the content in the scroll pane
-
-    }
 
     @FXML
     void initialize() throws IOException {
+         // ...
+         Elimination tournament = (Elimination) controller_DashBoard_admin.selectedTournament;
+         // Use the tournament variable here
+         // ...
         // =============================================
         Group root = new Group();
         fillWithMatches(root, tournament);
@@ -99,7 +89,11 @@ public class controllerElimination {
         TournamentName.setText("Name: " + tournament.getName());
         numRegistered.setText("" + tournament.getNumRegisteredTeams());
         numRegistered.setFont(Font.font("Verdana", 22));
-        Limit.setText("" + tournament.getNumOfTeams());
+        if(tournament.getNumOfTeams() != 0)
+            Limit.setText("" + tournament.getNumOfTeams());
+        else
+        Limit.setText("Unlimited");
+
         Limit.setFont(Font.font("Verdana", 22));
         status.setText(tournament.getStatus());
     }
@@ -206,6 +200,8 @@ public class controllerElimination {
     }
 
     void save() {
+        Elimination tournament = (Elimination) controller_DashBoard_admin.selectedTournament;
+
         new SystemData().updateTournament("savedTournaments.dat", tournament.getName(), tournament);
 
     }

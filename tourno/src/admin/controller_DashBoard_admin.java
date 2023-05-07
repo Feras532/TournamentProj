@@ -108,6 +108,8 @@ public class controller_DashBoard_admin {
                     selectedTournament = (Elimination) s; // save the seleceted tournament from the tableView in
                                                           // "selectedTournament"
                     // so I can work on this variable in controllerElimination.java
+                    System.out.println(selectedTournament.getName() + " teams : "+ selectedTournament.getNumRegisteredTeams());
+                    
                     break;
                 }
             }

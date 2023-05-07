@@ -42,19 +42,19 @@
                   </Text>
                   <Line endX="99.99993896484375" endY="-15.199989318847656" layoutX="50.0" layoutY="106.0" startX="99.99993896484375" startY="-96.00000762939453" stroke="WHITE" />
                   <Line endX="100.0" layoutX="177.0" layoutY="51.0" startX="-15.60003662109375" stroke="WHITE" />
-                  <Text fx:id="numRegistered" fill="WHITE" layoutX="202.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10" wrappingWidth="33.4547119140625">
+                  <Text fx:id="numRegistered" fill="WHITE" layoutX="151.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10" textAlignment="CENTER" wrappingWidth="135.20000000000005">
                      <font>
                         <Font size="26.0" />
                      </font>
                   </Text>
-                  <Text fx:id="Limit" fill="WHITE" layoutX="202.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10" wrappingWidth="33.45471191406244">
+                  <Text fx:id="Limit" fill="WHITE" layoutX="151.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10" textAlignment="CENTER" wrappingWidth="135.20000000000005">
                      <font>
                         <Font size="26.0" />
                      </font>
                   </Text>
                </children>
             </AnchorPane>
-            <ImageView fitHeight="104.0" fitWidth="117.0" layoutX="565.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="104.0" fitWidth="117.0" layoutX="757.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../image/elim.png" />
                </image>

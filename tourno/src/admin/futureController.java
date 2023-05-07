@@ -44,7 +44,7 @@ public class futureController {
 
     @FXML
     void initialize() throws IOException {
-
+        Tournament tournament = controller_DashBoard_admin.selectedTournament;
         buttonsInteraction(start);
         buttonsInteraction(back);
         tourName.setText(tournament.getName());
@@ -84,10 +84,11 @@ public class futureController {
 
     @FXML
     void clickedStart(MouseEvent event) throws IOException {
+        Tournament tournament = controller_DashBoard_admin.selectedTournament;
         // =========================== sample teams registeration number
         // to be deleted:
         ArrayList<Team> teams = new ArrayList<>();
-        for (int i = 0; i < 17; i++)
+        for (int i = 0; i < 10; i++)
             teams.add(new Team(i));
         tournament.setRegisteredTeams(teams);
         save(tournament);
@@ -103,8 +104,8 @@ public class futureController {
 
                 Elimination elimination = (Elimination) tournament;
                 elimination.generateMatches();
-                tournament.setIsActive(true);
-                tournament.setIsOpenRegisteration(false);
+                elimination.setIsActive(true);
+                elimination.setIsOpenRegisteration(false);
                 Parent root = FXMLLoader.load(getClass().getResource("DashBoard_admin.fxml"));
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
@@ -122,10 +123,12 @@ public class futureController {
 
     }
 
-    static Tournament tournament = controller_DashBoard_admin.selectedTournament;
+    // static Tournament tournament = controller_DashBoard_admin.selectedTournament;
 
     static void save(Tournament tournament) {
+        
         new SystemData().updateTournament("savedTournaments.dat", tournament.getName(), tournament);
+        System.out.println("tournament is saved with number of teams"+ tournament.getNumRegisteredTeams());
 
     }
 }

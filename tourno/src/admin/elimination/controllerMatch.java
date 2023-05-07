@@ -83,7 +83,11 @@ public class controllerMatch {
 
     @FXML
     void initialize() throws IOException {
-
+        // ...
+        Elimination tournament = (Elimination) controller_DashBoard_admin.selectedTournament;
+        // Use the tournament variable here
+        // ...
+        // =============================================
         buttonsInteraction(demoteTeam);
         buttonsInteraction(resetTeams);
         buttonsInteraction(recordScore);
@@ -109,6 +113,8 @@ public class controllerMatch {
 
     // this method records the match score
     public void handleButtonClick(MouseEvent event, Match match) {
+        Elimination tournament = (Elimination) controller_DashBoard_admin.selectedTournament;
+
         String team1Name = match.getTeam1().getNameString();
         String team2Name = match.getTeam2().getNameString();
         if (team1Name.equals("TBA") || team2Name.equals("TBA")) {
@@ -157,9 +163,9 @@ public class controllerMatch {
                 match.setScore(newScore);
                 setData(match);
                 if (match.getScore()[0] > match.getScore()[1])
-                    controllerElimination.tournament.promoteWinner(match.getTeam1());
+                    tournament.promoteWinner(match.getTeam1());
                 else
-                    controllerElimination.tournament.promoteWinner(match.getTeam2());
+                    tournament.promoteWinner(match.getTeam2());
             }
         } else {
         }
@@ -206,7 +212,7 @@ public class controllerMatch {
 
     }
 
-    static Elimination tournament = (Elimination) controller_DashBoard_admin.selectedTournament;
+    // static Elimination tournament = (Elimination) controller_DashBoard_admin.selectedTournament;
 
     private void resetter(MouseEvent event, Match match) {
         String team1Name = match.getTeam1().getNameString();
@@ -268,13 +274,12 @@ public class controllerMatch {
                 setData(match);
                 save();
             }
-        }
-        else{
+        } else {
             Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-                    errorAlert.setTitle("Demotion error");
-                    errorAlert.setHeaderText("Cannot be demoted!");
-                    errorAlert.setContentText("you cant demote teams from first round.");
-                    errorAlert.showAndWait();
+            errorAlert.setTitle("Demotion error");
+            errorAlert.setHeaderText("Cannot be demoted!");
+            errorAlert.setContentText("you cant demote teams from first round.");
+            errorAlert.showAndWait();
         }
     }
 
@@ -283,6 +288,8 @@ public class controllerMatch {
     }
 
     private static boolean Removable(Match match) {
+        Elimination tournament = (Elimination) controller_DashBoard_admin.selectedTournament;
+
         Team team1 = match.getTeam1();
         Team team2 = match.getTeam2();
         ArrayList<Round> rounds = tournament.getRounds();
@@ -306,6 +313,8 @@ public class controllerMatch {
     }
 
     private static void resetPrevious(Team team, Match currentMatch) {
+        Elimination tournament = (Elimination) controller_DashBoard_admin.selectedTournament;
+
         if (Removable(currentMatch)) {
             if (team == currentMatch.getTeam1())
                 currentMatch.setTeam1(new Team());
@@ -327,6 +336,8 @@ public class controllerMatch {
     }
 
     private void checkAndRemovePromotedTeam(Match currentMatch) {
+        Elimination tournament = (Elimination) controller_DashBoard_admin.selectedTournament;
+
         ArrayList<Round> rounds = tournament.getRounds();
         int currentRoundIndex = -1;
         for (int i = 0; i < rounds.size(); i++) {
@@ -365,6 +376,8 @@ public class controllerMatch {
     }
 
     static void save() {
+        Elimination tournament = (Elimination) controller_DashBoard_admin.selectedTournament;
+
         new SystemData().updateTournament("savedTournaments.dat", tournament.getName(), tournament);
 
     }

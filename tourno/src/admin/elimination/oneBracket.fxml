@@ -8,7 +8,19 @@
 
 <AnchorPane fx:id="myPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: #3c494f;" styleClass="pane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="admin.elimination.controllerBracket">
    <children>
-      <Pane layoutX="74.0" prefHeight="50.0" prefWidth="27.0" style="-fx-background-color: #4d6069;" />
+      <Pane layoutX="74.0" prefHeight="50.0" prefWidth="27.0" style="-fx-background-color: #4d6069;">
+         <children>
+            <Text fx:id="team2score" fill="WHITE" fontSmoothingType="LCD" layoutX="-1.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="28.703125">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="team1score" fill="WHITE" fontSmoothingType="LCD" layoutX="-1.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="27.90313720703125">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+         </children></Pane>
       <Line endX="-26.000015258789062" endY="-42.999977111816406" layoutX="126.0" layoutY="68.0" startX="-125.99996948242188" startY="-43.0" stroke="#668190" />
       <Text fx:id="team1name" fill="WHITE" fontSmoothingType="LCD" layoutX="3.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team1()">
          <font>
@@ -18,16 +30,6 @@
       <Text fx:id="team2name" fill="WHITE" fontSmoothingType="LCD" layoutX="3.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team2()">
          <font>
             <Font name="System Bold" size="14.0" />
-         </font>
-      </Text>
-      <Text fx:id="team1score" fill="WHITE" fontSmoothingType="LCD" layoutX="82.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-      <Text fx:id="team2score" fill="WHITE" fontSmoothingType="LCD" layoutX="82.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-         <font>
-            <Font size="18.0" />
          </font>
       </Text>
    </children>
