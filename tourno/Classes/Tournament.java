@@ -13,11 +13,27 @@ public abstract class Tournament implements java.io.Serializable {
     private Boolean isOpenRegisteration;
     private Boolean isActive;
     protected ArrayList<Team> registeredTeams;
+    protected ArrayList<Round> rounds;
+
+
+    public Boolean playersAreAlreadyRegistered(Team team) {
+        for (Team registeredTeam : registeredTeams) {
+            for (Paricipant registeredParicipant : registeredTeam.getPlayers()) {
+                for (Paricipant paricipant : team.getPlayers()) {
+                    if (registeredParicipant.getUserID().equals(paricipant.getUserID())){
+                        System.out.println("Player Already Registered FOUND !!");
+                        return true; 
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+
     public void setRegisteredTeams(ArrayList<Team> registeredTeams) {
         this.registeredTeams = registeredTeams;
     }
-
-    protected ArrayList<Round> rounds;
 
     public int getNumOfTeams() {
         return numOfTeams;
@@ -29,6 +45,10 @@ public abstract class Tournament implements java.io.Serializable {
 
     public String getGame() {
         return game.getName();
+    }
+
+    public Game getGameObj(){
+        return game;
     }
 
     public int getNumOfDays() {
@@ -112,7 +132,6 @@ public abstract class Tournament implements java.io.Serializable {
         this.isOpenRegisteration = isOpenRegisteration;
         this.isActive = isActive;
         this.registeredTeams = registeredTeams;
-
     }
     public Tournament(){
         rounds = new ArrayList<>();

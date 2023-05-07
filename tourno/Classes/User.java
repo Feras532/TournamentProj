@@ -1,23 +1,26 @@
 package Classes;
 public abstract class User implements java.io.Serializable {
-    int userID;
+    String userID;
     String firstName;
     String lastName;
     String emailString;
-    String phoneNumber;
+    
 
-public User(int userID,String firstName,String lastName,String emailString,String phoneNumber)
-{
+public User(String userID,String firstName,String lastName,String emailString){
     this.userID=userID;
     this.firstName=firstName;
     this.lastName=lastName;
-    this.emailString=emailString;
-    this.phoneNumber=phoneNumber;
+    this.emailString=emailString;    
+}
+
+
+public User(String userID) {
+    this.userID = userID;
 }
 
 
 //Getters
-public int getUserID(){
+public String getUserID(){
     return userID;
 }
 public String getFirstName(){
@@ -28,9 +31,6 @@ public String getLastName(){
 }
 public String getEmailString(){
     return emailString;
-}
-public String getPhoneNumber(){
-    return phoneNumber;
 }
 
 }

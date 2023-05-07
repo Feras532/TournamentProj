@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Team implements java.io.Serializable{
     private Tournament tournament;
-    private ArrayList<Paricipant> players;
+    private ArrayList<Paricipant> players ;
     private String nameString;
     private int gamesPlayed;
     private int wins;
@@ -27,6 +27,13 @@ public class Team implements java.io.Serializable{
         this.goalsReceived=goalsReceived;
     }
 
+    public Team(Tournament tournament,String nameString, Paricipant paricipant){
+        this.tournament = tournament;
+        this.nameString = nameString;
+        this.players = new ArrayList<>();
+        players.add(paricipant);
+    }
+
     public Team(int n){
         this.nameString = "Team" + n;
     }
@@ -37,6 +44,15 @@ public class Team implements java.io.Serializable{
     public String getNameString(){
         return nameString;
     }
+
+    public ArrayList<Paricipant> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(ArrayList<Paricipant> players) {
+        this.players = players;
+    }
+
 
     @Override
     public String toString() {

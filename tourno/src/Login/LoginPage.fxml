@@ -22,7 +22,7 @@
                   </Text>
                   <Text fill="WHITE" layoutX="107.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="tournaments" wrappingWidth="75.76822662353516" />
                   <Button layoutX="119.0" layoutY="234.0" mnemonicParsing="false" onAction="#LoginAdmin" text="admin" />
-                  <Button layoutX="105.0" layoutY="279.0" mnemonicParsing="false" text="participant" />
+                  <Button layoutX="105.0" layoutY="279.0" mnemonicParsing="false" onAction="#LoginParticipant" text="participant" />
                </children>
             </AnchorPane>
          </items>
