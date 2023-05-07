@@ -67,6 +67,9 @@ public class controller_DashBoard_CreateTournament {
     private TextField endDateField;
 
     @FXML
+    private TextField membersField;
+
+    @FXML
     void gameBox(ActionEvent event) {
         
      
@@ -80,6 +83,7 @@ public class controller_DashBoard_CreateTournament {
         try{
         String tournamentName = TournamentTextField.getText();
         String gamecomb = enterGameCombo.getValue();
+        int numberOfMembers = Integer.parseInt(membersField.getText());
         int numOfTeams;
         if(gamecomb == null){
             Alert checkAlert = new Alert(AlertType.WARNING);
@@ -107,12 +111,17 @@ public class controller_DashBoard_CreateTournament {
             checkAlert.setTitle("Error");
             checkAlert.setHeaderText("Tournament name is not intialized");
             checkAlert.showAndWait();
+            return;
         }
         if(checkDuplication(tournamentName) == false) {
             Alert checkAlert = new Alert(AlertType.WARNING);
             checkAlert.setTitle("Error");
              checkAlert.setHeaderText("Tournament Name is already intialized");
              checkAlert.showAndWait();
+             return;
+         }
+         if(checkMembers(gamecomb,numberOfMembers) == false){
+           return;
          }
         else if((startDate.isEmpty())){
             Alert checkAlert = new Alert(AlertType.WARNING);
@@ -136,7 +145,7 @@ public class controller_DashBoard_CreateTournament {
         else{    
             
             if(eliminationBox.isSelected() && !startDate.isEmpty() && !endDate.isEmpty() && !tournamentName.isEmpty()&& gamecomb != null ){
-                Elimination tournament = new Elimination(tournamentName, game, duration, new ArrayList<>(), startDate, endDate, isFixed,numOfTeams, true,false, new ArrayList<>());
+                Elimination tournament = new Elimination(tournamentName, game, duration, new ArrayList<>(), startDate, endDate, isFixed,numOfTeams,numberOfMembers, true,false, new ArrayList<>());
                 new SystemData().addNewTournament(tournament);
                 Alert checkAlert = new Alert(AlertType.WARNING);
                 checkAlert.setTitle("Success");
@@ -144,7 +153,7 @@ public class controller_DashBoard_CreateTournament {
                 checkAlert.showAndWait(); 
             }
             else if(roundRobinBox.isSelected() && !startDate.isEmpty() && !endDate.isEmpty() && !tournamentName.isEmpty()&& gamecomb != null){
-            RoundRobin tournament = new RoundRobin(tournamentName, game, duration, new ArrayList<>(), startDate, endDate, isFixed, numOfTeams, true,false, new ArrayList<>());
+            RoundRobin tournament = new RoundRobin(tournamentName, game, duration, new ArrayList<>(), startDate, endDate, isFixed, numOfTeams,numberOfMembers, true,false, new ArrayList<>());
             new SystemData().addNewTournament(tournament);
                 Alert checkAlert = new Alert(AlertType.WARNING);
                 checkAlert.setTitle("Success");
@@ -170,7 +179,7 @@ public class controller_DashBoard_CreateTournament {
     catch(NumberFormatException e){
         Alert gameAlert = new Alert(AlertType.WARNING);
         gameAlert.setTitle("Error");
-        gameAlert.setHeaderText("Only Numbers can be Entered in number of teams, start/end date");
+        gameAlert.setHeaderText("Only Numbers can be Entered in number of teams, start/end date/number of members");
         gameAlert.showAndWait();
     }
 
@@ -217,6 +226,34 @@ public Boolean checkDuplication(String tournament) throws IOException, ClassNotF
         fileOut.close();
     }
     return duplicate;
+}
+
+public boolean checkMembers(String game,int number) throws FileNotFoundException, IOException, ClassNotFoundException{
+    Boolean inRange = false;
+    int min;
+    int max;
+    try (FileInputStream fis = new FileInputStream("savedGames.dat");
+    ObjectInputStream ois = new ObjectInputStream(fis)) {
+   ArrayList<Game> list = (ArrayList<Game>) ois.readObject();
+   for(Game s: list){
+    if(s.getName().equals(game)){
+        if((s.getMinTeamSize() <= number)&(number<= s.getMaxTeamSize())){
+            inRange = true;
+        }
+        else{
+            min = s.getMinTeamSize();
+            max =s.getMaxTeamSize();
+            Alert checkAlert = new Alert(AlertType.WARNING);
+            checkAlert.setTitle("Error");
+             checkAlert.setHeaderText(s.getName() + " number of team members should be between " + min + " and "+ max);
+             checkAlert.showAndWait();  
+        }
+    } 
+    
+   }
+}
+
+            return inRange;
 }
 
     @FXML

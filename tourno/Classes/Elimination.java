@@ -7,9 +7,9 @@ import java.util.List;
 public class Elimination extends Tournament {
 
     public Elimination(String name, Game game, int numOfDays, ArrayList<Round> rounds, String startdate, String endDate,
-            Boolean numOfTeamsIsFixed, int numOfTeams, Boolean isOpenRegisteration, Boolean isActive,
+            Boolean numOfTeamsIsFixed, int numOfTeams, int numOfMembers, Boolean isOpenRegisteration, Boolean isActive,
             ArrayList<Team> registeredTeams) {
-        super(name, game, numOfDays, rounds, startdate, endDate, numOfTeamsIsFixed, numOfTeams, isOpenRegisteration,
+        super(name, game, numOfDays, rounds, startdate, endDate, numOfTeamsIsFixed, numOfTeams,numOfMembers, isOpenRegisteration,
                 isActive,
                 registeredTeams);
         // TODO Auto-generated constructor stub

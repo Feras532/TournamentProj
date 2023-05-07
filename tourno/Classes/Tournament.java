@@ -10,6 +10,7 @@ public abstract class Tournament implements java.io.Serializable {
     private String endDate;
     private Boolean numOfTeamsIsFixed;
     private int numOfTeams;
+    private int numOfMembers;
     private Boolean isOpenRegisteration;
     private Boolean isActive;
     protected ArrayList<Team> registeredTeams;
@@ -37,6 +38,10 @@ public abstract class Tournament implements java.io.Serializable {
 
     public int getNumOfTeams() {
         return numOfTeams;
+    }
+
+    public int getNumofMembers() {
+        return numOfMembers;
     }
 
     public String getName() {
@@ -119,7 +124,7 @@ public abstract class Tournament implements java.io.Serializable {
     }
 
     public Tournament(String name, Game game, int numOfDays, ArrayList<Round> rounds, String startdate, String endDate,
-            Boolean numOfTeamsIsFixed, int numOfTeams, Boolean isOpenRegisteration, Boolean isActive,
+            Boolean numOfTeamsIsFixed, int numOfTeams, int numOfMembers, Boolean isOpenRegisteration, Boolean isActive,
             ArrayList<Team> registeredTeams) {
         this.name = name;
         this.game = game;
@@ -132,6 +137,7 @@ public abstract class Tournament implements java.io.Serializable {
         this.isOpenRegisteration = isOpenRegisteration;
         this.isActive = isActive;
         this.registeredTeams = registeredTeams;
+        this.numOfMembers = numOfMembers;
     }
     public Tournament(){
         rounds = new ArrayList<>();
