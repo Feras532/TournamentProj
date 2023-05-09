@@ -13,6 +13,9 @@ public abstract class Tournament implements java.io.Serializable {
     private int numOfMembers;
     private Boolean isOpenRegisteration;
     private Boolean isActive;
+    private Boolean isCompleted;
+    
+
     protected ArrayList<Team> registeredTeams;
     protected ArrayList<Round> rounds;
 
@@ -124,7 +127,7 @@ public abstract class Tournament implements java.io.Serializable {
     }
 
     public Tournament(String name, Game game, int numOfDays, ArrayList<Round> rounds, String startdate, String endDate,
-            Boolean numOfTeamsIsFixed, int numOfTeams, int numOfMembers, Boolean isOpenRegisteration, Boolean isActive,
+            Boolean numOfTeamsIsFixed, int numOfTeams, int numOfMembers, Boolean isOpenRegisteration, Boolean isActive, Boolean isCompleted,
             ArrayList<Team> registeredTeams) {
         this.name = name;
         this.game = game;
@@ -138,6 +141,7 @@ public abstract class Tournament implements java.io.Serializable {
         this.isActive = isActive;
         this.registeredTeams = registeredTeams;
         this.numOfMembers = numOfMembers;
+        this.isCompleted = isCompleted;
     }
     public Tournament(){
         rounds = new ArrayList<>();
@@ -166,4 +170,13 @@ public abstract class Tournament implements java.io.Serializable {
 
     }
 
+
+    public boolean getIsCompleted() {
+        return isCompleted;
+    }
+
+
+    public void setIsCompleted(Boolean isCompleted) {
+        this.isCompleted = isCompleted;
+    }
 }

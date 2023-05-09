@@ -27,7 +27,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.scene.Node;
-public class controller_DashBoard_CreateTournament {
+public class controller_CreateTournament {
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -145,7 +145,7 @@ public class controller_DashBoard_CreateTournament {
         else{    
             
             if(eliminationBox.isSelected() && !startDate.isEmpty() && !endDate.isEmpty() && !tournamentName.isEmpty()&& gamecomb != null ){
-                Elimination tournament = new Elimination(tournamentName, game, duration, new ArrayList<>(), startDate, endDate, isFixed,numOfTeams,numberOfMembers, true,false, new ArrayList<>());
+                Elimination tournament = new Elimination(tournamentName, game, duration, new ArrayList<>(), startDate, endDate, isFixed,numOfTeams,numberOfMembers, true,false, false, new ArrayList<>());
                 new SystemData().addNewTournament(tournament);
                 Alert checkAlert = new Alert(AlertType.WARNING);
                 checkAlert.setTitle("Success");
@@ -153,7 +153,7 @@ public class controller_DashBoard_CreateTournament {
                 checkAlert.showAndWait(); 
             }
             else if(roundRobinBox.isSelected() && !startDate.isEmpty() && !endDate.isEmpty() && !tournamentName.isEmpty()&& gamecomb != null){
-            RoundRobin tournament = new RoundRobin(tournamentName, game, duration, new ArrayList<>(), startDate, endDate, isFixed, numOfTeams,numberOfMembers, true,false, new ArrayList<>());
+            RoundRobin tournament = new RoundRobin(tournamentName, game, duration, new ArrayList<>(), startDate, endDate, isFixed, numOfTeams,numberOfMembers, true,false, false, new ArrayList<>());
             new SystemData().addNewTournament(tournament);
                 Alert checkAlert = new Alert(AlertType.WARNING);
                 checkAlert.setTitle("Success");

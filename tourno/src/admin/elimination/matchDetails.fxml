@@ -11,11 +11,11 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="712.0" prefWidth="606.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="admin.elimination.controllerMatch">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="712.0" prefWidth="1643.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="admin.elimination.controllerMatch">
    <top>
       <Pane prefHeight="196.0" prefWidth="600.0" style="-fx-background-color: #536878;" BorderPane.alignment="CENTER">
          <children>
-            <Pane layoutX="40.0" layoutY="6.0" prefHeight="180.0" prefWidth="522.0" style="-fx-background-color: #383f45; -fx-background-radius: 30;">
+            <Pane layoutX="782.0" layoutY="8.0" prefHeight="180.0" prefWidth="522.0" style="-fx-background-color: #383f45; -fx-background-radius: 30;">
                <children>
                   <Label layoutX="250.0" layoutY="31.0" prefHeight="90.0" prefWidth="22.0" text=":" textFill="WHITE">
                      <font>
@@ -57,44 +57,42 @@
          </children>
       </Pane>
    </top>
-   <bottom>
-      <Button mnemonicParsing="false" onAction="#returnTournament" prefHeight="26.0" prefWidth="145.0" text="back to tournament" BorderPane.alignment="CENTER" />
-   </bottom>
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <VBox layoutX="229.0" layoutY="14.0" prefHeight="106.0" prefWidth="0.0" />
-            <ImageView fx:id="recordScore" fitHeight="49.0" fitWidth="49.0" layoutX="287.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="recordScore" fitHeight="49.0" fitWidth="49.0" layoutX="1033.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../image/edit.png" />
                </image>
             </ImageView>
-            <Label alignment="TOP_CENTER" layoutX="274.0" layoutY="77.0" prefHeight="15.0" prefWidth="74.0" text="Record scores" textAlignment="CENTER" wrapText="true">
+            <Label alignment="TOP_CENTER" layoutX="1020.0" layoutY="74.0" prefHeight="15.0" prefWidth="74.0" text="Record scores" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="Georgia" size="12.0" />
                </font>
             </Label>
-            <ImageView fx:id="resetTeams" fitHeight="65.0" fitWidth="63.0" layoutX="178.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="resetTeams" fitHeight="65.0" fitWidth="63.0" layoutX="924.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../image/trash.png" />
                </image>
             </ImageView>
-            <Label alignment="TOP_CENTER" layoutX="174.0" layoutY="77.0" prefHeight="15.0" prefWidth="70.0" text="Reset scores" textAlignment="CENTER" wrapText="true">
+            <Label alignment="TOP_CENTER" layoutX="920.0" layoutY="74.0" prefHeight="15.0" prefWidth="70.0" text="Reset scores" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="Georgia Italic" size="12.0" />
                </font>
             </Label>
-            <Line endX="281.39996337890625" layoutX="303.0" layoutY="100.0" startX="-263.4000244140625" />
-            <ImageView fx:id="demoteTeam" fitHeight="55.0" fitWidth="59.0" layoutX="383.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+            <Line endX="281.39996337890625" layoutX="1049.0" layoutY="97.0" startX="-263.4000244140625" />
+            <ImageView fx:id="demoteTeam" fitHeight="55.0" fitWidth="59.0" layoutX="1129.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../image/demoteTeam.png" />
                </image>
             </ImageView>
-            <Label alignment="TOP_CENTER" layoutX="376.0" layoutY="77.0" prefHeight="15.0" prefWidth="74.0" text="Demote team" textAlignment="CENTER" wrapText="true">
+            <Label alignment="TOP_CENTER" layoutX="1122.0" layoutY="74.0" prefHeight="15.0" prefWidth="74.0" text="Demote team" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="Georgia" size="12.0" />
                </font>
             </Label>
+            <Button layoutX="976.0" layoutY="97.0" mnemonicParsing="false" onAction="#returnTournament" prefHeight="26.0" prefWidth="145.0" text="back to tournament" />
          </children></AnchorPane>
    </center>
 </BorderPane>

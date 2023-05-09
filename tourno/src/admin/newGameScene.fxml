@@ -8,30 +8,30 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane centerShape="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="518.0" prefWidth="691.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="admin.controller_DashBoard_createGame">
+<AnchorPane centerShape="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="518.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="admin.controller_createGame">
    <children>
-      <Text layoutX="57.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create a game">
+      <Text layoutX="564.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create a game">
          <font>
             <Font name="Book Antiqua" size="20.0" />
          </font>
       </Text>
-      <Text layoutX="93.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter game name" wrappingWidth="104.03717041015625">
+      <Text layoutX="600.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter game name" wrappingWidth="104.03717041015625">
          <font>
             <Font name="Arial" size="13.0" />
          </font>
       </Text>
-      <Text layoutX="85.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="team/individual game">
+      <Text layoutX="592.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="team/individual game">
          <font>
             <Font name="Arial" size="13.0" />
          </font>
       </Text>
-      <TextField fx:id="gameTextField" layoutX="261.0" layoutY="113.0" />
-      <TextField fx:id="minTextField" alignment="CENTER" layoutX="229.0" layoutY="280.0" prefHeight="26.0" prefWidth="218.0" promptText="minimum members in a team" visible="false" />
-      <TextField fx:id="maxTextField" alignment="CENTER" layoutX="229.0" layoutY="339.0" prefHeight="26.0" prefWidth="218.0" promptText="maximum members in a team" visible="false" />
-      <CheckBox fx:id="individualCheck" layoutX="362.0" layoutY="205.0" mnemonicParsing="false" onAction="#handleIndividualCheck" text="Individual" />
-      <CheckBox fx:id="teamCheck" layoutX="253.0" layoutY="205.0" mnemonicParsing="false" onAction="#handleTeamCheck" text="Team-Based" />
-      <Button fx:id="createBtn" layoutX="252.0" layoutY="405.0" mnemonicParsing="false" onAction="#createGame" prefHeight="26.0" prefWidth="166.0" text="Create Game" />
-      <Line endX="153.0" endY="-7.62939453125E-6" layoutX="157.0" layoutY="80.0" startX="-106.20001220703125" startY="-7.62939453125E-6" />
-      <Button layoutX="552.0" layoutY="14.0" mnemonicParsing="false" onAction="#returnfromGame" text="back toDashBoard" />
+      <TextField fx:id="gameTextField" layoutX="768.0" layoutY="123.0" />
+      <TextField fx:id="minTextField" alignment="CENTER" layoutX="736.0" layoutY="290.0" prefHeight="26.0" prefWidth="218.0" promptText="minimum members in a team" visible="false" />
+      <TextField fx:id="maxTextField" alignment="CENTER" layoutX="736.0" layoutY="349.0" prefHeight="26.0" prefWidth="218.0" promptText="maximum members in a team" visible="false" />
+      <CheckBox fx:id="individualCheck" layoutX="869.0" layoutY="215.0" mnemonicParsing="false" onAction="#handleIndividualCheck" text="Individual" />
+      <CheckBox fx:id="teamCheck" layoutX="760.0" layoutY="215.0" mnemonicParsing="false" onAction="#handleTeamCheck" text="Team-Based" />
+      <Button fx:id="createBtn" layoutX="759.0" layoutY="415.0" mnemonicParsing="false" onAction="#createGame" prefHeight="26.0" prefWidth="166.0" text="Create Game" />
+      <Line endX="153.0" endY="-7.62939453125E-6" layoutX="664.0" layoutY="90.0" startX="-106.20001220703125" startY="-7.62939453125E-6" />
+      <Button layoutX="420.0" layoutY="61.0" mnemonicParsing="false" onAction="#returnfromGame" text="back toDashBoard" />
    </children>
 </AnchorPane>

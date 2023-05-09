@@ -33,7 +33,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
-public class controller_DashBoard_createGame{
+public class controller_createGame{
     private Stage stage;
     private Scene scene;
     private Parent root;

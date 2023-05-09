@@ -1,5 +1,6 @@
 package admin;
 
+import javafx.scene.layout.Region;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -16,6 +17,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -28,11 +31,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
 public class controller_DashBoard_admin {
-    public String Feras;
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -62,6 +65,12 @@ public class controller_DashBoard_admin {
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
+            stage.sizeToScene();
+
+            Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+            stage.setX((screenBounds.getWidth() - stage.getWidth()) / 2);
+            stage.setY((screenBounds.getHeight() - stage.getHeight()) / 2);
+
             stage.show();
         } else {
             // ... user chose CANCEL or closed the dialog
@@ -83,16 +92,6 @@ public class controller_DashBoard_admin {
     @FXML
     private TableColumn<Tournament, String> registeredToMax;
 
-    @FXML
-    void viewTournament(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("DashBoard_admin.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-
     public static Tournament selectedTournament;
 
     @FXML // this method to move scene after selecting a row from the table view.
@@ -108,28 +107,36 @@ public class controller_DashBoard_admin {
                     selectedTournament = (Elimination) s; // save the seleceted tournament from the tableView in
                                                           // "selectedTournament"
                     // so I can work on this variable in controllerElimination.java
-                    System.out.println(selectedTournament.getName() + " teams : "+ selectedTournament.getNumRegisteredTeams());
-                    
+                    System.out.println(
+                            selectedTournament.getName() + " teams : " + selectedTournament.getNumRegisteredTeams());
+
                     break;
                 }
             }
             in.close();
             fileIn.close();
-            if (selectedTournament.getIsActive()) {
+            if (selectedTournament.getIsActive() && selectedTournament.getIsOpenRegisteration() == false) {
                 Parent root = FXMLLoader.load(getClass().getResource("elimination/elimination.fxml"));
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
+                stage.setMaximized(true);
                 stage.show();
-            } else if (selectedTournament.getIsActive() == false && selectedTournament.getIsOpenRegisteration()) {
+            } else if (selectedTournament.getIsActive() == false && selectedTournament.getIsCompleted() == false) {
                 Parent root = FXMLLoader.load(getClass().getResource("future.fxml"));
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
+            } else {
+                Parent root = FXMLLoader.load(getClass().getResource("elimination/elimination.fxml"));
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setMaximized(true);
+                stage.show();
             }
-        } 
-        else if(selected instanceof RoundRobin){
+        } else if (selected instanceof RoundRobin) {
             System.out.println("put roundrobin method here");
             ////////////////////
         }
@@ -144,7 +151,7 @@ public class controller_DashBoard_admin {
             ArrayList<Tournament> list = (ArrayList<Tournament>) ois.readObject();
 
             for (Tournament s : list) { // display the active tournaments only
-                if (s.getIsActive() == true && s.getIsOpenRegisteration() == false)
+                if (s.getIsActive() == true && s.getIsOpenRegisteration() == false && s.getIsCompleted() == false)
                     observableList.add(s);
             }
             // observableList.addAll(list);
@@ -171,7 +178,7 @@ public class controller_DashBoard_admin {
             ArrayList<Tournament> list = (ArrayList<Tournament>) ois.readObject();
 
             for (Tournament s : list) { // display the active tournaments only
-                if (!s.getIsActive() == true && !s.getIsOpenRegisteration())
+                if (s.getIsActive() == false && s.getIsOpenRegisteration() == false && s.getIsCompleted() == true)
                     observableList.add(s);
             }
             // observableList.addAll(list);
@@ -196,7 +203,7 @@ public class controller_DashBoard_admin {
             ArrayList<Tournament> list = (ArrayList<Tournament>) ois.readObject();
 
             for (Tournament s : list) { // display the active tournaments only
-                if (!s.getIsActive() == true && s.getIsOpenRegisteration())
+                if (s.getIsActive() == false && s.getIsCompleted() == false)
                     observableList.add(s);
             }
             // observableList.addAll(list);
@@ -226,14 +233,43 @@ public class controller_DashBoard_admin {
 
     // 👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇
 
+    // 👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇
+
+    private void loadView(String fxmlPath) throws IOException {
+        AnchorPane view = FXMLLoader.load(getClass().getResource(fxmlPath));
+        view.setMinWidth(0);
+        view.setMinHeight(0);
+        view.setPrefWidth(400);
+        view.setPrefHeight(300);
+        view.setMaxWidth(Double.MAX_VALUE);
+        view.setMaxHeight(Double.MAX_VALUE);
+        borderpane.setCenter(view);
+        borderpane.setAlignment(view, Pos.CENTER);
+
+    }
+
     @FXML
-    void scene_addingGame(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("newGameScene.fxml"));
+    void viewTournament(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("DashBoard_admin.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
 
+    @FXML
+    void createTournament(ActionEvent event) throws IOException {
+        loadView("createTournaments.fxml");
+    }
+
+    @FXML
+    void manageTournament(ActionEvent event) throws IOException {
+        loadView("manageTournaments.fxml");
+    }
+
+    @FXML
+    void profile(ActionEvent event) throws IOException {
+        loadView("profile.fxml");
     }
 
     @FXML
@@ -247,29 +283,18 @@ public class controller_DashBoard_admin {
 
     @FXML
     void scene_addGame(ActionEvent event) throws IOException {
-        AnchorPane view = FXMLLoader.load(getClass().getResource("addGame.fxml"));
-        borderpane.setCenter(view);
+        loadView("addGame.fxml");
 
     }
 
-    // 👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇
-
     @FXML
-    void createTournament(ActionEvent event) throws IOException {
-        AnchorPane view = FXMLLoader.load(getClass().getResource("createTournaments.fxml"));
-        borderpane.setCenter(view);
-    }
+    void scene_addingGame(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("newGameScene.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
 
-    @FXML
-    void manageTournament(ActionEvent event) throws IOException {
-        AnchorPane view = FXMLLoader.load(getClass().getResource("manageTournaments.fxml"));
-        borderpane.setCenter(view);
-    }
-
-    @FXML
-    void profile(ActionEvent event) throws IOException {
-        AnchorPane view = FXMLLoader.load(getClass().getResource("profile.fxml"));
-        borderpane.setCenter(view);
     }
 
     @FXML
@@ -281,7 +306,6 @@ public class controller_DashBoard_admin {
         fake_CSS_styler(btn_profile);
         fake_CSS_styler(btn_viewTournament);
 
-        
     }
 
     @FXML

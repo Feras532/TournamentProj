@@ -48,7 +48,7 @@ public class futureController {
         buttonsInteraction(start);
         buttonsInteraction(back);
         tourName.setText(tournament.getName());
-        date.setText("Starting: "+ tournament.getStartdate()+", Ending: "+ tournament.getEndDate());
+        date.setText("Starting: " + tournament.getStartdate() + ", Ending: " + tournament.getEndDate());
         registered.setText(tournament.getRegisteredToMax());
     }
 
@@ -79,6 +79,7 @@ public class futureController {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+
         stage.show();
     }
 
@@ -87,11 +88,11 @@ public class futureController {
         Tournament tournament = controller_DashBoard_admin.selectedTournament;
         // =========================== sample teams registeration number
         // to be deleted:
-        ArrayList<Team> teams = new ArrayList<>();
-        for (int i = 0; i < 10; i++)
-            teams.add(new Team(i));
-        tournament.setRegisteredTeams(teams);
-        save(tournament);
+        ArrayList<Team> arrayList = new ArrayList<>();
+        // for(int i = 1 ; i< 400; i++)
+        // arrayList.add(new Team(i));
+        // tournament.setRegisteredTeams(arrayList);
+        // save(tournament);
         //// =======================================================
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Start Tournament Confirmation");
@@ -103,15 +104,24 @@ public class futureController {
             if (tournament instanceof Elimination) {
 
                 Elimination elimination = (Elimination) tournament;
-                elimination.generateMatches();
-                elimination.setIsActive(true);
-                elimination.setIsOpenRegisteration(false);
-                Parent root = FXMLLoader.load(getClass().getResource("DashBoard_admin.fxml"));
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-                save(elimination);
+                if (elimination.getNumRegisteredTeams() >= 2) {
+                    elimination.generateMatches();
+                    elimination.setIsActive(true);
+                    elimination.setIsOpenRegisteration(false);
+                    Parent root = FXMLLoader.load(getClass().getResource("DashBoard_admin.fxml"));
+                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    scene = new Scene(root);
+                    stage.setScene(scene);
+
+                    stage.show();
+                    save(elimination);
+                } 
+                else {
+                    alert = new Alert(AlertType.INFORMATION);
+                    alert.setTitle("Start Tournament Error");
+                    alert.setHeaderText("Registered teams are less than 2");
+                    result = alert.showAndWait();
+                }
                 // use methods of Elimination class on elimination object
             } else if (tournament instanceof RoundRobin) {
                 RoundRobin roundRobin = (RoundRobin) tournament;
@@ -126,9 +136,9 @@ public class futureController {
     // static Tournament tournament = controller_DashBoard_admin.selectedTournament;
 
     static void save(Tournament tournament) {
-        
+
         new SystemData().updateTournament("savedTournaments.dat", tournament.getName(), tournament);
-        System.out.println("tournament is saved with number of teams"+ tournament.getNumRegisteredTeams());
+        System.out.println("tournament is saved with number of teams" + tournament.getNumRegisteredTeams());
 
     }
 }

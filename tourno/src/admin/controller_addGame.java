@@ -34,7 +34,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
-public class controller_DashBoard_addGame {
+public class controller_addGame {
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -66,6 +66,8 @@ public class controller_DashBoard_addGame {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.setMaximized(false);
+        stage.setMaximized(true);
         stage.show();
 
     }

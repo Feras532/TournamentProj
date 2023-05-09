@@ -78,7 +78,10 @@ public class controllerMatch {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.setMaximized(true);
         stage.show();
+        
+
     }
 
     @FXML
@@ -215,6 +218,7 @@ public class controllerMatch {
     // static Elimination tournament = (Elimination) controller_DashBoard_admin.selectedTournament;
 
     private void resetter(MouseEvent event, Match match) {
+        
         String team1Name = match.getTeam1().getNameString();
         String team2Name = match.getTeam2().getNameString();
         if (team1Name.equals("TBA") || team2Name.equals("TBA")) {

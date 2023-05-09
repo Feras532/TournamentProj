@@ -23,7 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
-public class controller_DashBoard_manageTournament {
+public class controller_manageTournament {
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -98,6 +98,8 @@ public class controller_DashBoard_manageTournament {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.setMaximized(false);
+        stage.setMaximized(true);
         stage.show();
     }
 
@@ -194,6 +196,8 @@ public class controller_DashBoard_manageTournament {
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
+            stage.setMaximized(false);
+        stage.setMaximized(true);
             stage.show();
         } catch (NumberFormatException e) {
             Alert alert = new Alert(AlertType.WARNING);

@@ -24,6 +24,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -39,6 +40,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.scene.Node;
@@ -74,6 +76,12 @@ public class controller_DashBoard_participant {
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
+            stage.sizeToScene();
+
+            Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+            stage.setX((screenBounds.getWidth() - stage.getWidth()) / 2);
+            stage.setY((screenBounds.getHeight() - stage.getHeight()) / 2);
+
             stage.show();
         } else {
             // ... user chose CANCEL or closed the dialog
@@ -161,7 +169,7 @@ public class controller_DashBoard_participant {
             ArrayList<Tournament> list = (ArrayList<Tournament>) ois.readObject();
 
             for (Tournament s : list) { // display the active tournaments only
-                if (s.getIsActive() == true && s.getIsOpenRegisteration() == false)
+                if (s.getIsActive() == true && s.getIsOpenRegisteration() == false && s.getIsCompleted() == false)
                     observableList.add(s);
             }
             // observableList.addAll(list);
@@ -189,7 +197,7 @@ public class controller_DashBoard_participant {
             ArrayList<Tournament> list = (ArrayList<Tournament>) ois.readObject();
 
             for (Tournament s : list) { // display the active tournaments only
-                if (!s.getIsActive() == true && !s.getIsOpenRegisteration())
+                if (s.getIsActive() == false && !s.getIsOpenRegisteration() && s.getIsCompleted())
                     observableList.add(s);
             }
             
@@ -215,7 +223,7 @@ public class controller_DashBoard_participant {
             ArrayList<Tournament> list = (ArrayList<Tournament>) ois.readObject();
 
             for (Tournament s : list) { // display the active tournaments only
-                if (!s.getIsActive() == true && s.getIsOpenRegisteration())
+                if (s.getIsActive() == false && s.getIsCompleted() == false  )
                     observableList.add(s);
             }
             // observableList.addAll(list);
@@ -368,7 +376,7 @@ public class controller_DashBoard_participant {
                                     
                                     if (result.get() == ButtonType.OK) {
                                         // ... user chose OK,create team
-                                        Team team = new Team(tournament1, LoginPage.participantUser.getLastName()+" "+LoginPage.participantUser.getFirstName() , LoginPage.participantUser);
+                                        Team team = new Team(tournament1, LoginPage.participantUser.getLastName() , LoginPage.participantUser);
                                         // check if participant is an existing member
                                         if(tournament1.playersAreAlreadyRegistered(team)){
                                             showAlert("Participant is already registered, Double registeration are prohibited. ", "Registeration Failed");
