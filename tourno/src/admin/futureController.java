@@ -41,7 +41,8 @@ public class futureController {
 
     @FXML
     private Label tourName;
-
+    @FXML
+    private Label maximumTeams;
     @FXML
     void initialize() throws IOException {
         Tournament tournament = controller_DashBoard_admin.selectedTournament;
@@ -49,7 +50,9 @@ public class futureController {
         buttonsInteraction(back);
         tourName.setText(tournament.getName());
         date.setText("Starting: " + tournament.getStartdate() + ", Ending: " + tournament.getEndDate());
-        registered.setText(tournament.getRegisteredToMax());
+        registered.setText(tournament.getNumRegisteredTeams()+"");
+        maximumTeams.setText(tournament.getNumOfTeams()+"");
+
     }
 
     void buttonsInteraction(ImageView img) {
@@ -117,7 +120,7 @@ public class futureController {
                     save(elimination);
                 } 
                 else {
-                    alert = new Alert(AlertType.INFORMATION);
+                    alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Start Tournament Error");
                     alert.setHeaderText("Registered teams are less than 2");
                     result = alert.showAndWait();

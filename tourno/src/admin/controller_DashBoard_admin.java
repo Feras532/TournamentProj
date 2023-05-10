@@ -239,8 +239,8 @@ public class controller_DashBoard_admin {
         AnchorPane view = FXMLLoader.load(getClass().getResource(fxmlPath));
         view.setMinWidth(0);
         view.setMinHeight(0);
-        view.setPrefWidth(400);
-        view.setPrefHeight(300);
+        // view.setPrefWidth(600);
+        // view.setPrefHeight(800);
         view.setMaxWidth(Double.MAX_VALUE);
         view.setMaxHeight(Double.MAX_VALUE);
         borderpane.setCenter(view);

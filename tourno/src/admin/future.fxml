@@ -3,82 +3,58 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1036.0" prefWidth="1401.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="admin.futureController">
-   <center>
-      <Pane prefHeight="635.0" prefWidth="517.0" style="-fx-background-color: #C0C0C0;" BorderPane.alignment="CENTER">
-         <children>
-            <Pane layoutX="492.0" layoutY="146.0" prefHeight="65.0" prefWidth="437.0" style="-fx-background-color: #777777; -fx-background-radius: 20;">
-               <children>
-                  <Label alignment="CENTER" layoutX="-1.0" layoutY="21.0" prefHeight="23.0" prefWidth="443.0" text="Upcoming tournament" textAlignment="CENTER" textFill="WHITE">
-                     <font>
-                        <Font name="Verdana" size="18.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <ImageView fx:id="back" fitHeight="43.0" fitWidth="51.0" layoutX="33.0" layoutY="25.0" onMouseClicked="#clickedReturn" pickOnBounds="true" preserveRatio="true">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="admin.futureController">
+    <center>
+        <VBox prefHeight="500.0" prefWidth="300.0" spacing="20.0" style="-fx-background-color: #F5F8FA;">
+            <HBox prefHeight="50.0" prefWidth="1200.0" style="-fx-background-color: #6b818c; -fx-alignment: center-left;">
+                <ImageView fx:id="back" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#clickedReturn" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../image/back.png" />
+                    </image>
+                </ImageView>
+                <Label prefHeight="50.0" prefWidth="400.0" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 24pt; -fx-padding: 0px 0px 0px 10px;" text="Upcoming tournament" />
+            </HBox>
+            <Pane prefHeight="326.0" prefWidth="1200.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 10px; -fx-padding: 20px;">
+                <VBox prefHeight="221.0" prefWidth="1920.0" spacing="5">
+                    <Label fx:id="tourName" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="1918.0" style="-fx-text-fill: #4C5B7F; -fx-font-weight: bold; -fx-font-size: 18pt;" text="Tournament Name" />
+                    <HBox prefHeight="90.0" prefWidth="1200.0" spacing="20.0">
+                        <VBox alignment="TOP_CENTER" prefHeight="90.0" prefWidth="1217.0" spacing="5">
+                            <Label style="-fx-text-fill: #4C5B7F; -fx-font-size: 14pt;" text="Registration Period" />
+                            <Label style="-fx-text-fill: #4C5B7F; -fx-font-size: 12pt;" text="May 20, 2023 to May 25, 2023" />
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" spacing="5">
+                            <Label style="-fx-text-fill: #4C5B7F; -fx-font-size: 14pt;" text="Tournament Period" />
+                            <Label fx:id="date" style="-fx-text-fill: #4C5B7F; -fx-font-size: 12pt;" text="June 1, 2023 to June 5, 2023" />
+                        </VBox>
+                    </HBox>
+                    <HBox prefHeight="70.0" prefWidth="1200.0" spacing="20.0">
+                        <VBox alignment="TOP_CENTER" prefHeight="70.0" prefWidth="1217.0" spacing="5">
+                            <Label style="-fx-text-fill: #4C5B7F; -fx-font-size: 14pt;" text="Registered Teams" />
+                            <Label fx:id="registered" alignment="CENTER" prefHeight="25.0" prefWidth="51.0" style="-fx-text-fill: #4C5B7F; -fx-font-size: 12pt;" text="10" />
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" prefHeight="70.0" prefWidth="183.0" spacing="5">
+                            <Label style="-fx-text-fill: #4C5B7F; -fx-font-size: 14pt;" text="Maximum Teams" />
+                            <Label fx:id="maximumTeams" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="70.0" style="-fx-text-fill: #4C5B7F; -fx-font-size: 12pt;" text="20" textAlignment="CENTER" />
+                        </VBox>
+                    </HBox>
+                </VBox>
+            <ImageView fx:id="start" fitHeight="74.0" fitWidth="94.0" layoutX="927.0" layoutY="200.0" onMouseClicked="#clickedStart" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/back.png" />
+                  <Image url="@../image/power.png" />
                </image>
             </ImageView>
-            <AnchorPane prefHeight="342.0" prefWidth="0.0" />
-            <Pane layoutX="517.0" layoutY="247.0" prefHeight="68.0" prefWidth="387.0" style="-fx-background-color: #777777; -fx-background-radius: 20;">
-               <children>
-                  <Label fx:id="tourName" alignment="CENTER" layoutX="-2.0" prefHeight="69.0" prefWidth="389.0" text="Tournament Name" textFill="WHITE">
-                     <font>
-                        <Font name="System Italic" size="20.0" />
-                     </font>
-                  </Label>
-               </children>
+            <Label layoutX="907.0" layoutY="274.0" text="Start tournament">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
             </Pane>
-            <Pane layoutX="614.0" layoutY="469.0" prefHeight="95.0" prefWidth="194.0" style="-fx-background-color: #777777; -fx-background-radius: 20;">
-               <children>
-                  <Label alignment="CENTER" layoutX="2.0" layoutY="14.0" prefHeight="23.0" prefWidth="193.0" text="Registered Teams" textFill="WHITE">
-                     <font>
-                        <Font name="Verdana" size="16.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="registered" alignment="CENTER" layoutX="-2.0" layoutY="38.0" prefHeight="54.0" prefWidth="199.0" text="42 / 64">
-                     <font>
-                        <Font size="25.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <Pane layoutX="626.0" layoutY="344.0" prefHeight="95.0" prefWidth="170.0" style="-fx-background-color: #777777; -fx-background-radius: 20;">
-               <children>
-                  <Label alignment="CENTER" layoutX="2.0" layoutY="14.0" prefHeight="23.0" prefWidth="167.0" text="Date:" textFill="WHITE">
-                     <font>
-                        <Font name="Verdana" size="16.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="date" alignment="CENTER" layoutX="-2.0" layoutY="34.0" prefHeight="58.0" prefWidth="175.0" text="1/3 to 3/3" wrapText="true">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <Pane layoutX="625.0" layoutY="600.0" prefHeight="110.0" prefWidth="172.0" style="-fx-background-color: #777777; -fx-background-radius: 20;">
-               <children>
-                  <Label alignment="CENTER" layoutX="2.0" layoutY="14.0" prefHeight="23.0" prefWidth="170.0" text="Start Tournament" textFill="WHITE">
-                     <font>
-                        <Font name="Verdana" size="16.0" />
-                     </font>
-                  </Label>
-                  <ImageView fx:id="start" fitHeight="61.0" fitWidth="58.0" layoutX="58.0" layoutY="38.0" onMouseClicked="#clickedStart" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../image/power.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </Pane>
-         </children>
-      </Pane>
-   </center>
+        </VBox>
+    </center>
 </BorderPane>
