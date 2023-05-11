@@ -32,13 +32,13 @@
             <Font name="Verdana Bold" size="18.0" />
          </font>
       </Text>
-      <TextField layoutX="331.0" layoutY="131.0" prefHeight="35.0" prefWidth="219.0" promptText="E-mail" />
-      <Button layoutX="393.0" layoutY="235.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="82.0" style="-fx-background-color: #78909c;" text="Log in" />
+      <TextField fx:id="usernameField" layoutX="331.0" layoutY="131.0" prefHeight="35.0" prefWidth="219.0" promptText="Username" />
+      <Button layoutX="393.0" layoutY="235.0" mnemonicParsing="false" onAction="#LoginBtn" prefHeight="30.0" prefWidth="82.0" style="-fx-background-color: #78909c;" text="Log in" />
       <Hyperlink layoutX="392.0" layoutY="281.0" text="forgot password?">
          <font>
             <Font size="10.0" />
          </font>
       </Hyperlink>
-      <PasswordField layoutX="331.0" layoutY="175.0" prefHeight="35.0" prefWidth="219.0" promptText="Password" />
+      <PasswordField fx:id="passwordField" layoutX="331.0" layoutY="175.0" prefHeight="35.0" prefWidth="219.0" promptText="Password" />
    </children>
 </AnchorPane>

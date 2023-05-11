@@ -144,17 +144,7 @@ public class controller_DashBoard_participant {
                 stage.setScene(scene);
                 stage.show();
             }
-            //  else if (selectedTournament.getIsActive() == false && selectedTournament.getIsOpenRegisteration()) {
-            //     btn_registerTournament.setDisable(false);
-            //     btn_registerTournament.setOnMouseClicked((MouseEvent mousesEvent) -> {
-            //         if(selectedTournament.getGameObj().getIsTeamGame().equals(false)){
-            //             System.out.println("Indvidual game");
-            //         }
-            //         else{
-            //             System.out.println("Team game");
-            //         }
-            //     });
-            // }
+            
         } else {
             System.out.println("put roundrobin method here");
         }
@@ -252,50 +242,7 @@ public class controller_DashBoard_participant {
         Optional<ButtonType> result = alert.showAndWait();
 
     }
-    // ☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️☝️
-
-    // 👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇
-
-    // @FXML
-    // void scene_addingGame(ActionEvent event) throws IOException {
-    //     Parent root = FXMLLoader.load(getClass().getResource("newGameScene.fxml"));
-    //     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    //     scene = new Scene(root);
-    //     stage.setScene(scene);
-    //     stage.show();
-
-    // }
-
-    // @FXML
-    // void returnfromGame(ActionEvent event) throws IOException {
-    //     Parent root = FXMLLoader.load(getClass().getResource("DashBoard_admin.fxml"));
-    //     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    //     scene = new Scene(root);
-    //     stage.setScene(scene);
-    //     stage.show();
-    // }
-
-    // @FXML
-    // void scene_addGame(ActionEvent event) throws IOException {
-    //     AnchorPane view = FXMLLoader.load(getClass().getResource("addGame.fxml"));
-    //     borderpane.setCenter(view);
-
-    // }
-
-    // // 👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇
-
-    // @FXML
-    // void createTournament(ActionEvent event) throws IOException {
-    //     AnchorPane view = FXMLLoader.load(getClass().getResource("createTournaments.fxml"));
-    //     borderpane.setCenter(view);
-    // }
-
-    // @FXML
-    // void manageTournament(ActionEvent event) throws IOException {
-    //     AnchorPane view = FXMLLoader.load(getClass().getResource("manageTournaments.fxml"));
-    //     borderpane.setCenter(view);
-    // }
-
+    
     @FXML
     void profile(ActionEvent event) throws IOException {
         AnchorPane view = FXMLLoader.load(getClass().getResource("/participant/profile.fxml"));
@@ -313,12 +260,6 @@ public class controller_DashBoard_participant {
 
     }
 
-    // @FXML
-    // private Button btn_AddNewGame;
-    // @FXML
-    // private Button btn_createTournament;
-    // @FXML
-    // private Button btn_manage;
     @FXML
     private Button btn_profile;
     @FXML
@@ -370,31 +311,31 @@ public class controller_DashBoard_participant {
                                 else{
                                     Alert alert = new Alert(AlertType.CONFIRMATION);
                                     alert.setTitle("Tournament Registration Confirm");
-                                    alert.setHeaderText("Hey Participant, "+LoginPage.participantUser.getLastName()+" "+LoginPage.participantUser.getFirstName() +". do you want to confirm your registeration in " + tournament1.getName() + " Tournament ?");
+                                    alert.setHeaderText("Hey Participant, "+LoginPage.getParticipantUser().getLastName()+" "+LoginPage.getParticipantUser().getFirstName() +". do you want to confirm your registeration in " + tournament1.getName() + " Tournament ?");
 
                                     Optional<ButtonType> result = alert.showAndWait();
                                     
                                     if (result.get() == ButtonType.OK) {
                                         // ... user chose OK,create team
-                                        Team team = new Team(tournament1, LoginPage.participantUser.getLastName() , LoginPage.participantUser);
+                                        Team team = new Team(tournament1, LoginPage.getParticipantUser().getLastName() , LoginPage.getParticipantUser());
                                         // check if participant is an existing member
                                         if(tournament1.playersAreAlreadyRegistered(team)){
                                             showAlert("Participant is already registered, Double registeration are prohibited. ", "Registeration Failed");
                                         }
                                         else{
                                             // add tournament inside participant
-                                            LoginPage.participantUser.getTeams().add(team);
+                                            LoginPage.getParticipantUser().getTeams().add(team);
                                             // add team inside tournament 
                                             tournament1.getRegisteredTeams().add(team);
                                             // if tournament is full, close registeration 
                                             if(selectedTournament.getNumOfTeamsIsFixed() && selectedTournament.getRegisteredTeams().size() ==
                                                 selectedTournament.getNumOfTeams()){
 
-                                                // selectedTournament.setIsOpenRegisteration(false);
+                                                selectedTournament.setIsOpenRegisteration(false);
                                             }
                                             // updating data
                                             new SystemData().updateTournament("savedTournaments.dat",selectedTournament.getName(),selectedTournament);
-                                            SystemData.updateParticipant(LoginPage.participantUser);
+                                            SystemData.updateParticipant(LoginPage.getParticipantUser());
                                             //// Confirm and send email
                                             showInfoAlert("Team registration form submitted","Success");
                                         }

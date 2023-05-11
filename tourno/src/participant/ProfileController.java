@@ -19,9 +19,9 @@ public class ProfileController {
 
     @FXML
     void initialize() {
-        userIdField.setText(LoginPage.participantUser.getUserID());
-        lastNameField.setText(LoginPage.participantUser.getLastName());
-        firstNameField.setText(LoginPage.participantUser.getFirstName());
-        emailStringField.setText(LoginPage.participantUser.getEmailString());
+        userIdField.setText(LoginPage.getParticipantUser().getUserID());
+        lastNameField.setText(LoginPage.getParticipantUser().getLastName());
+        firstNameField.setText(LoginPage.getParticipantUser().getFirstName());
+        emailStringField.setText(LoginPage.getParticipantUser().getEmailString());
     }
 }
