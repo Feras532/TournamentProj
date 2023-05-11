@@ -120,7 +120,7 @@ public class controller_DashBoard_admin {
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
-                stage.setMaximized(true);
+                // stage.setMaximized(true);
                 stage.show();
             } else if (selectedTournament.getIsActive() == false && selectedTournament.getIsCompleted() == false) {
                 Parent root = FXMLLoader.load(getClass().getResource("future.fxml"));
@@ -133,7 +133,7 @@ public class controller_DashBoard_admin {
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
-                stage.setMaximized(true);
+                // stage.setMaximized(true);
                 stage.show();
             }
         } else if (selected instanceof RoundRobin) {

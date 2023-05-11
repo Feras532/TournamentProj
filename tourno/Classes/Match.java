@@ -62,4 +62,13 @@ public class Match implements java.io.Serializable{
         public String toString() {
             return team1 + " vs " + team2;
         }
+
+    public Team getWinner() {
+        Team winner;
+        if(getScore()[0] > getScore()[1])
+            winner = team1;
+        else
+            winner= team2;
+        return winner;
+    }
 }

@@ -13,6 +13,12 @@ public class Team implements java.io.Serializable{
     private int gamePoints;
     private int goalsScored;
     private int goalsReceived;
+    private String rankingString;
+    public String getRankString() {
+        return rankingString;
+    }
+
+    private int highestRoundReached; 
 
     public Team(Tournament tournament,ArrayList<Paricipant> players,String nameString,int gamesPlayed,int wins,int losses,int draws,int gamePoints,int goalsScored,int goalsReceived){
         this.tournament=tournament;
@@ -25,9 +31,11 @@ public class Team implements java.io.Serializable{
         this.gamePoints=gamePoints;
         this.goalsScored=goalsScored;
         this.goalsReceived=goalsReceived;
+        this.highestRoundReached = 0;
     }
 
     public Team(Tournament tournament,String nameString, Paricipant paricipant){
+        this.highestRoundReached = 0;
         this.tournament = tournament;
         this.nameString = nameString;
         this.players = new ArrayList<>();
@@ -57,5 +65,18 @@ public class Team implements java.io.Serializable{
     @Override
     public String toString() {
         return getNameString();
+    }
+
+    public void setRank(String rankingString) {
+        this.rankingString = rankingString;
+        System.out.println("Rank is set to: "+ rankingString);
+    }
+
+    public int getHighestRoundReached() {
+        return highestRoundReached;
+    }
+
+    public void setHighestRoundReached(int i) {
+        this.highestRoundReached = i;
     }
 }

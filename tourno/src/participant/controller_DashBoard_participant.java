@@ -103,7 +103,6 @@ public class controller_DashBoard_participant {
     @FXML
     private TableColumn<Tournament, String> registeredToMax;
 
-
     @FXML
     void viewTournament(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("DashBoard_participant.fxml"));
@@ -144,7 +143,7 @@ public class controller_DashBoard_participant {
                 stage.setScene(scene);
                 stage.show();
             }
-            
+
         } else {
             System.out.println("put roundrobin method here");
         }
@@ -190,14 +189,14 @@ public class controller_DashBoard_participant {
                 if (s.getIsActive() == false && !s.getIsOpenRegisteration() && s.getIsCompleted())
                     observableList.add(s);
             }
-            
+
             // observableList.addAll(list);
             name.setCellValueFactory(new PropertyValueFactory<Tournament, String>("name"));
             game.setCellValueFactory(new PropertyValueFactory<Tournament, String>("game"));
             status.setCellValueFactory(new PropertyValueFactory<Tournament, String>("status"));
             type.setCellValueFactory(new PropertyValueFactory<Tournament, String>("type"));
             registeredToMax.setCellValueFactory(new PropertyValueFactory<Tournament, String>("registeredToMax"));
-            
+
             if (observableList.isEmpty())
                 alertNotFound();// if the table is empty
 
@@ -213,7 +212,7 @@ public class controller_DashBoard_participant {
             ArrayList<Tournament> list = (ArrayList<Tournament>) ois.readObject();
 
             for (Tournament s : list) { // display the active tournaments only
-                if (s.getIsActive() == false && s.getIsCompleted() == false  )
+                if (s.getIsActive() == false && s.getIsCompleted() == false)
                     observableList.add(s);
             }
             // observableList.addAll(list);
@@ -222,7 +221,7 @@ public class controller_DashBoard_participant {
             status.setCellValueFactory(new PropertyValueFactory<Tournament, String>("status"));
             type.setCellValueFactory(new PropertyValueFactory<Tournament, String>("type"));
             registeredToMax.setCellValueFactory(new PropertyValueFactory<Tournament, String>("registeredToMax"));
-            
+
             addButtonToTable();
 
             tableView.setItems(observableList);
@@ -242,7 +241,7 @@ public class controller_DashBoard_participant {
         Optional<ButtonType> result = alert.showAndWait();
 
     }
-    
+
     @FXML
     void profile(ActionEvent event) throws IOException {
         AnchorPane view = FXMLLoader.load(getClass().getResource("/participant/profile.fxml"));
@@ -276,7 +275,7 @@ public class controller_DashBoard_participant {
         });
 
     }
-    
+
     private void addButtonToTable() {
         TableColumn<Tournament, Void> colBtn = new TableColumn("Button Column");
 
@@ -285,14 +284,14 @@ public class controller_DashBoard_participant {
             public TableCell<Tournament, Void> call(final TableColumn<Tournament, Void> param) {
                 final TableCell<Tournament, Void> cell = new TableCell<Tournament, Void>() {
                     private final Button btn = new Button("Register");
-                    
+
                     {
                         btn.setOnAction((ActionEvent event) -> {
                             Tournament tournament1 = getTableView().getItems().get(getIndex());
                             controller_DashBoard_participant.selectedTournament = tournament1;
-                            if(tournament1.getIsOpenRegisteration()){
+                            if (tournament1.getIsOpenRegisteration()) {
                                 /// Team based tournament
-                        
+
                                 if (tournament1.getGameObj().getIsTeamGame()) {
                                     try {
                                         Parent root;
@@ -306,47 +305,57 @@ public class controller_DashBoard_participant {
                                         e.printStackTrace();
                                     }
                                 }
-                                
+
                                 /// Indvidual tournament
-                                else{
+                                else {
                                     Alert alert = new Alert(AlertType.CONFIRMATION);
                                     alert.setTitle("Tournament Registration Confirm");
-                                    alert.setHeaderText("Hey Participant, "+LoginPage.getParticipantUser().getLastName()+" "+LoginPage.getParticipantUser().getFirstName() +". do you want to confirm your registeration in " + tournament1.getName() + " Tournament ?");
+                                    alert.setHeaderText(
+                                            "Hey Participant, " + LoginPage.getParticipantUser().getLastName() + " "
+                                                    + LoginPage.getParticipantUser().getFirstName()
+                                                    + ". do you want to confirm your registeration in "
+                                                    + tournament1.getName() + " Tournament ?");
 
                                     Optional<ButtonType> result = alert.showAndWait();
-                                    
+
                                     if (result.get() == ButtonType.OK) {
                                         // ... user chose OK,create team
-                                        Team team = new Team(tournament1, LoginPage.getParticipantUser().getLastName() , LoginPage.getParticipantUser());
+                                        Team team = new Team(tournament1, LoginPage.getParticipantUser().getLastName(),
+                                                LoginPage.getParticipantUser());
                                         // check if participant is an existing member
-                                        if(tournament1.playersAreAlreadyRegistered(team)){
-                                            showAlert("Participant is already registered, Double registeration are prohibited. ", "Registeration Failed");
-                                        }
-                                        else{
+                                        if (tournament1.playersAreAlreadyRegistered(team)) {
+                                            showAlert(
+                                                    "Participant is already registered, Double registeration are prohibited. ",
+                                                    "Registeration Failed");
+                                        } else {
                                             // add tournament inside participant
                                             LoginPage.getParticipantUser().getTeams().add(team);
-                                            // add team inside tournament 
+                                            // add team inside tournament
                                             tournament1.getRegisteredTeams().add(team);
-                                            // if tournament is full, close registeration 
-                                            if(selectedTournament.getNumOfTeamsIsFixed() && selectedTournament.getRegisteredTeams().size() ==
-                                                selectedTournament.getNumOfTeams()){
+                                            LoginPage.getParticipantUser().addToHistoryTournaments(selectedTournament);
+                                            // SystemData.updateParticipant(paricipant);
+                                            // if tournament is full, close registeration
+                                            if (selectedTournament.getNumOfTeamsIsFixed()
+                                                    && selectedTournament.getRegisteredTeams()
+                                                            .size() == selectedTournament.getNumOfTeams()) {
 
                                                 selectedTournament.setIsOpenRegisteration(false);
                                             }
                                             // updating data
-                                            new SystemData().updateTournament("savedTournaments.dat",selectedTournament.getName(),selectedTournament);
+                                            new SystemData().updateTournament("savedTournaments.dat",
+                                                    selectedTournament.getName(), selectedTournament);
                                             SystemData.updateParticipant(LoginPage.getParticipantUser());
                                             //// Confirm and send email
-                                            showInfoAlert("Team registration form submitted","Success");
+                                            showInfoAlert("Team registration form submitted", "Success");
                                         }
-                                        
+
                                     } else {
                                         // ... user chose CANCEL or closed the dialog
                                     }
                                 }
-                            }
-                            else{
-                                showAlert("The selected Tournament is not Open for registeration.", "Tournament Registration Closed");
+                            } else {
+                                showAlert("The selected Tournament is not Open for registeration.",
+                                        "Tournament Registration Closed");
                             }
                         });
                     }
@@ -354,7 +363,7 @@ public class controller_DashBoard_participant {
                     @Override
                     public void updateItem(Void item, boolean empty) {
                         super.updateItem(item, empty);
-                        if (empty ) {
+                        if (empty) {
                             setGraphic(null);
                         } else {
                             setGraphic(btn);

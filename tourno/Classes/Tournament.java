@@ -15,6 +15,15 @@ public abstract class Tournament implements java.io.Serializable {
     private Boolean isActive;
     private Boolean isCompleted;
     
+    private Team winner;
+
+    public Team getWinner() {
+        return winner;
+    }
+
+    public void setWinner(Team winner) {
+        this.winner = winner;
+    }
 
     protected ArrayList<Team> registeredTeams;
     protected ArrayList<Round> rounds;

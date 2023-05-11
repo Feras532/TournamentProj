@@ -30,7 +30,7 @@ public class LoginPage {
     private ResourceBundle resources;
     private static Admin adminUser = new Admin("Admin");
     // 7032,8809,student,Abdulmjeed.alothman222@gmail.com,"TURAIKI, DHAFER"
-    private static Paricipant participantUser = new Paricipant("7032", "DHAFER", "TURAIKI","Abdulmjeed.alothman222@gmail.com");
+    private static Paricipant participantUser;
     
     @FXML
     private URL location;

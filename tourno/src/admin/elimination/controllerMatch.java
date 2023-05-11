@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 
 import Classes.Elimination;
 import Classes.Match;
+import Classes.Paricipant;
 import Classes.Round;
 import Classes.SystemData;
 import Classes.Team;
@@ -30,7 +31,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.Cursor;
@@ -71,6 +74,11 @@ public class controllerMatch {
 
     @FXML
     private Label team2winORlost;
+    @FXML
+    private VBox vboxTeam1;
+
+    @FXML
+    private VBox vboxTeam2;
 
     @FXML
     void returnTournament(ActionEvent event) throws IOException {
@@ -80,7 +88,6 @@ public class controllerMatch {
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.show();
-        
 
     }
 
@@ -94,6 +101,21 @@ public class controllerMatch {
         buttonsInteraction(demoteTeam);
         buttonsInteraction(resetTeams);
         buttonsInteraction(recordScore);
+
+        // ArrayList<Round> rounds = tournament.getRounds();
+        // for (int i = 0; i < rounds.size(); i++) {
+        // ArrayList<Match> matches = rounds.get(i).getMatches();
+        // for (int j = 0; j < matches.size(); j++) {
+        // if (matches.get(j).getTeam1().equals(team1name) &&
+        // matches.get(j).getTeam2().equals(team2name)) {
+        // System.out.println("Herreeee");
+        // fillPlayers(matches.get(j));
+        // break;
+        // }
+
+        // }
+        // }
+
     }
 
     void buttonsInteraction(ImageView img) {
@@ -206,19 +228,24 @@ public class controllerMatch {
         }
     }
 
-    public void recordHelper(Match match) {
+    public void recordHelper(Tournament tournament, Match match) throws IOException {
 
-        resetTeams.setOnMouseClicked(event -> resetter(event, match));
-        recordScore.setOnMouseClicked(event -> handleButtonClick(event, match));
-        demoteTeam.setOnMouseClicked(event -> onMouseClick_demoteTeam(event, match));
+        if (!tournament.getIsCompleted()) {
+            resetTeams.setOnMouseClicked(event -> resetter(event, match));
+            recordScore.setOnMouseClicked(event -> handleButtonClick(event, match));
+            demoteTeam.setOnMouseClicked(event -> onMouseClick_demoteTeam(event, match));
+        }
+
         setData(match);
+        fillPlayers(match);
 
     }
 
-    // static Elimination tournament = (Elimination) controller_DashBoard_admin.selectedTournament;
+    // static Elimination tournament = (Elimination)
+    // controller_DashBoard_admin.selectedTournament;
 
     private void resetter(MouseEvent event, Match match) {
-        
+
         String team1Name = match.getTeam1().getNameString();
         String team2Name = match.getTeam2().getNameString();
         if (team1Name.equals("TBA") || team2Name.equals("TBA")) {
@@ -229,23 +256,22 @@ public class controllerMatch {
             errorAlert.showAndWait();
             return;
         }
-        if (Removable(match)) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Reset Teams");
-            alert.setHeaderText("Are you sure you want to reset the teams?");
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.isPresent() && result.get() == ButtonType.OK) {
-                match.setScore(emptyArray(match.getScore()));
-                checkAndRemovePromotedTeam(match); // Call the checkAndRemovePromotedTeam method
-                setData(match);
-            }
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Reset results");
-            alert.setHeaderText("It is not recorded.");
-            Optional<ButtonType> result = alert.showAndWait();
-
+        // if (Removable(match)) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Reset Teams");
+        alert.setHeaderText("Are you sure you want to reset the teams?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            match.setScore(emptyArray(match.getScore()));
+            checkAndRemovePromotedTeam(match); // Call the checkAndRemovePromotedTeam method
+            setData(match);
         }
+        // } else {
+        // Alert alert = new Alert(Alert.AlertType.ERROR);
+        // alert.setTitle("Reset results");
+        // alert.setHeaderText("It is not recorded.");
+        // Optional<ButtonType> result = alert.showAndWait();
+
     }
 
     private void onMouseClick_demoteTeam(MouseEvent event, Match match) {
@@ -292,6 +318,7 @@ public class controllerMatch {
     }
 
     private static boolean Removable(Match match) {
+
         Elimination tournament = (Elimination) controller_DashBoard_admin.selectedTournament;
 
         Team team1 = match.getTeam1();
@@ -299,20 +326,32 @@ public class controllerMatch {
         ArrayList<Round> rounds = tournament.getRounds();
         int team1Existence = 0;
         int team2Existence = 0;
-        for (Round r : rounds) {
-            ArrayList<Match> matches = r.getMatches();
-            for (Match m : matches) {
-                if (m.getTeam1() == team1 || m.getTeam2() == team1)
-                    team1Existence++;
-                if (m.getTeam1() == team2 || m.getTeam2() == team2)
-                    team2Existence++;
-            }
+        if (match.getScore() == null) {
+            for (Round r : rounds) {
+                ArrayList<Match> matches = r.getMatches();
+                for (Match m : matches) {
+                    if (m.getTeam1() == team1 || m.getTeam2() == team1)
+                        team1Existence++;
+                    if (m.getTeam1() == team2 || m.getTeam2() == team2)
+                        team2Existence++;
+                }
 
-        }
-        if (team1Existence == 1 && team2Existence == 1)
+            }
+            System.out.println("Team 1 existence = " + team1Existence);
+            System.out.println("Team 2 existence = " + team2Existence);
+
+            if (team1Existence == 1 && team2Existence == 1)
+                return false;
+            else
+                return true;
+        } else {
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            errorAlert.setTitle("Demote Error");
+            errorAlert.setHeaderText("Cannot be demoted.");
+            errorAlert.setContentText("Please reset the match score before trying to demote.");
+            errorAlert.showAndWait();
             return false;
-        else
-            return true;
+        }
 
     }
 
@@ -385,4 +424,38 @@ public class controllerMatch {
         new SystemData().updateTournament("savedTournaments.dat", tournament.getName(), tournament);
 
     }
+
+    private void fillPlayers(Match match) throws IOException {
+
+        // filling team 1 players::::
+        ArrayList<Paricipant> players = match.getTeam1().getPlayers();
+        int i = 0;
+        for (Paricipant player : players) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("player.fxml"));
+            AnchorPane playerPane = loader.load();
+            // Get the controller
+            playerController controller3 = loader.getController();
+            // Call the setData method
+            controller3.setName(i + 1, player);
+            vboxTeam1.getChildren().add(playerPane);
+            i++;
+
+        }
+
+        // filling team 2 players::::
+        players = match.getTeam2().getPlayers();
+        i = 0;
+        for (Paricipant player : players) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("player.fxml"));
+            AnchorPane playerPane = loader.load();
+            // Get the controller
+            playerController controller3 = loader.getController();
+            // Call the setData method
+            controller3.setName(i + 1, player);
+            vboxTeam2.getChildren().add(playerPane);
+            i++;
+
+        }
+    }
+
 }

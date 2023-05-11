@@ -18,8 +18,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -48,6 +50,10 @@ public class controllerElimination {
     private Text status;
     @FXML
     private ScrollPane scrollPane;
+    @FXML
+    private Label winnerLabel;
+    @FXML
+    private AnchorPane winnerPane;
 
     private Stage stage;
     private Scene scene;
@@ -72,6 +78,14 @@ public class controllerElimination {
         // Use the tournament variable here
         // ...
         // =============================================
+        if (!tournament.getIsCompleted()) {
+            winnerPane.setVisible(false);
+        } else {
+            winnerPane.setVisible(true);
+            winnerLabel.setText(tournament.getWinner().getNameString());
+            save();
+        }
+
         Group root = new Group();
         fillWithMatches(root, tournament);
         scrollPane.setContent(root); // display the content in the scroll pane
@@ -132,23 +146,23 @@ public class controllerElimination {
                         try {
                             // Load the new FXML file
                             FXMLLoader loader = new FXMLLoader(getClass().getResource("matchDetails.fxml"));
-                                Parent root = loader.load();
-                                // Get the controller
-                                controllerMatch controller2 = loader.getController();
-                                // Call the setData method
-                                controller2.setData(match);
-                                // Get the current stage
-                                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                                // Create a new scene with the loaded content
-                                Scene scene = new Scene(root);
-                                // Set the scene of the current stage to the new scene
-                                stage.setScene(scene);
-                                if (!tournament.getIsCompleted()) {
+                            Parent root = loader.load();
+                            // Get the controller
+                            controllerMatch controller2 = loader.getController();
+                            // Call the setData method
+                            controller2.setData(match);
+                            // Get the current stage
+                            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                            // Create a new scene with the loaded content
+                            Scene scene = new Scene(root);
+                            // Set the scene of the current stage to the new scene
+                            stage.setScene(scene);
+                            // if (!tournament.getIsCompleted()) {
 
-                                controller2.recordHelper(match);
+                            controller2.recordHelper(tournament, match);
 
-                                save();
-                            }
+                            save();
+                            // }
 
                         } catch (IOException e) {
                             // Handle the exception
@@ -178,17 +192,27 @@ public class controllerElimination {
             // Adding winner Rectangle
             if (roundNum == rounds.size()) {
                 Rectangle r = new Rectangle(xPos + WIDTH / 2, firstMatchYpos, WIDTH, HEIGHT);
-                r.setFill(Color.GREENYELLOW);
+                r.setFill(Color.GOLD);
                 ArrayList<Round> allRounds = tournament.getRounds();
                 Round lastRound = allRounds.get(allRounds.size() - 1);
                 Match lastMatch = lastRound.getMatches().get(0);
                 if (lastMatch.getScore() != null) {
-                    String winner;
-                    if (lastMatch.getScore()[0] > lastMatch.getScore()[1])
-                        winner = lastRound.getMatches().get(0).getTeam1().getNameString();
-                    else
-                        winner = lastRound.getMatches().get(0).getTeam2().getNameString();
-                    Text text = new Text(winner);
+                    Team winner;
+                    Team loser;
+                    if (lastMatch.getScore()[0] > lastMatch.getScore()[1]) {
+                        winner = lastRound.getMatches().get(0).getTeam1();
+                        loser = lastRound.getMatches().get(0).getTeam2();
+
+                        winner.setRank("Champion");
+                        loser.setRank("Finals");
+                    } else {
+                        winner = lastRound.getMatches().get(0).getTeam2();
+                        loser = lastRound.getMatches().get(0).getTeam1();
+                        winner.setRank("Champion");
+                        loser.setRank("Finals");
+
+                    }
+                    Text text = new Text(winner.getNameString());
                     text.setX(r.getX() + r.getWidth() / 2 - text.getLayoutBounds().getWidth() / 2);
                     text.setY(r.getY() + r.getHeight() / 2 + text.getLayoutBounds().getHeight() / 4);
                     root.getChildren().addAll(r, text);
@@ -197,9 +221,13 @@ public class controllerElimination {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Tournament is completed");
                         alert.setHeaderText("Tournament is completed, \n winner is: " + winner);
+
                         Optional<ButtonType> result = alert.showAndWait();
+                        ((Elimination) tournament).updateTeamsRank();
                         tournament.setIsCompleted(true);
                         tournament.setIsActive(false);
+                        tournament.setWinner(winner);
+
                         save();
                     }
                 }

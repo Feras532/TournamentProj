@@ -3,14 +3,17 @@ package Classes;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.TreeMap;
 
 public class Elimination extends Tournament {
 
     public Elimination(String name, Game game, int numOfDays, ArrayList<Round> rounds, String startdate, String endDate,
-            Boolean numOfTeamsIsFixed, int numOfTeams, int numOfMembers, Boolean isOpenRegisteration, Boolean isActive, Boolean isCompleted,
+            Boolean numOfTeamsIsFixed, int numOfTeams, int numOfMembers, Boolean isOpenRegisteration, Boolean isActive,
+            Boolean isCompleted,
             ArrayList<Team> registeredTeams) {
-        super(name, game, numOfDays, rounds, startdate, endDate, numOfTeamsIsFixed, numOfTeams,numOfMembers, isOpenRegisteration,
-                isActive,  isCompleted,
+        super(name, game, numOfDays, rounds, startdate, endDate, numOfTeamsIsFixed, numOfTeams, numOfMembers,
+                isOpenRegisteration,
+                isActive, isCompleted,
                 registeredTeams);
         // TODO Auto-generated constructor stub
     }
@@ -129,11 +132,11 @@ public class Elimination extends Tournament {
             int nextMatchIndex = currentMatchIndex / 2;
             Match nextMatch = nextRoundMatches.get(nextMatchIndex);
             // if (nextMatch.getTeam1().getNameString().equals("TBA")
-                    // || nextMatch.getTeam2().getNameString().equals("TBA")) {
-                if (currentMatchIndex % 2 == 0)
-                    nextMatch.setTeam1(winnerTeam);
-                else
-                    nextMatch.setTeam2(winnerTeam);
+            // || nextMatch.getTeam2().getNameString().equals("TBA")) {
+            if (currentMatchIndex % 2 == 0)
+                nextMatch.setTeam1(winnerTeam);
+            else
+                nextMatch.setTeam2(winnerTeam);
             // }
             nextRoundMatches.set(nextMatchIndex, nextMatch);
             nextRound.setMatches(nextRoundMatches);
@@ -141,4 +144,73 @@ public class Elimination extends Tournament {
         }
     }
 
+
+
+
+
+    // all of these methods just to assign the rank for each team. ;)
+    public void updateTeamsRank() {
+        TreeMap<Integer, List<Team>> ranking = new TreeMap<>(Collections.reverseOrder());
+        for (int i = 0; i < rounds.size(); i++) {
+            Round round = rounds.get(i);
+            for (Match match : round.getMatches()) {
+                Team team1 = match.getTeam1();
+                Team team2 = match.getTeam2();
+                if (team1 != null && team2 != null) {
+                    int rank = (int) Math.pow(2, rounds.size() - i);
+                    if (!ranking.containsKey(rank)) {
+                        ranking.put(rank, new ArrayList<>());
+                    }
+                    if (match.getWinner() == team1) {
+                        ranking.get(rank).add(team1);
+                        if (team1.getHighestRoundReached() < i + 1) {  // update the team's highest round reached if it advances to a higher round
+                            team1.setHighestRoundReached(i + 1);
+                        }
+                    } else {
+                        ranking.get(rank).add(team2);
+                        if (team2.getHighestRoundReached() < i + 1) {  // update the team's highest round reached if it advances to a higher round
+                            team2.setHighestRoundReached(i + 1);
+                        }
+                    }
+                }
+            }
+        }
+        
+        int rank = 1;
+        for (List<Team> teams : ranking.values()) {
+            for (Team team : teams) {
+                team.setRank(getRankingString(rank, registeredTeams.size()));
+                rank++;
+            }
+        }
+    }
+    
+    public String getRank(Team team) {
+        int highestRoundReached = team.getHighestRoundReached();
+        if (highestRoundReached == rounds.size()) {
+            return "Champion";
+        } else if (highestRoundReached == rounds.size() - 1) {
+            return "Finals";
+        } else if (highestRoundReached == rounds.size() - 2) {
+            return "Semi-final";
+        } else if (highestRoundReached == rounds.size() - 3) {
+            return "Quarter-final";
+        } else {
+            return "Round of " + (int) Math.pow(2, rounds.size() - highestRoundReached + 1);
+        }
+    }
+    private String getRankingString(int rank, int numTeams) {
+        if (rank == 1) {
+            return "Champion";
+        } else if (rank == 2) {
+            return "Finals";
+        } else if (rank == 3) {
+            return "Semi-final";
+        } else if (rank == 4) {
+            return "Quarter-final";
+        } else {
+            int k = numTeams - (int) Math.pow(2, Math.ceil(Math.log(rank - 1) / Math.log(2)));
+            return "Round of " + (int) Math.pow(2, Math.ceil(Math.log(k) / Math.log(2)) + 1);
+        }
+    }
 }

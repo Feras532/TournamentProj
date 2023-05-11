@@ -130,6 +130,7 @@ public class RegisterFormController {
         //// Adding team inside Participant and updating data
         for (Paricipant paricipant : team.getPlayers()) {
             paricipant.getTeams().add(team);
+            paricipant.addToHistoryTournaments(selectedTournament);
             SystemData.updateParticipant(paricipant);
         }
         //// Adding team inside Tournament
