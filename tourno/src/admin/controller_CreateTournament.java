@@ -5,6 +5,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import Classes.Elimination;
 import Classes.Game;
@@ -21,6 +24,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
@@ -61,13 +65,13 @@ public class controller_CreateTournament {
     private TextField durationField;
 
     @FXML
-    private TextField startDateField;
-
-    @FXML
-    private TextField endDateField;
-
-    @FXML
     private TextField membersField;
+
+    @FXML
+    private DatePicker startPick;
+
+    @FXML
+    private DatePicker endPick;
 
     @FXML
     void gameBox(ActionEvent event) {
@@ -85,6 +89,8 @@ public class controller_CreateTournament {
         String gamecomb = enterGameCombo.getValue();
         int numberOfMembers = Integer.parseInt(membersField.getText());
         int numOfTeams;
+        String startDate;
+        String endDate;
         if(gamecomb == null){
             Alert checkAlert = new Alert(AlertType.WARNING);
             checkAlert.setTitle("Error");
@@ -92,8 +98,29 @@ public class controller_CreateTournament {
             checkAlert.showAndWait();
         }
         Game game =checkClass(gamecomb);
-        String startDate = startDateField.getText();
-        String endDate = endDateField.getText();
+        if(startPick.getValue() == null){
+            Alert checkAlert = new Alert(AlertType.WARNING);
+            checkAlert.setTitle("Error");
+            checkAlert.setHeaderText("Start Date is not picked");
+            checkAlert.showAndWait();
+            return;
+        }
+        else{
+         startDate = startPick.getValue().toString();
+        }
+
+        if(endPick.getValue() == null){
+            Alert checkAlert = new Alert(AlertType.WARNING);
+            checkAlert.setTitle("Error");
+            checkAlert.setHeaderText("End Date is not picked");
+            checkAlert.showAndWait();
+            return;
+        }
+        else{
+            endDate = endPick.getValue().toString();
+        }
+
+       
         int duration = Integer.parseInt(durationField.getText());
         Boolean isFixed = false;
         if(fixedBox.isSelected()){
@@ -112,6 +139,14 @@ public class controller_CreateTournament {
             checkAlert.setHeaderText("Tournament name is not intialized");
             checkAlert.showAndWait();
             return;
+        }
+        if(checkDateConflict(startDate, endDate) == false){
+            System.out.println("hi");
+            Alert checkAlert = new Alert(AlertType.WARNING);
+            checkAlert.setTitle("Error");
+             checkAlert.setHeaderText("There is a date conflict");
+             checkAlert.showAndWait();
+             return; 
         }
         if(checkDuplication(tournamentName) == false) {
             Alert checkAlert = new Alert(AlertType.WARNING);
@@ -185,6 +220,8 @@ public class controller_CreateTournament {
 
 
 
+
+
     }
     //////////DO NOT TOUCH IT , IT WORKS 🤓🤓🤓🤓🤓🤓🤓🤓🤓🤓🤓🤓🤓🤓🤓🤓🤓🤓🤓🤓🤓🤓🤓🤓🤓🤓🤓
     Game checkClass(String game) throws FileNotFoundException, IOException, ClassNotFoundException{ // a class to get the object from the String of the game
@@ -255,6 +292,30 @@ public boolean checkMembers(String game,int number) throws FileNotFoundException
 
             return inRange;
 }
+
+public static boolean checkDateConflict(String startDate, String endDate) {
+    // Split the input date strings into year, month, and day components
+    String[] startComponents = startDate.split("-");
+    String[] endComponents = endDate.split("-");
+    
+    // Parse the components as integers
+    int startYear = Integer.parseInt(startComponents[0]);
+    int startMonth = Integer.parseInt(startComponents[1]);
+    int startDay = Integer.parseInt(startComponents[2]);
+    int endYear = Integer.parseInt(endComponents[0]);
+    int endMonth = Integer.parseInt(endComponents[1]);
+    int endDay = Integer.parseInt(endComponents[2]);
+
+    
+    // Compare the dates in "YYYY-MM-DD" order (earlier dates should be smaller)
+    if (startYear < endYear || (startYear == endYear && startMonth < endMonth) ||
+            (startYear == endYear && startMonth == endMonth && startDay <= endDay)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 
     @FXML
     void handleElimination(ActionEvent event) {

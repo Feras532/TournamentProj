@@ -19,6 +19,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
@@ -50,23 +51,17 @@ public class controller_manageTournament {
     private TextField startDateField;
     @FXML
     private CheckBox durationBox;
-    @FXML
-    private CheckBox isActiveBox;
 
     @FXML
     private CheckBox isOpenBox;
 
     @FXML
-    void isActiveHandler(ActionEvent event) {
-        if(isActiveBox.isSelected())
-        isOpenBox.setSelected(false);;
-    }
+    private DatePicker startPicker;
 
     @FXML
-    void isOpenHandler(ActionEvent event) {
-        if(isOpenBox.isSelected())
-        isActiveBox.setSelected(false);;
-    }
+    private DatePicker endPicker;
+
+
 
     
     @FXML
@@ -108,8 +103,8 @@ public class controller_manageTournament {
         try {
             int duration;
             String tournamentName = nameField.getText();
-            String startDate = startDateField.getText();
-            String endDate = endField.getText();
+            String startDate;
+            String endDate;
             String tournamentCombo = enterTournamentCombo.getValue();
             Tournament tournament = checkClass(tournamentCombo);
             Tournament tournament2 = checkClass(tournamentCombo);
@@ -127,6 +122,29 @@ public class controller_manageTournament {
                 checkAlert.showAndWait();
                 return;
             }
+
+            if(startPicker.getValue() == null){
+                Alert checkAlert = new Alert(AlertType.WARNING);
+                checkAlert.setTitle("Error");
+                checkAlert.setHeaderText("Start Date is not picked");
+                checkAlert.showAndWait();
+                return;
+            }
+            else{
+             startDate = startPicker.getValue().toString();
+            }
+    
+            if(endPicker.getValue() == null){
+                Alert checkAlert = new Alert(AlertType.WARNING);
+                checkAlert.setTitle("Error");
+                checkAlert.setHeaderText("End Date is not picked");
+                checkAlert.showAndWait();
+                return;
+            }
+            else{
+                endDate = endPicker.getValue().toString();
+            }
+    
     
             if (durationBox.isSelected()) {
                 duration = Integer.parseInt(durationField.getText());
@@ -134,18 +152,14 @@ public class controller_manageTournament {
                 duration = tournament2.getNumOfDays();
             }
     
-            if (isActiveBox.isSelected() && tournament2.getIsActive() == true) {
+            if(checkDateConflict(startDate, endDate) == false){
                 Alert checkAlert = new Alert(AlertType.WARNING);
                 checkAlert.setTitle("Error");
-                checkAlert.setHeaderText("tournament is already active");
-                checkAlert.showAndWait();
-                return;
+                 checkAlert.setHeaderText("There is a date conflict");
+                 checkAlert.showAndWait();
+                 return; 
             }
-    
-            if (isActiveBox.isSelected()) {
-                tournament2.setIsActive(true);
-                tournament2.setIsOpenRegisteration(false);
-            }
+
             
             if (isOpenBox.isSelected() && tournament2.getIsOpenRegisteration() == true) {
                 Alert checkAlert = new Alert(AlertType.WARNING);
@@ -229,6 +243,28 @@ public class controller_manageTournament {
         
     }
         return null;
+}
+
+public static boolean checkDateConflict(String startDate, String endDate) {
+    // Split the input date strings into year, month, and day components
+    String[] startComponents = startDate.split("-");
+    String[] endComponents = endDate.split("-");
+    
+    // Parse the components as integers
+    int startYear = Integer.parseInt(startComponents[0]);
+    int startMonth = Integer.parseInt(startComponents[1]);
+    int startDay = Integer.parseInt(startComponents[2]);
+    int endYear = Integer.parseInt(endComponents[0]);
+    int endMonth = Integer.parseInt(endComponents[1]);
+    int endDay = Integer.parseInt(endComponents[2]);
+
+
+    if (startYear < endYear || (startYear == endYear && startMonth < endMonth) ||
+            (startYear == endYear && startMonth == endMonth && startDay <= endDay)) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 

@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
@@ -24,25 +25,15 @@
       </Text>
       <Button fx:id="editTournBtn" layoutX="31.0" layoutY="608.0" mnemonicParsing="false" onAction="#editTournamentBtn" prefHeight="26.0" prefWidth="270.0" text="Edit Tournament" />
       <Line endX="153.0" endY="-7.62939453125E-6" layoutX="113.0" layoutY="79.0" startX="-106.20001220703125" startY="-7.62939453125E-6" />
-      <VBox layoutX="294.0" layoutY="232.0" prefHeight="200.0" prefWidth="100.0">
-         <children>
-            <AnchorPane prefHeight="31.0" prefWidth="100.0" />
-            <TextField fx:id="nameField" prefHeight="26.0" prefWidth="92.0" />
-            <AnchorPane prefHeight="35.0" prefWidth="100.0" />
-            <TextField fx:id="startDateField" prefHeight="26.0" prefWidth="92.0" />
-            <AnchorPane prefHeight="35.0" prefWidth="104.0" />
-            <TextField fx:id="endField" />
-         </children>
-      </VBox>
       <VBox layoutX="93.0" layoutY="232.0" prefHeight="251.0" prefWidth="178.0">
          <children>
             <AnchorPane prefHeight="38.0" prefWidth="174.0" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name Of Tournament" textAlignment="CENTER" wrappingWidth="173.72540283203125">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name Of Tournament" textAlignment="CENTER" wrappingWidth="158.52540588378906">
                <font>
                   <Font name="Arial" size="13.0" />
                </font>
             </Text>
-            <AnchorPane prefHeight="45.0" prefWidth="174.0" />
+            <AnchorPane prefHeight="48.0" prefWidth="178.0" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Start Date" textAlignment="CENTER" wrappingWidth="171.80267333984375">
                <font>
                   <Font name="Arial" size="13.0" />
@@ -66,12 +57,14 @@
       <Button fx:id="deleteTournBtn" layoutX="353.0" layoutY="608.0" mnemonicParsing="false" onAction="#deleteTournamentBtn" prefHeight="26.0" prefWidth="270.0" text="Delete Tournament" />
       <TextField fx:id="durationField" layoutX="271.0" layoutY="183.0" prefHeight="26.0" prefWidth="100.0" visible="false" />
       <CheckBox fx:id="durationBox" layoutX="40.0" layoutY="187.0" mnemonicParsing="false" onAction="#handleDurationBox" prefHeight="18.0" prefWidth="213.0" text="Duration of Days Between Rounds" textAlignment="CENTER" />
-      <CheckBox fx:id="isActiveBox" layoutX="222.0" layoutY="528.0" mnemonicParsing="false" onAction="#isActiveHandler" text="Active " />
-      <CheckBox fx:id="isOpenBox" layoutX="334.0" layoutY="528.0" mnemonicParsing="false" onAction="#isOpenHandler" text="Open For Registration" />
+      <CheckBox fx:id="isOpenBox" layoutX="251.0" layoutY="530.0" mnemonicParsing="false" text="Open For Registration" />
       <Text layoutX="14.0" layoutY="664.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Note: You are able to modify only needed changes and leave un-needed fields empty">
          <font>
             <Font name="System Italic" size="12.0" />
          </font>
       </Text>
+      <TextField fx:id="nameField" layoutX="258.0" layoutY="267.0" prefHeight="26.0" prefWidth="139.0" promptText="Name" />
+      <DatePicker fx:id="startPicker" layoutX="259.0" layoutY="328.0" prefHeight="26.0" prefWidth="139.0" promptText="Year/MM/D" />
+      <DatePicker fx:id="endPicker" layoutX="259.0" layoutY="382.0" prefHeight="26.0" prefWidth="139.0" promptText="Year/MM/D" />
    </children>
 </AnchorPane>
