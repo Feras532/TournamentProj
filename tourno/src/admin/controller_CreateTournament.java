@@ -141,7 +141,6 @@ public class controller_CreateTournament {
             return;
         }
         if(checkDateConflict(startDate, endDate) == false){
-            System.out.println("hi");
             Alert checkAlert = new Alert(AlertType.WARNING);
             checkAlert.setTitle("Error");
              checkAlert.setHeaderText("There is a date conflict");
