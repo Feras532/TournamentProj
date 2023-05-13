@@ -11,6 +11,7 @@ import Classes.Team;
 import Classes.Tournament;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class HistoryController {
@@ -55,19 +56,23 @@ public class HistoryController {
                 }
             }
 
-        }
-        else{
+        } else {
             RoundRobin tournament = ((RoundRobin) t);
             ArrayList<Team> arrayTeams = tournament.getRegisteredTeams();
             for (Team team : arrayTeams) {
                 for (Paricipant player : team.getPlayers()) {
                     if (player == p) {
                         String Rank = team.getRankString();
-                        System.out.println(player.getLastName() +" "+team.getRankString());
+                        System.out.println(player.getLastName() + " " + team.getRankString());
                         rank.setText(Rank);
                         System.out.println(Rank);
                         teamName.setText(team.getNameString());
                         tournamentName.setText(t.getName());
+                        Image newImage = new Image("image/football.png");
+                        imageType.setImage(newImage);
+                        // Set the desired dimensions of the ImageView
+                        imageType.setFitWidth(60);
+                        imageType.setFitHeight(70);
                         break;
                     }
                 }
