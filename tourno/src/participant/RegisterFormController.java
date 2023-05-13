@@ -53,7 +53,7 @@ public class RegisterFormController {
         grid.setPadding(new Insets(25, 25, 25, 25));
         
         // Tournament Info Label
-        tournamentInfo.setText("Tournament :"+controller_DashBoard_participant.selectedTournament.getName());
+        tournamentInfo.setText("Tournament :"+controller_DashBoard_par.selectedTournament.getName());
         /// Team name fields
         Label teamNameLabel = new Label("Team Name:");
         teamNameField = new TextField();
@@ -67,7 +67,7 @@ public class RegisterFormController {
 
          // Create an array list to store the text fields for team member ids
         
-         for (int i = 0; i < controller_DashBoard_participant.selectedTournament.getNumofMembers()-1; i++) {
+         for (int i = 0; i < controller_DashBoard_par.selectedTournament.getNumofMembers()-1; i++) {
             Label label = new Label("Team member " + (i + 2) + " id:");
             grid.add(label, 0, i + 2); // Add the label to the grid pane at column 0 and row i
             TextField textField = new TextField();
@@ -87,7 +87,7 @@ public class RegisterFormController {
 
     @FXML
     void submitBtn(ActionEvent event) {
-        Tournament selectedTournament = controller_DashBoard_participant.selectedTournament;
+        Tournament selectedTournament = controller_DashBoard_par.selectedTournament;
         // validate team name 
         teamName = teamNameField.getText();
         if(teamName.isBlank()){
@@ -165,7 +165,7 @@ public class RegisterFormController {
     @FXML
     void backBtn(ActionEvent event){
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("DashBoard_participant.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("DashBoard_par.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);

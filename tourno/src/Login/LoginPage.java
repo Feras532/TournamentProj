@@ -71,7 +71,7 @@ public class LoginPage {
     @FXML
     public void LoginParticipant(ActionEvent event) throws Exception {
   
-        Parent newPage = FXMLLoader.load(getClass().getResource("/participant/DashBoard_participant.fxml"));
+        Parent newPage = FXMLLoader.load(getClass().getResource("/participant/DashBoard_par.fxml"));
         Scene newScene = new Scene(newPage);
         Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         appStage.setScene(newScene);

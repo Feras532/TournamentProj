@@ -4,6 +4,7 @@ import javafx.event.EventHandler;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import Classes.Elimination;
 import Classes.Match;
@@ -11,14 +12,16 @@ import Classes.Round;
 import Classes.SystemData;
 import Classes.Team;
 import Classes.Tournament;
-import admin.controller_DashBoard_admin;
+import participant.controller_DashBoard_par;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -26,7 +29,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.scene.Node;
 import javafx.scene.*;
 
 public class controllerElimination {
@@ -48,6 +50,10 @@ public class controllerElimination {
     private Text status;
     @FXML
     private ScrollPane scrollPane;
+    @FXML
+    private Label winnerLabel;
+    @FXML
+    private AnchorPane winnerPane;
 
     private Stage stage;
     private Scene scene;
@@ -55,33 +61,31 @@ public class controllerElimination {
 
     @FXML
     void backHome(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/participant/DashBoard_participant.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/participant/DashBoard_par.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    static Elimination tournament = (Elimination) controller_DashBoard_admin.selectedTournament;
-
-
-    //// ========== test number of teams here.
-    @FXML
-    void testGenerateMatches(ActionEvent event) {
-        
-    }
-
-    @FXML
-    void testDisplayMatches(ActionEvent event) throws IOException {
-        Group root = new Group();
-        fillWithMatches(root, tournament);
-        scrollPane.setContent(root); // display the content in the scroll pane
-
-    }
+    // static Elimination tournament = (Elimination)
+    // controller_DashBoard_admin.selectedTournament;
 
     @FXML
     void initialize() throws IOException {
+        // ...
+        Elimination tournament = (Elimination) controller_DashBoard_par.selectedTournament;
+        // Use the tournament variable here
+        // ...
         // =============================================
+        if (!tournament.getIsCompleted()) {
+            winnerPane.setVisible(false);
+        } else {
+            winnerPane.setVisible(true);
+            winnerLabel.setText(tournament.getWinner().getNameString());
+            save();
+        }
+
         Group root = new Group();
         fillWithMatches(root, tournament);
         scrollPane.setContent(root); // display the content in the scroll pane
@@ -91,7 +95,7 @@ public class controllerElimination {
     }
 
     public void mainSceneStyler() {
-        Elimination tournament = (Elimination) controller_DashBoard_admin.selectedTournament;
+        Elimination tournament = (Elimination) controller_DashBoard_par.selectedTournament;
 
         //// styling the getters
         Date.setText("from: " + tournament.getStartdate() + " To: " + tournament.getEndDate());
@@ -99,7 +103,11 @@ public class controllerElimination {
         TournamentName.setText("Name: " + tournament.getName());
         numRegistered.setText("" + tournament.getNumRegisteredTeams());
         numRegistered.setFont(Font.font("Verdana", 22));
-        Limit.setText("" + tournament.getNumOfTeams());
+        if (tournament.getNumOfTeams() != 0)
+            Limit.setText("" + tournament.getNumOfTeams());
+        else
+            Limit.setText("Unlimited");
+
         Limit.setFont(Font.font("Verdana", 22));
         status.setText(tournament.getStatus());
     }
@@ -149,9 +157,12 @@ public class controllerElimination {
                             Scene scene = new Scene(root);
                             // Set the scene of the current stage to the new scene
                             stage.setScene(scene);
-                            controller2.recordHelper(match);
+                            // if (!tournament.getIsCompleted()) {
+
+                            controller2.recordHelper(tournament, match);
 
                             save();
+                            // }
 
                         } catch (IOException e) {
                             // Handle the exception
@@ -181,20 +192,44 @@ public class controllerElimination {
             // Adding winner Rectangle
             if (roundNum == rounds.size()) {
                 Rectangle r = new Rectangle(xPos + WIDTH / 2, firstMatchYpos, WIDTH, HEIGHT);
-                r.setFill(Color.GREENYELLOW);
+                r.setFill(Color.GOLD);
                 ArrayList<Round> allRounds = tournament.getRounds();
                 Round lastRound = allRounds.get(allRounds.size() - 1);
                 Match lastMatch = lastRound.getMatches().get(0);
                 if (lastMatch.getScore() != null) {
-                    String winner;
-                    if (lastMatch.getScore()[0] > lastMatch.getScore()[1])
-                        winner = lastRound.getMatches().get(0).getTeam1().getNameString();
-                    else
-                        winner = lastRound.getMatches().get(0).getTeam2().getNameString();
-                    Text text = new Text(winner);
+                    Team winner;
+                    Team loser;
+                    if (lastMatch.getScore()[0] > lastMatch.getScore()[1]) {
+                        winner = lastRound.getMatches().get(0).getTeam1();
+                        loser = lastRound.getMatches().get(0).getTeam2();
+
+                        winner.setRank("Champion");
+                        loser.setRank("Finals");
+                    } else {
+                        winner = lastRound.getMatches().get(0).getTeam2();
+                        loser = lastRound.getMatches().get(0).getTeam1();
+                        winner.setRank("Champion");
+                        loser.setRank("Finals");
+
+                    }
+                    Text text = new Text(winner.getNameString());
                     text.setX(r.getX() + r.getWidth() / 2 - text.getLayoutBounds().getWidth() / 2);
                     text.setY(r.getY() + r.getHeight() / 2 + text.getLayoutBounds().getHeight() / 4);
                     root.getChildren().addAll(r, text);
+
+                    if (!tournament.getIsCompleted()) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Tournament is completed");
+                        alert.setHeaderText("Tournament is completed, \n winner is: " + winner);
+
+                        Optional<ButtonType> result = alert.showAndWait();
+                        ((Elimination) tournament).updateTeamsRank();
+                        tournament.setIsCompleted(true);
+                        tournament.setIsActive(false);
+                        tournament.setWinner(winner);
+
+                        save();
+                    }
                 }
 
             }
@@ -206,6 +241,8 @@ public class controllerElimination {
     }
 
     void save() {
+        Elimination tournament = (Elimination) controller_DashBoard_par.selectedTournament;
+
         new SystemData().updateTournament("savedTournaments.dat", tournament.getName(), tournament);
 
     }
