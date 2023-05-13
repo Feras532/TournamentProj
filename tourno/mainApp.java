@@ -1,6 +1,7 @@
 import java.io.IOException;
 
 import Classes.Elimination;
+import Classes.Notification;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,6 +26,8 @@ public class mainApp extends Application {
     public static void main(String[] args) {
         System.out.println("Start the app");
         System.out.println("Test");
+
         launch(args);
+
     }
 }

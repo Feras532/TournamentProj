@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
+import Classes.Notification;
 import Classes.Paricipant;
 import Classes.SystemData;
 import Classes.Team;
@@ -145,6 +146,9 @@ public class RegisterFormController {
         new SystemData().updateTournament("savedTournaments.dat",selectedTournament.getName(),selectedTournament);
         
         //// Confirm and send email
+        for (Paricipant p : team.getPlayers()) {
+            Notification.sendNotification(p, team,selectedTournament);
+        }
         showInfoAlert("Team registration form submitted");
     }
 

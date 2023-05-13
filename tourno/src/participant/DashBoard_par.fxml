@@ -131,7 +131,7 @@
                   </Button>
                </children>
             </HBox>
-            <TableView fx:id="tableView" layoutX="29.0" layoutY="187.0" onMouseClicked="#selectTournament_fromSchedule" prefHeight="362.0" prefWidth="749.0">
+            <TableView fx:id="tableView" layoutX="29.0" layoutY="187.0" onMouseClicked="#selectTournament_fromSchedule" prefHeight="362.0" prefWidth="843.0">
                <columns>
                   <TableColumn fx:id="name" prefWidth="149.59997940063477" text="name" />
                   <TableColumn fx:id="game" prefWidth="149.59997940063477" text="game" />

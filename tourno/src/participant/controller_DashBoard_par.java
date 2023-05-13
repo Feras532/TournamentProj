@@ -10,6 +10,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import Classes.Elimination;
 import Classes.Game;
+import Classes.Notification;
 import Classes.RoundRobin;
 import Classes.SystemData;
 import Classes.Team;
@@ -429,6 +430,7 @@ public class controller_DashBoard_par {
                                                     selectedTournament.getName(), selectedTournament);
                                             SystemData.updateParticipant(LoginPage.getParticipantUser());
                                             //// Confirm and send email
+                                            Notification.sendNotification(LoginPage.getParticipantUser(),team, tournament1);
                                             showInfoAlert("Team registration form submitted", "Success");
                                         }
 
