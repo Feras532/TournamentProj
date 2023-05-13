@@ -1,5 +1,6 @@
 package Classes;
 
+import java.time.LocalDate;
 
 public class Match implements java.io.Serializable{
     Team team1;
@@ -7,6 +8,7 @@ public class Match implements java.io.Serializable{
     int[] score;
     int status; //number of teams
     String matchString;
+    private LocalDate date;
 
     public Match(Team team1,Team team2,int[] score, int status){
         this.team1=team1;
@@ -82,4 +84,11 @@ public class Match implements java.io.Serializable{
         return winner;
     }
     public boolean hasBeenRecorded = false;
+    
+    public LocalDate getDate() {
+        return date;
+    }
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
 }

@@ -1,10 +1,12 @@
 package Classes;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Round implements java.io.Serializable{
     private ArrayList<Match> matches;
     private Boolean isCompleted;
+    private LocalDate date;
 
     public Round() {
         this.matches = new ArrayList<>();
@@ -35,6 +37,14 @@ public class Round implements java.io.Serializable{
         this.matches = matches;
     }
 
-  
+    public void setDate(LocalDate date) {
+        for (Match match : matches) {
+            match.setDate(date);
+        }
+        this.date = date;
+    }
+    public LocalDate getDate() {
+        return date;
+    }
 
 }

@@ -1,5 +1,7 @@
 package Classes;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 
 public abstract class Tournament implements java.io.Serializable {
@@ -187,5 +189,30 @@ public abstract class Tournament implements java.io.Serializable {
 
     public void setIsCompleted(Boolean isCompleted) {
         this.isCompleted = isCompleted;
+    }
+
+    public void setRoundDates() {
+        //YYYY-MM-DD
+        LocalDate startDate = LocalDate.of(Integer.valueOf(startdate.substring(0, 4)),
+        Integer.valueOf(startdate.substring(5, 7)),
+        Integer.valueOf(startdate.substring(8, 10)));
+           
+            
+        LocalDate endDate = LocalDate.of(Integer.valueOf(this.endDate.substring(0, 4)),
+        Integer.valueOf(this.endDate.substring(5, 7)),
+        Integer.valueOf(this.endDate.substring(8, 10)));
+        // Get the number of days between the start and end date
+        int days = Period.between(startDate, endDate).getDays()+1;
+        // Get the number of rounds in the tournament
+        int rounds = this.rounds.size();
+                // Calculate the interval between each round date
+                int interval = days / rounds;
+                // Loop through the rounds and set their dates
+                for (int i = 0; i < rounds; i++) {
+                // Add the interval times the round index to the start date
+                LocalDate roundDate = startDate.plusDays(interval * i);
+                // Set the round date
+                this.rounds.get(i).setDate(roundDate);
+                }    
     }
 }
