@@ -1,5 +1,6 @@
 # TournamentProj
 Application to handle Round Robin and Elimination tournaments.
+Github link: https://github.com/Feras532/TournamentProj.git
 
 -add javafx libraries inside Referenced Libraries
 ...you can find the libraries in the folder "Important libs"
