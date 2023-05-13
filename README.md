@@ -21,9 +21,19 @@ Application to handle Round Robin and Elimination tournaments.
 
 -Start application
 *** Run the application from mainApp.java***
-
+-to login 
+you can check the csv files and use their username and password
 
 
 // note:
 - you can find some samples that were saved in past just to check the size of teams:
  so history tournaments are not  updated.
+
+
+
+Done by:
+Mohammed Alshowaikhat 202178490
+Feras Alsinan       202021580
+Hassan Almaqdoud 202156130
+Hussain Almatrouk 202042760
+Abdullah Bukahri 201951430
