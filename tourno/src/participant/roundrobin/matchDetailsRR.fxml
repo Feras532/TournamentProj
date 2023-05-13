@@ -51,6 +51,11 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
+                  <Label fx:id="date" alignment="CENTER" layoutX="227.0" layoutY="141.0" prefHeight="17.0" prefWidth="99.0" text="Label" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
          </children>

@@ -22,11 +22,11 @@
             </HBox>
             <Pane prefHeight="326.0" prefWidth="1200.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 10px; -fx-padding: 20px;">
                 <VBox prefHeight="221.0" prefWidth="1920.0" spacing="5">
-                    <Label fx:id="tourName" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="1918.0" style="-fx-text-fill: #4C5B7F; -fx-font-weight: bold; -fx-font-size: 18pt;" text="Tournament Name" />
+                    <Label fx:id="tourName" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="1892.0" style="-fx-text-fill: #4C5B7F; -fx-font-weight: bold; -fx-font-size: 18pt;" text="Tournament Name" />
                     <HBox prefHeight="90.0" prefWidth="1200.0" spacing="20.0">
-                        <VBox alignment="TOP_CENTER" prefHeight="90.0" prefWidth="1217.0" spacing="5">
-                            <Label style="-fx-text-fill: #4C5B7F; -fx-font-size: 14pt;" text="Registration Period" />
-                            <Label style="-fx-text-fill: #4C5B7F; -fx-font-size: 12pt;" text="May 20, 2023 to May 25, 2023" />
+                        <VBox alignment="TOP_CENTER" prefHeight="90.0" prefWidth="1178.0" spacing="5">
+                            <Label style="-fx-text-fill: #4C5B7F; -fx-font-size: 14pt;" text="Duration between Rounds" />
+                            <Label fx:id="durationRounds" style="-fx-text-fill: #4C5B7F; -fx-font-size: 12pt;" text="3 days" />
                         </VBox>
                         <VBox alignment="TOP_CENTER" spacing="5">
                             <Label style="-fx-text-fill: #4C5B7F; -fx-font-size: 14pt;" text="Tournament Period" />
@@ -34,7 +34,7 @@
                         </VBox>
                     </HBox>
                     <HBox prefHeight="70.0" prefWidth="1200.0" spacing="20.0">
-                        <VBox alignment="TOP_CENTER" prefHeight="70.0" prefWidth="1217.0" spacing="5">
+                        <VBox alignment="TOP_CENTER" prefHeight="70.0" prefWidth="1174.0" spacing="5">
                             <Label style="-fx-text-fill: #4C5B7F; -fx-font-size: 14pt;" text="Registered Teams" />
                             <Label fx:id="registered" alignment="CENTER" prefHeight="25.0" prefWidth="51.0" style="-fx-text-fill: #4C5B7F; -fx-font-size: 12pt;" text="10" />
                         </VBox>
@@ -44,12 +44,12 @@
                         </VBox>
                     </HBox>
                 </VBox>
-            <ImageView fx:id="start" fitHeight="74.0" fitWidth="94.0" layoutX="927.0" layoutY="200.0" onMouseClicked="#clickedStart" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="start" fitHeight="74.0" fitWidth="94.0" layoutX="907.0" layoutY="200.0" onMouseClicked="#clickedStart" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/power.png" />
                </image>
             </ImageView>
-            <Label layoutX="907.0" layoutY="274.0" text="Start tournament">
+            <Label layoutX="893.0" layoutY="274.0" text="Start tournament">
                <font>
                   <Font size="15.0" />
                </font>

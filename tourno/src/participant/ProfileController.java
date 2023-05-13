@@ -60,12 +60,7 @@ public class ProfileController {
         firstNameField.setText(student.getFirstName());
         emailStringField.setText(student.getEmailString());
 
-        for (int i = 0; i < student.getHistoryTournaments().size(); i++) {
-            System.out.println("inside");
-            System.out.println("broooo" + student.getHistoryTournaments().get(i));
-        }
-
-        System.out.println("Trolling");
+     
         ArrayList<Tournament> tournaments = student.getHistoryTournaments();
 
         for (Tournament t : tournaments) {

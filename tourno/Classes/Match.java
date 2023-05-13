@@ -85,8 +85,8 @@ public class Match implements java.io.Serializable{
     }
     public boolean hasBeenRecorded = false;
     
-    public LocalDate getDate() {
-        return date;
+    public String getDate() {
+        return date+"";
     }
     public void setDate(LocalDate date) {
         this.date = date;

@@ -79,6 +79,9 @@ public class controllerMatch {
 
     @FXML
     private VBox vboxTeam2;
+    @FXML
+    private Label Date;
+
 
     @FXML
     void returnTournament(ActionEvent event) throws IOException {
@@ -199,9 +202,11 @@ public class controllerMatch {
     }
 
     public void setData(Match match) {
+        System.out.println();
+
         team1name.setText(match.getTeam1().getNameString());
         team2name.setText(match.getTeam2().getNameString());
-
+        Date.setText(match.getDate());
         int[] trashArray = null;
         if (match.getScore() == trashArray) {
             team1score.setText("_");

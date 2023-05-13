@@ -47,7 +47,8 @@ public class controllerMatch {
     private Parent root;
     @FXML
     private ResourceBundle resources;
-
+    @FXML
+    private Label date;
     @FXML
     private URL location;
     
@@ -171,6 +172,7 @@ public class controllerMatch {
     }
 
     public void setData(Match match) {
+        date.setText(match.getDate());
         team1name.setText(match.getTeam1().getNameString());
         team2name.setText(match.getTeam2().getNameString());
 

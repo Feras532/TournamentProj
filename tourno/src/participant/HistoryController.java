@@ -46,9 +46,11 @@ public class HistoryController {
             for (Team team : arrayTeams) {
                 for (Paricipant player : team.getPlayers()) {
                     if (player == p) {
-                        String Rank = ((Elimination) tournament).getRank(team);
-                        rank.setText(Rank);
-                        System.out.println(Rank);
+                        if (tournament.getIsCompleted()) {
+                            String Rank = ((Elimination) tournament).getRank(team);
+                            rank.setText("Unranked");
+                        }
+
                         teamName.setText(team.getNameString());
                         tournamentName.setText(t.getName());
                         break;

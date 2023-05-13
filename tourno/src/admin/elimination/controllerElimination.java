@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import Classes.Elimination;
 import Classes.Match;
+import Classes.Paricipant;
 import Classes.Round;
 import Classes.SystemData;
 import Classes.Team;
@@ -229,6 +230,11 @@ public class controllerElimination {
                         tournament.setWinner(winner);
 
                         save();
+                        for(Team team: tournament.getRegisteredTeams()){
+                            for(Paricipant player: team.getPlayers()){
+                                SystemData.updateParticipant(player);
+                            }
+                        }
                     }
                 }
 

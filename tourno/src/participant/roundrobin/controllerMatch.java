@@ -50,7 +50,8 @@ public class controllerMatch {
 
     @FXML
     private URL location;
-    
+    @FXML
+    private Label date;
     @FXML
     private ImageView recordScore;
 
@@ -171,6 +172,7 @@ public class controllerMatch {
     }
 
     public void setData(Match match) {
+        date.setText(match.getDate());
         team1name.setText(match.getTeam1().getNameString());
         team2name.setText(match.getTeam2().getNameString());
 

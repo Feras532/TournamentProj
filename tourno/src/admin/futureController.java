@@ -26,7 +26,8 @@ import javafx.stage.Stage;
 import javafx.scene.Node;
 
 public class futureController {
-
+    @FXML
+    private Label durationRounds;
     @FXML
     private ImageView back;
 
@@ -43,6 +44,7 @@ public class futureController {
     private Label tourName;
     @FXML
     private Label maximumTeams;
+
     @FXML
     void initialize() throws IOException {
         Tournament tournament = controller_DashBoard_admin.selectedTournament;
@@ -50,8 +52,9 @@ public class futureController {
         buttonsInteraction(back);
         tourName.setText(tournament.getName());
         date.setText("Starting: " + tournament.getStartdate() + ", Ending: " + tournament.getEndDate());
-        registered.setText(tournament.getNumRegisteredTeams()+"");
-        maximumTeams.setText(tournament.getNumOfTeams()+"");
+        registered.setText(tournament.getNumRegisteredTeams() + "");
+        maximumTeams.setText(tournament.getNumOfTeams() + "");
+        durationRounds.setText(tournament.getNumOfDays()+" Days.");
 
     }
 
@@ -92,9 +95,9 @@ public class futureController {
         // =========================== sample teams registeration number
         // to be deleted:
         ArrayList<Team> teams = new ArrayList<>();
-        //for (int i = 0; i < 5; i++)
-            //teams.add(new Team(i));
-        //tournament.setRegisteredTeams(teams);
+        // for (int i = 0; i < 5; i++)
+        // teams.add(new Team(i));
+        // tournament.setRegisteredTeams(teams);
         save(tournament);
         //// =======================================================
         Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -111,6 +114,7 @@ public class futureController {
                     elimination.generateMatches();
                     elimination.setIsActive(true);
                     elimination.setIsOpenRegisteration(false);
+                    elimination.setRoundDates();
                     Parent root = FXMLLoader.load(getClass().getResource("DashBoard_admin.fxml"));
                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     scene = new Scene(root);
@@ -118,8 +122,7 @@ public class futureController {
 
                     stage.show();
                     save(elimination);
-                } 
-                else {
+                } else {
                     alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Start Tournament Error");
                     alert.setHeaderText("Registered teams are less than 2");
@@ -128,15 +131,24 @@ public class futureController {
                 // use methods of Elimination class on elimination object
             } else if (tournament instanceof RoundRobin) {
                 RoundRobin roundRobin = (RoundRobin) tournament;
-                roundRobin.generateMatches();
-                tournament.setIsActive(true);
-                tournament.setIsOpenRegisteration(false);
-                Parent root = FXMLLoader.load(getClass().getResource("DashBoard_admin.fxml"));
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-                save(roundRobin);
+                if (roundRobin.getNumRegisteredTeams() >= 2) {
+                    roundRobin.generateMatches();
+                    roundRobin.setRoundDates();
+                    tournament.setIsActive(true);
+                    tournament.setIsOpenRegisteration(false);
+                    Parent root = FXMLLoader.load(getClass().getResource("DashBoard_admin.fxml"));
+                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                    save(roundRobin);
+                }
+                else {
+                    alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Start Tournament Error");
+                    alert.setHeaderText("Registered teams are less than 2");
+                    result = alert.showAndWait();
+                }
             }
 
         }
