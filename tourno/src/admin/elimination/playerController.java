@@ -27,7 +27,7 @@ public class playerController {
         
     }
 
-    void setName(Integer number,  Paricipant player){
+    public void setName(Integer number,  Paricipant player){
         playerName.setText("#"+number +"  "+ player.getFirstName()+" " + player.getLastName());
     }
 }

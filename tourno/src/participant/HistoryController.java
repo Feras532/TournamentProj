@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import Classes.Elimination;
 import Classes.Paricipant;
+import Classes.RoundRobin;
 import Classes.Team;
 import Classes.Tournament;
 import javafx.fxml.FXML;
@@ -55,8 +56,24 @@ public class HistoryController {
             }
 
         }
+        else{
+            RoundRobin tournament = ((RoundRobin) t);
+            ArrayList<Team> arrayTeams = tournament.getRegisteredTeams();
+            for (Team team : arrayTeams) {
+                for (Paricipant player : team.getPlayers()) {
+                    if (player == p) {
+                        String Rank = team.getRankString();
+                        System.out.println(player.getLastName() +" "+team.getRankString());
+                        rank.setText(Rank);
+                        System.out.println(Rank);
+                        teamName.setText(team.getNameString());
+                        tournamentName.setText(t.getName());
+                        break;
+                    }
+                }
+            }
+        }
 
-        // do the roundRobin
     }
 
 }

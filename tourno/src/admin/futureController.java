@@ -91,11 +91,11 @@ public class futureController {
         Tournament tournament = controller_DashBoard_admin.selectedTournament;
         // =========================== sample teams registeration number
         // to be deleted:
-        ArrayList<Team> arrayList = new ArrayList<>();
-        // for(int i = 1 ; i< 7; i++)
-        // arrayList.add(new Team(i));
-        // tournament.setRegisteredTeams(arrayList);
-        // save(tournament);
+        ArrayList<Team> teams = new ArrayList<>();
+        //for (int i = 0; i < 5; i++)
+            //teams.add(new Team(i));
+        //tournament.setRegisteredTeams(teams);
+        save(tournament);
         //// =======================================================
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Start Tournament Confirmation");
@@ -128,8 +128,15 @@ public class futureController {
                 // use methods of Elimination class on elimination object
             } else if (tournament instanceof RoundRobin) {
                 RoundRobin roundRobin = (RoundRobin) tournament;
-                // TODO: by hassan...
-
+                roundRobin.generateMatches();
+                tournament.setIsActive(true);
+                tournament.setIsOpenRegisteration(false);
+                Parent root = FXMLLoader.load(getClass().getResource("DashBoard_admin.fxml"));
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+                save(roundRobin);
             }
 
         }

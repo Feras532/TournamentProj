@@ -94,7 +94,7 @@ public class controllerMatch {
     @FXML
     void initialize() throws IOException {
         // ...
-        Elimination tournament = (Elimination) controller_DashBoard_admin.selectedTournament;
+        //Elimination tournament = (Elimination) controller_DashBoard_admin.selectedTournament;
         // Use the tournament variable here
         // ...
         // =============================================

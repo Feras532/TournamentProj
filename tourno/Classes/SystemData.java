@@ -179,7 +179,7 @@ public class SystemData {
 
 
     // used in elimination you can check its functionality.
-    public static void updateTournament(String fileName, String name, Tournament newTournament) {
+    public void updateTournament(String fileName, String name, Tournament newTournament) {
         ArrayList<Tournament> tournaments = new ArrayList<>();
         try {
             FileInputStream fis = new FileInputStream(fileName);

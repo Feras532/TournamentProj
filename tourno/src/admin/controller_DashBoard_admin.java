@@ -10,7 +10,9 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import Classes.Elimination;
+import Classes.Game;
 import Classes.RoundRobin;
+import Classes.SystemData;
 import Classes.Tournament;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -137,8 +139,39 @@ public class controller_DashBoard_admin {
                 stage.show();
             }
         } else if (selected instanceof RoundRobin) {
-            System.out.println("put roundrobin method here");
-            ////////////////////
+            FileInputStream fileIn = new FileInputStream("savedTournaments.dat");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            ArrayList<Tournament> tournaments = (ArrayList<Tournament>) in.readObject();
+            for (Tournament s : tournaments) {
+                if (s.getName().equals(selected.getName())) {
+                    selectedTournament = (RoundRobin) s; // save the seleceted tournament from the tableView in
+                                                         // "selectedTournament"
+                    // so I can work on this variable in controllerElimination.java
+                    break;
+                }
+            }
+            in.close();
+            fileIn.close();
+            if (selectedTournament.getIsActive()) {
+                Parent root = FXMLLoader.load(getClass().getResource("roundrobin/roundrobin.fxml"));
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } else if (selectedTournament.getIsActive() == false && selectedTournament.getIsCompleted() == false) {
+                Parent root = FXMLLoader.load(getClass().getResource("future.fxml"));
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } else {
+                Parent root = FXMLLoader.load(getClass().getResource("roundrobin/roundrobin.fxml"));
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                // stage.setMaximized(true);
+                stage.show();
+            }
         }
 
     }

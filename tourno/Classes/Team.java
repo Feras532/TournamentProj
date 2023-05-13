@@ -52,16 +52,37 @@ public class Team implements java.io.Serializable{
     public String getNameString(){
         return nameString;
     }
-
+    public int getDraws() {
+        return draws;
+    }
+    public int getGamePoints() {
+        gamePoints = getWins()*3 + getDraws();
+        return gamePoints;
+    }
+    public int getGamesPlayed() {
+        return gamesPlayed;
+    }
+    public int getGoalsReceived() {
+        return goalsReceived;
+    }
+    public int getGoalsScored() {
+        return goalsScored;
+    }
+    public int getGoalDifference(){
+        return goalsScored - goalsReceived;
+    }
+    public int getLosses() {
+        return losses;
+    }
     public ArrayList<Paricipant> getPlayers() {
         return players;
     }
-
-    public void setPlayers(ArrayList<Paricipant> players) {
-        this.players = players;
+    public Tournament getTournament() {
+        return tournament;
     }
-
-
+    public int getWins() {
+        return wins;
+    }
     @Override
     public String toString() {
         return getNameString();
@@ -72,6 +93,24 @@ public class Team implements java.io.Serializable{
         System.out.println("Rank is set to: "+ rankingString);
     }
 
+    public void setDraws(int draws) {
+        this.draws = draws;
+    }
+    public void setGamePoints(int gamePoints) {
+        this.gamePoints = gamePoints;
+    }
+    public void setWins(int wins) {
+        this.wins = wins;
+    }
+    public void setLosses(int losses) {
+        this.losses = losses;
+    }
+    public void setGoalsReceived(int goalsReceived) {
+        this.goalsReceived = goalsReceived;
+    }
+    public void setGoalsScored(int goalsScored) {
+        this.goalsScored = goalsScored;
+    }
     public int getHighestRoundReached() {
         return highestRoundReached;
     }

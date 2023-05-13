@@ -1,20 +1,25 @@
 package Classes;
+
+
 public class Match implements java.io.Serializable{
     Team team1;
     Team team2;
     int[] score;
     int status; //number of teams
+    String matchString;
 
     public Match(Team team1,Team team2,int[] score, int status){
         this.team1=team1;
         this.team2=team2;
         this.score=score;
         this.status=status;
+        this.matchString = team1 + " vs " + team2;
     }
 
     public Match(Team team1, Team team2) {
         this.team1 = team1;
         this.team2 = team2;
+        this.matchString = team1 + " vs " + team2;
     }
 
     public Match(){
@@ -53,7 +58,9 @@ public class Match implements java.io.Serializable{
     public int getStatus() {
         return status;
     }
-
+    public String getMatchString() {
+        return matchString;
+    }
     public void setStatus(int status) {
         this.status = status;
     }
@@ -63,6 +70,9 @@ public class Match implements java.io.Serializable{
             return team1 + " vs " + team2;
         }
 
+    public void remove(int index) {
+    }
+
     public Team getWinner() {
         Team winner;
         if(getScore()[0] > getScore()[1])
@@ -71,4 +81,5 @@ public class Match implements java.io.Serializable{
             winner= team2;
         return winner;
     }
+    public boolean hasBeenRecorded = false;
 }
