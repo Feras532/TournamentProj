@@ -38,6 +38,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
@@ -145,11 +146,23 @@ public class controllerRoundRobin {
                     allButtons.add(new ArrayList<Button>());
                     Button button = new Button(tournament.getRounds().get(i).getMatches().get(j).getMatchString());
                     Match match = tournament.getRounds().get(i).getMatches().get(j);
-                    roundsGridPane.add(button, i, j+1);
-                    if(match.hasBeenRecorded){
+                    roundsGridPane.add(button, i, j + 1);
+                    if (match.hasBeenRecorded) {
                         button.setStyle("-fx-background-color: green; -fx-text-fill: white;");
                     }
                     allButtons.get(i).add(button);
+                    // ==================================================================== this to
+                    // click on bracket and move scene.
+                    // adjust the column width if the button has two human names
+                    int buttonSize = match.getMatchString().length();
+                    if (buttonSize > 20) {
+                        if (i < roundsGridPane.getColumnConstraints().size()) { // check if i is within bounds
+                            ColumnConstraints column = roundsGridPane.getColumnConstraints().get(i);
+                            column.setPrefWidth(column.getPrefWidth() + 20); // increase by 20 pixels (or
+                                                                             // whatever value works for your
+                                                                             // UI)
+                        }
+                    }
                     // ==================================================================== this to
                     // click on bracket and move scene.
                     button.setOnAction(event -> {

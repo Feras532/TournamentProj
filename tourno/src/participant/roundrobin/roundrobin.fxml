@@ -87,9 +87,9 @@
             <TableColumn fx:id="teamPoints" minWidth="0.0" prefWidth="91.0" style="-fx-alignment: CENTER;" text="POINTS" />
         </columns>
       </TableView>
-      <ScrollPane layoutX="135.0" layoutY="582.0" prefHeight="208.0" prefWidth="913.0">
+      <ScrollPane layoutX="46.0" layoutY="582.0" prefHeight="240.0" prefWidth="1176.0">
          <content>
-            <GridPane fx:id="roundsGridPane" prefHeight="204.0" prefWidth="906.0">
+            <GridPane fx:id="roundsGridPane" prefHeight="359.0" prefWidth="1590.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

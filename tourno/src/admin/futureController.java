@@ -1,10 +1,13 @@
 package admin;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Optional;
 
 import Classes.Elimination;
+import Classes.Paricipant;
 import Classes.RoundRobin;
 import Classes.SystemData;
 import Classes.Team;
@@ -92,13 +95,30 @@ public class futureController {
     @FXML
     void clickedStart(MouseEvent event) throws IOException {
         Tournament tournament = controller_DashBoard_admin.selectedTournament;
-        // =========================== sample teams registeration number
-        // to be deleted:
-        ArrayList<Team> teams = new ArrayList<>();
-        // for (int i = 0; i < 5; i++)
-        // teams.add(new Team(i));
-        // tournament.setRegisteredTeams(teams);
-        save(tournament);
+        // try {
+        //     // create an ObjectInputStream to read the serialized data from the file
+        //     ObjectInputStream input = new ObjectInputStream(new FileInputStream("savedParticipants.dat"));
+        //     // cast the object read from the file to an ArrayList<Participant>
+        //     ArrayList<Paricipant> participants = (ArrayList<Paricipant>) input.readObject();
+        //     ArrayList<Team> teams = new ArrayList<>();
+        //     int i = 0;
+        //     // iterate over the participants and register them in the tournament
+        //     for (Paricipant participant : participants) {
+        //         // create a new team with the participant as its captain
+        //         Team team = new Team(tournament, participant.getLastName(), participant);
+        //         // add the team to the tournament's registered teams
+        //         teams.add(team);
+        //         if (i == 4){
+        //             break;
+        //         }
+        //         i++;
+                
+        //     }
+        //     System.out.println(teams.size());
+            // save the updated tournament to the file
+            // tournament.setRegisteredTeams(teams);
+            save(tournament);
+        
         //// =======================================================
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Start Tournament Confirmation");

@@ -232,51 +232,13 @@ public class controllerMatch {
     }
 
     public void recordHelper(Tournament tournament,Match match) throws IOException {
-        // if (!tournament.getIsCompleted()) {
-        //     resetTeams.setOnMouseClicked(event -> resetter(event, match));
-        //     recordScore.setOnMouseClicked(event -> handleButtonClick(event, match));
-        // }
+        
         setData(match);
         fillPlayers(match);
     }
 
     static RoundRobin tournament = (RoundRobin) controller_DashBoard_par.selectedTournament;
 
-    // private void resetter(MouseEvent event, Match match) {
-    //     String team1Name = match.getTeam1().getNameString();
-    //     String team2Name = match.getTeam2().getNameString();
-    //     if (team1Name.equals("TBA") || team2Name.equals("TBA")) {
-    //         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-    //         errorAlert.setTitle("Invalid Teams");
-    //         errorAlert.setHeaderText("To be announced!.");
-    //         errorAlert.setContentText("You cannot reset invalid teams!");
-    //         errorAlert.showAndWait();
-    //         return;
-    //     }
-    //     match.hasBeenRecorded = false;
-    //     if (match.getScore()[0] > match.getScore()[1]) { //team 1 wins
-    //         match.getTeam1().setWins( match.getTeam1().getWins()-1);
-    //         match.getTeam2().setLosses( match.getTeam2().getLosses()-1);
-
-    //     } else if(match.getScore()[0] == match.getScore()[1]){ //draw
-    //         match.getTeam1().setDraws( match.getTeam1().getDraws()-1);
-    //         match.getTeam2().setDraws( match.getTeam2().getDraws()-1);
-    //     }
-    //     else { 
-    //         match.getTeam1().setLosses( match.getTeam1().getLosses()-1);
-    //         match.getTeam2().setWins( match.getTeam2().getWins()-1);
-    //     }
-    //     match.getTeam1().setGoalsScored(match.getTeam1().getGoalsScored()-match.getScore()[0]);
-    //     match.getTeam1().setGoalsReceived(match.getTeam1().getGoalsReceived()-match.getScore()[1]);
-
-    //     match.getTeam2().setGoalsScored(match.getTeam2().getGoalsScored()-match.getScore()[1]);
-    //     match.getTeam2().setGoalsReceived(match.getTeam2().getGoalsReceived()-match.getScore()[0]);
-
-    //     match.setScore(emptyArray(match.getScore()));
-    //     setData(match);
-
-
-    // }
 
     public static int[] emptyArray(int[] array) {
         return array = null;

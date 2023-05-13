@@ -50,6 +50,10 @@ public class HistoryController {
                             String Rank = ((Elimination) tournament).getRank(team);
                             rank.setText("Unranked");
                         }
+                        else{
+                            String Rank = ((Elimination) tournament).getRank(team);
+                            rank.setText(Rank);
+                        }
 
                         teamName.setText(team.getNameString());
                         tournamentName.setText(t.getName());
@@ -58,8 +62,10 @@ public class HistoryController {
                 }
             }
 
-        } else {
+        } else if (t instanceof RoundRobin){
             RoundRobin tournament = ((RoundRobin) t);
+            System.out.println(t.getName());
+
             ArrayList<Team> arrayTeams = tournament.getRegisteredTeams();
             for (Team team : arrayTeams) {
                 for (Paricipant player : team.getPlayers()) {

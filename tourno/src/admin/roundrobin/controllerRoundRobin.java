@@ -38,6 +38,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
@@ -47,7 +48,6 @@ import javafx.util.Callback;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.event.EventHandler;
-
 
 public class controllerRoundRobin {
 
@@ -77,7 +77,7 @@ public class controllerRoundRobin {
 
     @FXML
     private GridPane roundsGridPane;
-    
+
     @FXML
     private TableColumn<Team, Integer> teamLoss;
 
@@ -107,8 +107,7 @@ public class controllerRoundRobin {
 
     private Stage stage;
     private Scene scene;
-    
-    
+
     @FXML
     void backHome(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/admin/DashBoard_admin.fxml"));
@@ -117,21 +116,21 @@ public class controllerRoundRobin {
         stage.setScene(scene);
         stage.show();
     }
+
     @FXML
-    void initialize(){
+    void initialize() {
         RoundRobin tournament = (RoundRobin) controller_DashBoard_admin.selectedTournament;
 
         mainSceneStyler();
-        //tournament.printMe();
-        try{
+        // tournament.printMe();
+        try {
             roundsGridPane.setAlignment(Pos.CENTER);
             roundsGridPane.setHgap(5);
             roundsGridPane.setVgap(50);
             roundsGridPane.setPadding(new Insets(25, 25, 25, 25));
 
-            
             ArrayList<ArrayList<Match>> allRoundMatches = new ArrayList<>();
-            
+
             ArrayList<ArrayList<Button>> allButtons = new ArrayList<>();
 
             for (Round round : tournament.getRounds()) {
@@ -144,98 +143,106 @@ public class controllerRoundRobin {
                     allButtons.add(new ArrayList<Button>());
                     Button button = new Button(tournament.getRounds().get(i).getMatches().get(j).getMatchString());
                     Match match = tournament.getRounds().get(i).getMatches().get(j);
-                    roundsGridPane.add(button, i, j+1);
-                    if(match.hasBeenRecorded){
+                    roundsGridPane.add(button, i, j + 1);
+                    if (match.hasBeenRecorded) {
                         button.setStyle("-fx-background-color: green; -fx-text-fill: white;");
                     }
                     allButtons.get(i).add(button);
                     // ==================================================================== this to
                     // click on bracket and move scene.
+                    // adjust the column width if the button has two human names
+                    int buttonSize = match.getMatchString().length();
+                    if (buttonSize > 20) {
+                        if (i < roundsGridPane.getColumnConstraints().size()) { // check if i is within bounds
+                            ColumnConstraints column = roundsGridPane.getColumnConstraints().get(i);
+                            column.setPrefWidth(column.getPrefWidth() + 20); // increase by 20 pixels (or
+                                                                             // whatever value works for your
+                                                                             // UI)
+                        }
+                    }
                     button.setOnAction(event -> {
-                            try {
-                                // Load the new FXML file
-                                FXMLLoader loader = new FXMLLoader(getClass().getResource("matchDetailsRR.fxml"));
-                                Parent root = loader.load();
-                                // Get the controller
-                                controllerMatch controller2 = loader.getController();
-                                // Call the setData method
-                                controller2.setData(match);
-                                // Get the current stage
-                                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                                // Create a new scene with the loaded content
-                                Scene scene = new Scene(root);
-                                // Set the scene of the current stage to the new scene
-                                stage.setScene(scene);
-                                controller2.recordHelper(tournament,match);
+                        try {
+                            // Load the new FXML file
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("matchDetailsRR.fxml"));
+                            Parent root = loader.load();
+                            // Get the controller
+                            controllerMatch controller2 = loader.getController();
+                            // Call the setData method
+                            controller2.setData(match);
+                            // Get the current stage
+                            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                            // Create a new scene with the loaded content
+                            Scene scene = new Scene(root);
+                            // Set the scene of the current stage to the new scene
+                            stage.setScene(scene);
+                            controller2.recordHelper(tournament, match);
 
-                               save();
+                            save();
 
+                            
 
-                            } catch (IOException e) {
-                                // Handle the exception
-                                e.printStackTrace();
+                        } catch (IOException e) {
+                            // Handle the exception
+                            e.printStackTrace();
+                        }
+                    });
+                }
+            }
+            boolean lockNextRounds = false;
+            boolean allLastRoundMatchesRecorded = false;
+            for (int i = 0; i < allRoundMatches.size(); i++) {
+                ArrayList<Match> matches = allRoundMatches.get(i);
+                if (lockNextRounds) {
+                    for (int j = 0; j < matches.size(); j++) {
+                        allButtons.get(i).get(j).setDisable(true);
+                    }
+                } else {
+                    int counter = 0;
+                    for (int j = 0; j < matches.size(); j++) {
+                        if (i == allRoundMatches.size() - 1 && matches.get(j).hasBeenRecorded) { // last round each
+                                                                                                 // match recorded
+                            counter += 1;
+                            if (counter == matches.size()) {
+                                allLastRoundMatchesRecorded = true;
                             }
-                        });
-                    
-                //});
-            }
-        } 
-        boolean lockNextRounds = false;
-        boolean allLastRoundMatchesRecorded = false;
-        for (int i = 0; i < allRoundMatches.size(); i++) {
-            ArrayList<Match> matches = allRoundMatches.get(i);
-            if(lockNextRounds){
-                for (int j = 0; j < matches.size(); j++) {
-                    allButtons.get(i).get(j).setDisable(true);
-                }
-            }
-            else{
-                int counter = 0;
-                for (int j = 0; j < matches.size(); j++) {
-                    if(i == allRoundMatches.size()-1 && matches.get(j).hasBeenRecorded){ //last round each match recorded
-                        counter+=1;
-                        if(counter == matches.size()){   
-                            allLastRoundMatchesRecorded = true;
-                        }                               
-                    }
-                    else if(!matches.get(j).hasBeenRecorded){
-                        lockNextRounds = true;
+                        } else if (!matches.get(j).hasBeenRecorded) {
+                            lockNextRounds = true;
+                        }
                     }
                 }
             }
-        }       
 
-        RoundRobin.sortTeamsByPointsAndGoalDifference(tournament.getRegisteredTeams());
+            RoundRobin.sortTeamsByPointsAndGoalDifference(tournament.getRegisteredTeams());
 
-        Match lastMatch = allRoundMatches.get(tournament.getRounds().size()-1).get(
-            allRoundMatches.get(tournament.getRounds().size()-1).size()-1);
+            Match lastMatch = allRoundMatches.get(tournament.getRounds().size() - 1).get(
+                    allRoundMatches.get(tournament.getRounds().size() - 1).size() - 1);
 
-        if (allLastRoundMatchesRecorded && !tournament.getIsCompleted()) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Tournament is completed");
-            alert.setHeaderText("Tournament is completed, \n winner is: " + tournament.getRegisteredTeams().get(0));
+            if (allLastRoundMatchesRecorded && !tournament.getIsCompleted()) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Tournament is completed");
+                alert.setHeaderText("Tournament is completed, \n winner is: " + tournament.getRegisteredTeams().get(0));
 
-            Optional<ButtonType> result = alert.showAndWait();
-            ((RoundRobin) tournament).updateTeamsRank();
-            tournament.setIsCompleted(true);
-            tournament.setIsActive(false);
-            tournament.setWinner( tournament.getRegisteredTeams().get(0));
+                Optional<ButtonType> result = alert.showAndWait();
+                ((RoundRobin) tournament).updateTeamsRank();
+                tournament.setIsCompleted(true);
+                tournament.setIsActive(false);
+                tournament.setWinner(tournament.getRegisteredTeams().get(0));
 
-            save();
-        }
-        if (!tournament.getIsCompleted()) {
-            winnerPane.setVisible(false);
-        } else {
-            winnerPane.setVisible(true);
-            winnerLabel.setText(tournament.getWinner().getNameString());
-            save();
-        }
-            //---------------------------------------------------------
-            
-        ObservableList<Team> teamsobservableList = FXCollections.observableArrayList();
+                save();
+            }
+            if (!tournament.getIsCompleted()) {
+                winnerPane.setVisible(false);
+            } else {
+                winnerPane.setVisible(true);
+                winnerLabel.setText(tournament.getWinner().getNameString());
+                save();
+            }
+            // ---------------------------------------------------------
+
+            ObservableList<Team> teamsobservableList = FXCollections.observableArrayList();
 
             for (Team team : tournament.getRegisteredTeams()) { // teams table
-                
+
                 teamsobservableList.add(team);
             }
             System.out.println(teamsobservableList);
@@ -246,7 +253,6 @@ public class controllerRoundRobin {
             teamGD.setCellValueFactory(new PropertyValueFactory<Team, Integer>("goalDifference"));
             teamPoints.setCellValueFactory(new PropertyValueFactory<Team, Integer>("gamePoints"));
 
-
             teamsTable.setItems(teamsobservableList);
 
             save();
@@ -255,19 +261,19 @@ public class controllerRoundRobin {
                     SystemData.updateParticipant(p);
                 }
             }
-        
-    }
-        catch (Exception e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     void save() {
         RoundRobin tournament = (RoundRobin) controller_DashBoard_admin.selectedTournament;
 
         new SystemData().updateTournament("savedTournaments.dat", tournament.getName(), tournament);
 
     }
-    
+
     public void mainSceneStyler() {
         RoundRobin tournament = (RoundRobin) controller_DashBoard_admin.selectedTournament;
 
