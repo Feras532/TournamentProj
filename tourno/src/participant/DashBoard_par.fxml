@@ -23,11 +23,11 @@
          <children>
             <AnchorPane prefHeight="125.0" prefWidth="191.0">
                <children>
-                  <Text fill="WHITE" layoutX="22.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ahmed's" wrappingWidth="146.01953125">
+                  <Text fill="WHITE" layoutX="40.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="University" underline="true" wrappingWidth="146.01953125">
                      <font>
                         <Font name="Eras Bold ITC" size="27.0" />
                      </font></Text>
-                  <Text fill="WHITE" layoutX="22.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Software" wrappingWidth="146.01953125">
+                  <Text fill="WHITE" layoutX="40.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="tournaments" wrappingWidth="146.01953125">
                      <font>
                         <Font name="Eras Bold ITC" size="19.0" />
                      </font>

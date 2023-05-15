@@ -95,6 +95,8 @@ public class futureController {
     @FXML
     void clickedStart(MouseEvent event) throws IOException {
         Tournament tournament = controller_DashBoard_admin.selectedTournament;
+
+        //TODO: this code just to check the number of teams in a tournament.....
         // try {
         //     // create an ObjectInputStream to read the serialized data from the file
         //     ObjectInputStream input = new ObjectInputStream(new FileInputStream("savedParticipants.dat"));
@@ -117,6 +119,7 @@ public class futureController {
         //     System.out.println(teams.size());
             // save the updated tournament to the file
             // tournament.setRegisteredTeams(teams);
+        // ========================================================================
             save(tournament);
         
         //// =======================================================

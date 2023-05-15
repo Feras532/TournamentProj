@@ -15,14 +15,12 @@
          <items>
             <AnchorPane prefHeight="443.0" prefWidth="300.0" style="-fx-background-color: #78909c;">
                <children>
-                  <Text fill="WHITE" layoutX="51.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="     Troll     " underline="true" wrappingWidth="188.67578125">
+                  <Text fill="WHITE" layoutX="51.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="University" underline="true" wrappingWidth="188.67578125">
                      <font>
                         <Font name="Segoe UI Emoji" size="40.0" />
                      </font>
                   </Text>
-                  <Text fill="WHITE" layoutX="107.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="tournaments" wrappingWidth="75.76822662353516" />
-                  <Button layoutX="119.0" layoutY="234.0" mnemonicParsing="false" onAction="#LoginAdmin" text="admin" />
-                  <Button layoutX="105.0" layoutY="279.0" mnemonicParsing="false" onAction="#LoginParticipant" text="participant" />
+                  <Text fill="WHITE" layoutX="107.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="tournaments" wrappingWidth="75.76822662353516" />
                </children>
             </AnchorPane>
          </items>
