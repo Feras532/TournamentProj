@@ -1,6 +1,28 @@
 # TournamentProj
 
-This repository contains an application designed to manage Round Robin and Elimination tournaments.
+## About
+
+TournamentProj is a dynamic tournament management application developed using JavaFX to provide a robust and user-friendly interface. It is designed to cater to both teams and individual participants, offering a range of functionalities for users and administrators alike.
+
+## Features
+
+### User Accounts
+- **Account Creation**: Users can sign up and create their own accounts.
+- **Join as Team or Individual**: Flexible registration options allow users to join tournaments as a single player or as part of a team.
+
+### Tournament Management
+- **Tournament Setup**: Admins can create and manage tournaments, setting up the structure for Round Robin or Elimination formats.
+- **Editing and Updates**: Admins can edit tournament details and record match results in real-time.
+- **User Interface**: A JavaFX-based interface ensures all interactions are intuitive and straightforward.
+
+### User Experience
+- **Historical Data**: Users have access to their past tournament history, allowing them to track their progress and performance over time.
+- **Real-time Access**: All participants can view ongoing tournament details and results as the events unfold.
+
+### Administrative Control
+- **Tournament Oversight**: Admins can oversee the entire tournament process, from creation to completion, ensuring a smooth experience for all.
+- **Result Recording**: After matches, admins can record the outcomes, which are then reflected across the participant's accounts and tournament brackets.
+
 
 ## Getting Started
 
