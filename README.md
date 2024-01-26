@@ -16,7 +16,7 @@ To set up the email and activation features, follow these steps:
 2. Create a `launch.json` file.
 3. Add the following configuration to the file:
 
-json
+```json
 {
     "type": "java",
     "name": "MailAPI",
@@ -25,19 +25,20 @@ json
     "projectName": "MailAPI_e765d83c",
     "args": "--add-modules java.activation"
 }
+```
 -------------------------------------------
-Running the Application
-To start the application, run mainApp.java.
+### Running the Application
+To start the application, run `mainApp.java`.
 
-Login Information
+### Login Information
 To log in, refer to the CSV files included in the project for usernames and passwords.
 
-Note
+### Note
 This repository includes sample data for historical tournaments to demonstrate the functionality. However, please note that the history tournaments are not updated.
 
-Contributors
-Mohammed Alshowaikhat 202178490
-Feras Alsinan 202021580
-Hassan Almaqdoud 202156130
-Hussain Almatrouk 202042760
-Abdullah Bukahri 201951430
+### Contributors
+- Mohammed Alshowaikhat 202178490
+- Feras Alsinan 202021580
+- Hassan Almaqdoud 202156130
+- Hussain Almatrouk 202042760
+- Abdullah Bukahri 201951430
